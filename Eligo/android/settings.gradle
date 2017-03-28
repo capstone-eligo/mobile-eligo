@@ -1,0 +1,3 @@
+rootProject.name = 'Eligo'
+
+include ':app'
