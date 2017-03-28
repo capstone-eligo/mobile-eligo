@@ -1,6 +1,6 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Eligo app
+ * 
  * @flow
  */
 
@@ -12,42 +12,22 @@ import {
   View
 } from 'react-native';
 
+import { Router, Scene } from 'react-native-router-flux';
+
+import PageOne from './pages/PageOne';
+import PageTwo from './pages/PageTwo';
+
 export default class Eligo extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Eligo
-        </Text>
-        <Text style={styles.instructions}>
-          Hello world
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
+      <Router>
+        <Scene key="root">
+          <Scene key="pageOne" component={PageOne} title="PageOne" hideNavBar={true} initial={true} />
+          <Scene key="pageTwo" component={PageTwo} title="PageTwo" hideNavBar={false}/>
+        </Scene>
+      </Router>
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('Eligo', () => Eligo);
