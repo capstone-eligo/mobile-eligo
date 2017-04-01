@@ -1,5 +1,5 @@
 /**
- * Sample React Native App
+ * Eligo App
  * https://github.com/facebook/react-native
  * @flow
  */

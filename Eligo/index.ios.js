@@ -1,33 +1,43 @@
-/**
- * Eligo app
- * 
- * @flow
- */
+'use strict'
 
-import React, { Component } from 'react';
+import React from 'react'
+import { AppRegistry } from 'react-native'
+
+import { Provider } from 'react-redux'
+
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+  applyMiddleware,
+  combineReducers,
+  createStore
+} from 'redux'
 
-import { Router, Scene } from 'react-native-router-flux';
+import TabBarNavigation from './app/tabBar/views/TabBarNavigation'
 
-import PageOne from './pages/PageOne';
-import PageTwo from './pages/PageTwo';
+import { NavigatorTabOne } from './app/tabOne/navigationConfiguration'
+import { 
+  TabBar,
+  tabBarReducer
+} from './app/tabBar/navigationConfiguration'
 
-export default class Eligo extends Component {
-  render() {
-    return (
-      <Router>
-        <Scene key="root">
-          <Scene key="pageOne" component={PageOne} title="PageOne" hideNavBar={true} initial={true} />
-          <Scene key="pageTwo" component={PageTwo} title="PageTwo" hideNavBar={false}/>
-        </Scene>
-      </Router>
+const middleware = () => {};
+
+const store = createStore(
+  combineReducers({
+    tabBar: tabBarReducer,
+    tabOne: (state,action) => NavigatorTabOne.router.getStateForAction(action, state),
+  }),
+  middleware()
+);
+
+
+class Eligo extends React.Component {
+  render(){
+    return(
+      <Provider store={store}>
+        <TabBarNavigation />
+      </Provider>
     )
   }
-}
+};
 
 AppRegistry.registerComponent('Eligo', () => Eligo);
