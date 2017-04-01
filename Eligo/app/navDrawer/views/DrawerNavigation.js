@@ -5,14 +5,14 @@ import React from 'react'
 
 // Navigation
 import { addNavigationHelpers } from 'react-navigation'
-import { DrawNavigator } from '../navConfig'
+import { Drawer } from '../navConfig'
 
 //Redux
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
  return {
-  navigationState: state.tabBar,
+  navigationState: state.navDraw,
   }
 }
 
@@ -20,7 +20,7 @@ class DrawerNavigation extends React.Component {
   render(){
     const { dispatch, navigationState } = this.props
     return (
-      <DrawNavigator
+      <Drawer
         navigation={
           addNavigationHelpers({
             dispatch: dispatch,

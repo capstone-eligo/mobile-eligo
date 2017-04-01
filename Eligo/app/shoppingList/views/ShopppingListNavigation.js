@@ -19,7 +19,7 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
  return {
-  navigationState: state.tabOne
+  navigationState: state.shoppingList
   }
 }
 

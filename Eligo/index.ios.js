@@ -13,7 +13,7 @@ import {
 
 import { ShoppingList } from './app/shoppingList/navConfig'
 import { 
-  DrawNavigator,
+  Drawer,
   navDrawerReducer
 } from './app/navDrawer/navConfig'
 
@@ -21,10 +21,11 @@ const middleware = () => {};
 
 const store = createStore(
   combineReducers({
-    navDraw: navDrawerReducer,
-    tabOne: (state,action) => ShoppingList.router.getStateForAction(action, state),
-  }),
-  middleware()
+    navDraw: (state,action) => Drawer.router.getStateForAction(action, state),
+    navDrawerReducer: navDrawerReducer,
+    shoppingList: (state,action) => ShoppingList.router.getStateForAction(action, state)
+  })
+  // middleware()
 );
 
 
@@ -32,7 +33,7 @@ class Eligo extends React.Component {
   render(){
     return(
       <Provider store={store}>
-        <DrawNavigator />
+        <Drawer />
       </Provider>
     )
   }

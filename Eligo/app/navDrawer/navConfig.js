@@ -25,7 +25,7 @@ const CustomDrawerContentComponent = (props) => (
 const drawerConfiguration = {
   drawerWidth: 500,
   drawerPosition: "left",
-  contentComponent: CustomDrawerContentComponent
+  // contentComponent: CustomDrawerContentComponent
   // contentOptions: {
   //   activeTintColor: '#e91e63',
   //   style: {
@@ -34,12 +34,12 @@ const drawerConfiguration = {
   // }
 }
 
-export const DrawNavigator = DrawerNavigator(routeConfiguration, drawerConfiguration)
+export const Drawer = DrawerNavigator(routeConfiguration, drawerConfiguration)
 
 export const navDrawerReducer = (state,action) => {
   if (action.type === 'DrawerOpen') {
     return { ...state, index:0 }
   } else {
-    return DrawNavigator.router.getStateForAction(action,state)
+    return Drawer.router.getStateForAction(action,state)
   }
 }

@@ -11,7 +11,7 @@ const routeConfiguration = {
   ShoppingListTwo: { screen: ShoppingListTwo },
 }
 
-// going to disable the header for now
+// headerMode to 'float' to enable header
 const stackNavigatorConfiguration = {
   headerMode: 'none',
   initialRoute: 'ShoppingListOne'
