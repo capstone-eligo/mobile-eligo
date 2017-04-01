@@ -4,6 +4,8 @@
 // React
 import React from 'react'
 
+import { Text } from 'react-native'
+
 // Navigation
 import { addNavigationHelpers } from 'react-navigation'
 import { ShoppingList } from '../navConfig'
@@ -23,13 +25,16 @@ const mapStateToProps = (state) => {
 
 class ShoppingListNavigation extends React.Component {
   static navigationOptions = {
+    title: "hello",
     drawer: () => ({
-      label: 'Home',
+      label: 'Shopping List',
+      icon: (<Text>Hi</Text>)
     }),
   }
 
   render(){
     const { navigationState, dispatch } = this.props
+
     return (
       <ShoppingList
         navigation={

@@ -11,19 +11,17 @@ import {
   createStore
 } from 'redux'
 
-import DrawNav from './app/navDrawer/views/DrawerNavigation'
-
 import { ShoppingList } from './app/shoppingList/navConfig'
 import { 
   DrawNavigator,
-  tabBarReducer
+  navDrawerReducer
 } from './app/navDrawer/navConfig'
 
 const middleware = () => {};
 
 const store = createStore(
   combineReducers({
-    DrawNav: tabBarReducer,
+    navDraw: navDrawerReducer,
     tabOne: (state,action) => ShoppingList.router.getStateForAction(action, state),
   }),
   middleware()
