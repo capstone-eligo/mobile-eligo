@@ -5,7 +5,7 @@ import React from 'react'
 
 // Navigation
 import { addNavigationHelpers } from 'react-navigation'
-import { TabBar } from '../navigationConfiguration'
+import { DrawNavigator } from '../navConfig'
 
 //Redux
 import { connect } from 'react-redux'
@@ -16,12 +16,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-class TabBarNavigation extends React.Component {
-
+class DrawerNavigation extends React.Component {
   render(){
     const { dispatch, navigationState } = this.props
     return (
-      <TabBar
+      <DrawNavigator
         navigation={
           addNavigationHelpers({
             dispatch: dispatch,
@@ -33,4 +32,4 @@ class TabBarNavigation extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(TabBarNavigation)
+export default connect(mapStateToProps)(DrawerNavigation)

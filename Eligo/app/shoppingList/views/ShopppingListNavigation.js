@@ -6,13 +6,13 @@ import React from 'react'
 
 // Navigation
 import { addNavigationHelpers } from 'react-navigation'
-import { NavigatorTabOne } from '../navigationConfiguration'
+import { ShoppingList } from '../navConfig'
 
 // Redux
 import { connect } from 'react-redux'
 
-// Icon
-import Icon from 'react-native-vector-icons/FontAwesome'
+// // Icon
+// import Icon from 'react-native-vector-icons/FontAwesome'
 
 
 const mapStateToProps = (state) => {
@@ -21,18 +21,17 @@ const mapStateToProps = (state) => {
   }
 }
 
-class TabOneNavigation extends React.Component {
+class ShoppingListNavigation extends React.Component {
   static navigationOptions = {
-    tabBar:{
-      label: 'Tab One',
-      icon: ({ tintColor }) => <Icon size={ 20 } name={ 'cogs' } color={ tintColor }/>
-    }
+    drawer: () => ({
+      label: 'Home',
+    }),
   }
 
   render(){
     const { navigationState, dispatch } = this.props
     return (
-      <NavigatorTabOne
+      <ShoppingList
         navigation={
           addNavigationHelpers({
             dispatch: dispatch,
@@ -43,4 +42,8 @@ class TabOneNavigation extends React.Component {
     )
   }
 }
-export default connect(mapStateToProps)(TabOneNavigation)
+export default connect(mapStateToProps)(ShoppingListNavigation)
+
+
+
+

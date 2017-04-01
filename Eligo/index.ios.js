@@ -11,20 +11,20 @@ import {
   createStore
 } from 'redux'
 
-import TabBarNavigation from './app/tabBar/views/TabBarNavigation'
+import DrawNav from './app/navDrawer/views/DrawerNavigation'
 
-import { NavigatorTabOne } from './app/tabOne/navigationConfiguration'
+import { ShoppingList } from './app/shoppingList/navConfig'
 import { 
-  TabBar,
+  DrawNavigator,
   tabBarReducer
-} from './app/tabBar/navigationConfiguration'
+} from './app/navDrawer/navConfig'
 
 const middleware = () => {};
 
 const store = createStore(
   combineReducers({
-    tabBar: tabBarReducer,
-    tabOne: (state,action) => NavigatorTabOne.router.getStateForAction(action, state),
+    DrawNav: tabBarReducer,
+    tabOne: (state,action) => ShoppingList.router.getStateForAction(action, state),
   }),
   middleware()
 );
@@ -34,7 +34,7 @@ class Eligo extends React.Component {
   render(){
     return(
       <Provider store={store}>
-        <TabBarNavigation />
+        <DrawNavigator />
       </Provider>
     )
   }
