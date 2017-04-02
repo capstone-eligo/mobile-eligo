@@ -15,8 +15,7 @@ export default class ShoppingListScreen extends React.Component {
     drawer: () => ({
       label: 'Shopping List',
       icon: ({ tintColor }) => (
-        <Icon
-          name="list-ul"/>
+        <Icon name="list-ul"/>
       ),
     }),
   }

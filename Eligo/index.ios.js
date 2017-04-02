@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import {StackNavigator, DrawerNavigator} from 'react-navigation';
 
-import LoginScreen from './app/loginScreen/views/LoginScreen'
+import LoginScreen from './app/login/views/LoginScreen'
 import ShoppingListScreen from './app/shoppingList/views/ShoppingListScreen'
 import ScannerScreen from './app/scanner/views/ScannerScreen'
 
