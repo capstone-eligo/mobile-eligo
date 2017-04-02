@@ -23,6 +23,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+
 class ShoppingListNavigation extends React.Component {
   static navigationOptions = {
     title: "hello",

@@ -5,7 +5,7 @@ import React from 'react'
 
 // Navigation
 import { addNavigationHelpers } from 'react-navigation'
-import { Drawer } from '../navConfig'
+import { Drawer, Text } from '../navConfig'
 
 //Redux
 import { connect } from 'react-redux'
@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-class DrawerNavigation extends React.Component {
+export class DrawerNavigation extends React.Component {
   render(){
     const { dispatch, navigationState } = this.props
     return (

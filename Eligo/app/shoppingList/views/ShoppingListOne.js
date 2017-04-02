@@ -24,7 +24,7 @@ export default class ShoppingListOne extends React.Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={ () => this.props.navigation.navigate('DrawerOpen')}
+          onPress={ () => this.props.navigation.navigate('Scanner')}
           style={ styles.welcomeButton }>
           <Text>Open drawer</Text>
         </TouchableOpacity>

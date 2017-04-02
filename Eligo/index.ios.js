@@ -21,13 +21,12 @@ const middleware = () => {};
 
 const store = createStore(
   combineReducers({
-    navDraw: (state,action) => Drawer.router.getStateForAction(action, state),
+    navDraw: (state,action) => Drawer.router.getStateForAction(action, state) || state,
     navDrawerReducer: navDrawerReducer,
-    shoppingList: (state,action) => ShoppingList.router.getStateForAction(action, state)
+    shoppingList: (state,action) => ShoppingList.router.getStateForAction(action, state) || state
   })
   // middleware()
 );
-
 
 class Eligo extends React.Component {
   render(){

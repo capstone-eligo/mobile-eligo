@@ -2,7 +2,9 @@
 
 import React from 'react'
 import { View, ScrollView, DrawerView, Text } from 'react-native'
-import { DrawerNavigator } from 'react-navigation'
+import { AppNavigator, DrawerNavigator, DrawerScreen, TabNavigator } from 'react-navigation'
+
+import DrawerNavigation from '../navDrawer/views/DrawerNavigation'
 import ShopppingListNavigation from '../shoppingList/views/ShopppingListNavigation'
 import ScannerTest from '../scanner/ScannerTest'
 
@@ -10,14 +12,15 @@ import ScannerTest from '../scanner/ScannerTest'
 import styles from '../styles'
 
 const routeConfiguration = {
-  ShopppingListNavigation: { screen: ShopppingListNavigation },
-  Scanner: { screen: ScannerTest }
+  ShoppingListNavigation: { screen: ShopppingListNavigation },
+  Scanner: { screen: ScannerTest },
+  // DrawerOpen: { screen: DrawerNavigation }
 }
 
 // todo fix drawer opening
-const CustomDrawerContentComponent = (props) => (
+export const CustomDrawerContentComponent = (props) => (
   <View style={styles.container}>
-    <Text> HI </Text>
+    <Text> Hi </Text>
   </View>
 );
 
@@ -25,21 +28,30 @@ const CustomDrawerContentComponent = (props) => (
 const drawerConfiguration = {
   drawerWidth: 500,
   drawerPosition: "left",
-  // contentComponent: CustomDrawerContentComponent
-  // contentOptions: {
-  //   activeTintColor: '#e91e63',
-  //   style: {
-  //     marginVertical: 0,
-  //   }
-  // }
+  initialRouteName: "ShoppingListNavigation",
+  // contentComponent: CustomDrawerContentComponent,
+  contentOptions: {
+    activeTintColor: '#e91e63',
+    style: {
+      marginVertical: 0,
+    }
+  },
+  headerMode: "screen",
 }
 
 export const Drawer = DrawerNavigator(routeConfiguration, drawerConfiguration)
 
+
+// navigation drawer reducer is not sending a Navigation Dispatch...it's only sending a simple object
 export const navDrawerReducer = (state,action) => {
-  if (action.type === 'DrawerOpen') {
-    return { ...state, index:0 }
+  if (action.routeName == "DrawerOpen") {
+    // return { ...state, index:0 }
+    console.log(action)
+
+    return Drawer.router.getStateForAction(action,state) || state
+    
   } else {
-    return Drawer.router.getStateForAction(action,state)
+    console.log(action)
+    return Drawer.router.getStateForAction(action,state) || state
   }
 }
