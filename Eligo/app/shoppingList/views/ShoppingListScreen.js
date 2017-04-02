@@ -7,6 +7,7 @@ import {
   Image
 } from 'react-native'
 
+import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from '../../styles'
 
 export default class ShoppingListScreen extends React.Component {
@@ -14,9 +15,8 @@ export default class ShoppingListScreen extends React.Component {
     drawer: () => ({
       label: 'Shopping List',
       icon: ({ tintColor }) => (
-        <Image
-          source={require('../../img/eligo_tp.png')}
-          style={[styles.icon, {tintColor: tintColor}]}/>
+        <Icon
+          name="list-ul"/>
       ),
     }),
   }

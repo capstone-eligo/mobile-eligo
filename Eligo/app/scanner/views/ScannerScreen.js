@@ -7,6 +7,7 @@ import {
   Image
 } from 'react-native'
 
+import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from '../../styles'
 
 export default class ScannerScreen extends React.Component {
@@ -14,9 +15,7 @@ export default class ScannerScreen extends React.Component {
     drawer: () => ({
       label: 'Scanner',
       icon: ({ tintColor }) => (
-        <Image
-          source={require('../../img/eligo_tp.png')}
-          style={[styles.icon, {tintColor: tintColor}]}/>
+        <Icon name='barcode'/>
       ),
     }),
   }
@@ -31,7 +30,7 @@ export default class ScannerScreen extends React.Component {
         <TouchableOpacity
           onPress={ () => this.props.navigation.navigate('ShoppingList')}
           style={ styles.welcomeButton }>
-          <Text>Open drawer</Text>
+          <Text>Go to Shopping List</Text>
         </TouchableOpacity>
       </View>
     )
