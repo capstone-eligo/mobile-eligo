@@ -22,5 +22,9 @@ export default StyleSheet.create({
   welcomeLogo: {
       width: 150,
       height: 150
+  },
+  icon: {
+    width: 24,
+    height: 24
   }
 });

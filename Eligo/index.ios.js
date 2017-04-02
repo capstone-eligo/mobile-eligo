@@ -1,41 +1,48 @@
-'use strict'
+/**
+ * Eligo App
+ * @flow
+ */
 
-import React from 'react'
-import { AppRegistry } from 'react-native'
+import React, { Component } from 'react';
+import { AppRegistry } from 'react-native';
+import {StackNavigator, DrawerNavigator} from 'react-navigation';
 
-import { Provider } from 'react-redux'
+import LoginScreen from './app/loginScreen/views/LoginScreen'
+import ShoppingListScreen from './app/shoppingList/views/ShoppingListScreen'
+import ScannerScreen from './app/scanner/views/ScannerScreen'
 
-import {
-  applyMiddleware,
-  combineReducers,
-  createStore
-} from 'redux'
 
-import { ShoppingList } from './app/shoppingList/navConfig'
-import { 
-  Drawer,
-  navDrawerReducer
-} from './app/navDrawer/navConfig'
-
-const middleware = () => {};
-
-const store = createStore(
-  combineReducers({
-    navDraw: (state,action) => Drawer.router.getStateForAction(action, state) || state,
-    navDrawerReducer: navDrawerReducer,
-    shoppingList: (state,action) => ShoppingList.router.getStateForAction(action, state) || state
-  })
-  // middleware()
-);
-
-class Eligo extends React.Component {
-  render(){
-    return(
-      <Provider store={store}>
-        <Drawer />
-      </Provider>
-    )
+// nested drawer stuff
+const drawRouteConfigs = {
+  ShoppingList: {
+    screen: ShoppingListScreen
+  },
+  Scanner: {
+    screen: ScannerScreen
   }
 };
 
-AppRegistry.registerComponent('Eligo', () => Eligo);
+const drawerConfigs = {
+  initialRouteName: "ShoppingList"
+};
+
+export const mainNavigator = DrawerNavigator(drawRouteConfigs, drawerConfigs);
+
+// parent stack navigator stuff
+const routeConfig = {
+  Login: {
+    screen: LoginScreen,
+  },
+  MainNav: {
+    screen: mainNavigator
+  }
+};
+
+const stackConfig = {
+  initialRouteName: 'Login',
+  headerMode: "none"
+};
+
+const ModalStack = StackNavigator(routeConfig, stackConfig);
+
+AppRegistry.registerComponent('Eligo', () => ModalStack);

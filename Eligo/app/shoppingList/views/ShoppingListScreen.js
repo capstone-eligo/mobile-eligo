@@ -9,22 +9,27 @@ import {
 
 import styles from '../../styles'
 
-export default class ShoppingListOne extends React.Component {
+export default class ShoppingListScreen extends React.Component {
+  static navigationOptions = {
+    drawer: () => ({
+      label: 'Shopping List',
+      icon: ({ tintColor }) => (
+        <Image
+          source={require('../../img/eligo_tp.png')}
+          style={[styles.icon, {tintColor: tintColor}]}/>
+      ),
+    }),
+  }
+
   render(){
     return(
       <View style={ styles.container }>
 
         <Image source={require('../../img/eligo_tp.png')} style={ styles.welcomeLogo }/>
-        <Text>Shopping List Page 1/2</Text>
+        <Text>Shopping List</Text>
       
         <TouchableOpacity
-          onPress={ () => this.props.navigation.navigate('ShoppingListTwo') }
-          style={ styles.welcomeButton }>
-          <Text>Go to next screen this tab</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={ () => this.props.navigation.navigate('Scanner')}
+          onPress={ () => this.props.navigation.navigate('DrawerOpen')}
           style={ styles.welcomeButton }>
           <Text>Open drawer</Text>
         </TouchableOpacity>
