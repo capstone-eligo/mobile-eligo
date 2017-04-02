@@ -9,12 +9,8 @@
   "dependencies": {
     "react": "15.4.2",
     "react-native": "0.42.3",
-    "react-native-drawer": "^2.3.0",
-    "react-native-router-flux": "^3.38.0",
     "react-native-vector-icons": "^4.0.0",
-    "react-navigation": "https://github.com/react-community/react-navigation/tarball/master",
-    "react-redux": "^5.0.3",
-    "redux-logger": "^3.0.1"
+    "react-navigation": "https://github.com/react-community/react-navigation/tarball/master"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
