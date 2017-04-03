@@ -4,7 +4,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image
+  Image,
+  Alert
 } from 'react-native'
 
 import Camera from 'react-native-camera'
@@ -30,27 +31,31 @@ export default class ScannerScreen extends React.Component {
       .catch(err => console.error(err));
   }
 
+  showBarcode(data, bounds) {
+    console.log(data);
+  } 
+
   render(){
     return(
-      <View style={ styles.cameraContainer }>
-        <Text>Scanner</Text>
-      
+      <View style={ styles.container }>
         <TouchableOpacity
           onPress={ () => this.props.navigation.navigate('ShoppingList')}
           style={ styles.welcomeButton }>
           <Text>Go to Shopping List</Text>
         </TouchableOpacity>
 
-        <Camera 
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fit}>
+        <View style={ styles.cameraContainer }>
+          <Camera 
+            ref={(cam) => {
+              this.camera = cam;
+            }}
+            style={styles.preview}
+            aspect={Camera.constants.Aspect.fit}
+            onBarCodeRead={this.showBarcode}>
+          </Camera>
+        </View>
 
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
-          
-        </Camera>
+        <Text>Placeholder for search</Text>
       </View>
     )
   }

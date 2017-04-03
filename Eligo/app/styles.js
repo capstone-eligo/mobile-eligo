@@ -8,7 +8,8 @@ export default StyleSheet.create({
     backgroundColor: '#FFF',
   },
   cameraContainer: {
-    flex: 1
+    flex: 1,
+    height: '80%'
   },
   welcomeButton: {
     padding:20,
