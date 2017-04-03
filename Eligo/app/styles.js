@@ -7,6 +7,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFF',
   },
+  cameraContainer: {
+    flex: 1
+  },
   welcomeButton: {
     padding:20,
     borderRadius:20,
@@ -26,5 +29,18 @@ export default StyleSheet.create({
   icon: {
     width: 24,
     height: 24
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
   }
 });

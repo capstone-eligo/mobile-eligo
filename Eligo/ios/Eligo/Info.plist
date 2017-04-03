@@ -51,6 +51,8 @@
         </dict>
       </dict>
     </dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Eligo needs access to your camera in order to scan barcodes.</string>
     <key>UIAppFonts</key>
     <array>
       <string>Entypo.ttf</string>
