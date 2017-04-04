@@ -38,23 +38,21 @@ export default class ScannerScreen extends React.Component {
 
   render(){
     return(
-      <View style={ styles.container }>
+      <View style={ styles.cameraContainer }>
         <TouchableOpacity
           onPress={ () => this.props.navigation.navigate('Results')}
           style={ styles.welcomeButton }>
           <Text>Go to Results (test)</Text>
         </TouchableOpacity>
 
-        <View style={ styles.cameraContainer }>
-          <Camera 
-            ref={(cam) => {
-              this.camera = cam;
-            }}
-            style={styles.preview}
-            aspect={Camera.constants.Aspect.fit}
-            onBarCodeRead={this.showBarcode}>
-          </Camera>
-        </View>
+        <Camera 
+          ref={(cam) => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill}
+          onBarCodeRead={this.showBarcode}>
+        </Camera>
 
       </View>
     )

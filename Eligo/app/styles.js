@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   cameraContainer: {
     flex: 1,
-    height: '80%'
+    // height: '80%'
   },
   welcomeButton: {
     padding:20,
