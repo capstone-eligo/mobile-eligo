@@ -5,20 +5,55 @@
 
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import {StackNavigator, DrawerNavigator} from 'react-navigation';
+import {StackNavigator, DrawerNavigator, TabNavigator} from 'react-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
+// Login screens
 import LoginScreen from './app/login/views/LoginScreen'
-import ShoppingListScreen from './app/shoppingList/views/ShoppingListScreen'
-import ScannerScreen from './app/scanner/views/ScannerScreen'
 
+// Main navigator screens
+import ShoppingListScreen from './app/shoppingList/views/ShoppingListScreen'
+
+// Scanner navigator screens
+import ScannerScreen from './app/scanner/views/ScannerScreen'
+import ResultsScreen from './app/scanner/views/ResultsScreen'
+import ScannerTabScreen2 from './app/scanner/views/ScannerTabScreen2'
+
+
+// scanner tab navigator stuff
+const routeConfigs = {
+  Scanner: {
+    screen: ScannerScreen
+  },
+  Results: {
+    screen: ResultsScreen
+  },
+  // Nutrition: {
+  //   screen: NutritionScreen
+  // }
+};
+
+const tabConfigs = {
+  initialRouteName: "Scanner",
+};
+
+export const ScannerNavigator = TabNavigator(routeConfigs, tabConfigs);
+ScannerNavigator.navigationOptions = {
+      drawer: () => ({
+        label: 'Scanner',
+        icon: ({ tintColor }) => (
+          <Icon name='barcode'/>
+        ),
+    }),
+  }
 
 // nested drawer stuff
 const drawRouteConfigs = {
   ShoppingList: {
     screen: ShoppingListScreen
   },
-  Scanner: {
-    screen: ScannerScreen
+  ScannerNav: {
+    screen: ScannerNavigator
   }
 };
 
@@ -42,6 +77,7 @@ const stackConfig = {
   initialRouteName: 'Login',
   headerMode: "none"
 };
+
 
 const ModalStack = StackNavigator(routeConfig, stackConfig);
 

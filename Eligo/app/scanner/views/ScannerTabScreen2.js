@@ -13,14 +13,13 @@ import Camera from 'react-native-camera'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from '../../styles'
 
-export default class ScannerScreen extends React.Component {
+export default class ScannerTabScreen2 extends React.Component {
   static navigationOptions = {
     tabBar: () => ({
-      label: 'Scanner',
+      label: 'Scanner 2',
       icon: ({ tintColor }) => (
         <Icon name='barcode'/>
       ),
-      visible: false,
     }),
   }
 
@@ -39,23 +38,7 @@ export default class ScannerScreen extends React.Component {
   render(){
     return(
       <View style={ styles.container }>
-        <TouchableOpacity
-          onPress={ () => this.props.navigation.navigate('Results')}
-          style={ styles.welcomeButton }>
-          <Text>Go to Results (test)</Text>
-        </TouchableOpacity>
-
-        <View style={ styles.cameraContainer }>
-          <Camera 
-            ref={(cam) => {
-              this.camera = cam;
-            }}
-            style={styles.preview}
-            aspect={Camera.constants.Aspect.fit}
-            onBarCodeRead={this.showBarcode}>
-          </Camera>
-        </View>
-
+        <Text>Hello world 2</Text>
       </View>
     )
   }
