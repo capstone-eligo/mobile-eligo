@@ -4,35 +4,42 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
-import {StackNavigator} from 'react-navigation';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 
-import LoginScreen from './app/login/views/LoginScreen'
-import MainNavigator from './app/MainNavigator'
+import { Provider, connect } from 'react-redux';
+import { createStore } from 'redux';
+import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
 
-// parent stack navigator stuff
-const routeConfig = {
-  Login: {
-    screen: LoginScreen,
-  },
-  MainNav: {
-    screen: MainNavigator
-  }
-};
+import { appReducer } from './app/reducers';
+import Login from './app/components/login';
+import ShoppingList from './app/components/shoppingList';
 
-const stackConfig = {
-  initialRouteName: 'Login',
-  headerMode: "none"
-};
 
-const ModalStack = StackNavigator(routeConfig, stackConfig);
+const Scenes = Actions.create(
+  <Scene key='root'>
+    <Scene key="loginStack">
+      <Scene key='login' title='Login' component={Login}></Scene>
+      <Scene key='shoppingList' title='Shopping List' component={ShoppingList}></Scene>      
+    </Scene>
+  </Scene>  
+)
 
-class App extends React.Component {
+const ConnectedRouter = connect()(Router);
+const store = createStore(appReducer)
+
+export default class Eligo extends Component {
   render() {
     return (
-      <ModalStack/>
-    )
+      <Provider store={store}>
+        <ConnectedRouter scenes={Scenes} />
+      </Provider>
+    );
   }
 }
 
-AppRegistry.registerComponent('Eligo', () => App);
+AppRegistry.registerComponent('Eligo', () => Eligo);
