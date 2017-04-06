@@ -33,14 +33,14 @@ export default class ScannerScreen extends React.Component {
   }
 
   showBarcode(data, bounds) {
-    console.log(data);
+    return this.props.navigation.navigate('Results', data);
   } 
 
   render(){
     return(
       <View style={ styles.cameraContainer }>
         <TouchableOpacity
-          onPress={ () => this.props.navigation.navigate('Results')}
+          onPress={ () => this.props.navigation.navigate('Results', {barcode: '09501230123'})}
           style={ styles.welcomeButton }>
           <Text>Go to Results (test)</Text>
         </TouchableOpacity>

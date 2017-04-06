@@ -14,6 +14,12 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from '../../styles'
 
 export default class ResultsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {test: 'hello world'};
+  }
+
   static navigationOptions = {
     tabBar: () => ({
       label: 'Results',
@@ -23,22 +29,11 @@ export default class ResultsScreen extends React.Component {
     }),
   }
 
-  takePicture() {
-    const options = {};
-    //options.location = ...
-    this.camera.capture({metadata: options})
-      .then((data) => console.log(data))
-      .catch(err => console.error(err));
-  }
-
-  showBarcode(data, bounds) {
-    console.log(data);
-  } 
-
   render(){
     return(
       <View style={ styles.container }>
         <Text>Results</Text>
+        <Text>{this.state.test}</Text>
       </View>
     )
   }

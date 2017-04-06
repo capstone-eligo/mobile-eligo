@@ -81,4 +81,17 @@ const stackConfig = {
 
 const ModalStack = StackNavigator(routeConfig, stackConfig);
 
-AppRegistry.registerComponent('Eligo', () => ModalStack);
+class App extends React.Component {
+  construtor(props) {
+    super(props);
+    this.state = {test: "hello"};
+  }
+
+  render() {
+    return (
+      <ModalStack state={this.state}/>
+    )
+  }
+}
+
+AppRegistry.registerComponent('Eligo', () => App);
