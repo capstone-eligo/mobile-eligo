@@ -13,24 +13,15 @@ import Camera from 'react-native-camera'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from '../../styles'
 
-export default class ResultsScreen extends React.Component {
+export default class TestScreen extends React.Component {
   static navigationOptions = {
-    tabBar: () => ({
-      label: 'Results',
-      icon: ({ tintColor }) => (
-        <Icon name='barcode'/>
-      ),
-    }),
+    title: "Test",
   }
 
   render(){
-    const { params } = this.props.navigation.state;
-    console.log(params);
-
     return(
       <View style={ styles.container }>
-        <Text>Results</Text>
-        <Text>{params}</Text>
+        <Text>Test</Text>
       </View>
     )
   }

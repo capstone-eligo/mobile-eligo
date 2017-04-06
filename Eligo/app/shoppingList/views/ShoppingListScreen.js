@@ -21,11 +21,13 @@ export default class ShoppingListScreen extends React.Component {
   }
 
   render(){
+    let temp = this.state ? this.state.test : "nothing passed";
+
     return(
       <View style={ styles.container }>
 
         <Image source={require('../../img/eligo_tp.png')} style={ styles.welcomeLogo }/>
-        <Text>Shopping List</Text>
+        <Text>Shopping List - and test = {temp}</Text>
       
         <TouchableOpacity
           onPress={ () => this.props.navigation.navigate('DrawerOpen')}
