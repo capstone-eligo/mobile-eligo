@@ -18,13 +18,17 @@ import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
 import { appReducer } from './app/reducers';
 import Login from './app/components/login';
 import ShoppingList from './app/components/shoppingList';
+import MainNav from './app/components/MainNav';
+
 
 
 const Scenes = Actions.create(
   <Scene key='root'>
     <Scene key="loginStack">
       <Scene key='login' title='Login' component={Login}></Scene>
-      <Scene key='shoppingList' title='Shopping List' component={ShoppingList}></Scene>      
+      <Scene key='mainNav' title='MainNav' component={MainNav} open={false}>
+        <Scene key='shoppingList' title='Shopping List' tabs={true} component={ShoppingList}></Scene>    
+      </Scene>
     </Scene>
   </Scene>  
 )

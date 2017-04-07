@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux';
 import { ActionConst } from 'react-native-router-flux';
 
-// import { groceryReducer } from './groceryReducer';
-// import { todoReducer } from './todoReducer';
-
-
 import { ACTION_TYPES } from '../actions';
 
 export function countReducer(state={ count: {} }, action) {
@@ -13,7 +9,6 @@ export function countReducer(state={ count: {} }, action) {
         case ACTION_TYPES.ADD_COUNT:
             var x = Number(Math.random() * 15)
             count[x] = 1
-            console.log(count);
             return { ...state, count };       
         default:
             return state;

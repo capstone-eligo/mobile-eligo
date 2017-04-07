@@ -26,6 +26,7 @@ class Login extends React.Component {
         return(
             <View style={styles.container}>
                 <Text onPress={() => Actions.shoppingList()}>Login</Text>
+                <Text onPress={() => Actions.mainNav()}>To Main Nav</Text>                
                 <TouchableHighlight onPress={() => { addCount(count); }}>
                     <Text>Iterate count</Text>
                 </TouchableHighlight>
