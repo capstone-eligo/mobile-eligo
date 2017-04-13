@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+// default ELIGO color palette
+const COLOR_PALETTE = {};
+
 export default StyleSheet.create({
+  // containers
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -26,6 +30,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  // inputs
   cameraInput: {
     paddingLeft: 15,
     height: 40,
@@ -34,44 +40,23 @@ export default StyleSheet.create({
     backgroundColor: '#DDD',    
   },
   loginInput: {
-    // borderWidth: 1,
     paddingLeft: 15,    
     borderRadius: 4,
     borderColor: '#E6E5ED',
     backgroundColor: '#F8F8F9',
     height: 40
   },
-  welcomeButton: {
-    padding:20,
-    borderRadius:20,
-    backgroundColor:'#EEE',
-    marginTop:20
-  },
-  instructions: {
-    fontStyle: 'italic',
-    textAlign: 'center',
-    color: '#AAA',
-    marginBottom: 5,
-  },
+
+  // others
   welcomeLogo: {
     width: 150,
     height: 150
-  },
-  icon: {
-    width: 24,
-    height: 24
   },
   preview: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    color: '#000',
-    padding: 10,
-    margin: 40
-  }
+
+
 });
