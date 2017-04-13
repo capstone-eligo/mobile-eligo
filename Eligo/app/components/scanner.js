@@ -40,6 +40,8 @@ class Scanner extends React.Component {
                 <Camera 
                     ref={(cam) => {this.camera = cam;}}
                     style={styles.preview}
+                    onFocusChanged={() => {}}
+                    defaultOnFocusComponent={true}
                     aspect={Camera.constants.Aspect.fill}
                     onBarCodeRead={showBarcode.bind(this)}>
                 </Camera>

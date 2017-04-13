@@ -19,6 +19,9 @@ import { appReducer } from './app/reducers';
 import Login from './app/components/login';
 import ShoppingList from './app/components/shoppingList';
 import Scanner from './app/components/scanner';
+import Profile from './app/components/profile';
+import Settings from './app/components/settings';
+
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -29,7 +32,7 @@ class TabIcon extends React.Component {
     render(){
         return (
             <View style={styles.iconContainer}>
-              <Icon style={{color: this.props.selected ? '#44B8AE' :'#BBB'}} name='barcode'/>
+              <Icon style={{color: this.props.selected ? '#44B8AE' :'#BBB'}} name='shopping-cart'/>
               <Text style={{color: this.props.selected ? '#44B8AE' :'#BBB'}}>{this.props.title}</Text>
             </View>
         );
@@ -40,8 +43,10 @@ const Scenes = Actions.create(
   <Scene key='root'>
       <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
       <Scene key='lists' tabs={true} hideNavBar type={ActionConst.REPLACE} style={styles.tabBarStyle}>
-          <Scene key='shoppingList' title='Shopping List' component={ShoppingList} icon={TabIcon}></Scene>
+          <Scene key='shoppingList' title='List' component={ShoppingList} icon={TabIcon}></Scene>
           <Scene key='scanner' title='Scanner' component={Scanner} icon={TabIcon}></Scene>
+          <Scene key='profile' title='Profile' component={Profile} icon={TabIcon}></Scene>
+          <Scene key='settings' title='Settings' component={Settings} icon={TabIcon}></Scene>                              
       </Scene>
   </Scene>  
 )

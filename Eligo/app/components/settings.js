@@ -18,15 +18,15 @@ mapDispatchToProps = (dispatch) => ({
     // },
 });
 
-class Profile extends React.Component {
+class Settings extends React.Component {
 
     render() {
         // const { addTodoItem, addGroceryItem } = this.props;
         return(
             <View style={styles.container}>               
-                <Text>Profile</Text>
+                <Text>Settings</Text>
             </View>);
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
