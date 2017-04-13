@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableHighlight } from 'react-native';
+import { View, Text, TextInput, TouchableHighlight, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import styles from '../styles'
 
 
-mapStateToProps = (state) => ({ count: state.countReducer.count });
+mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
 
 mapDispatchToProps = (dispatch) => ({
     // addGroceryItem: (groceryItem) => {
@@ -18,16 +18,25 @@ mapDispatchToProps = (dispatch) => ({
 });
 
 class ShoppingList extends React.Component {
-
     render() {
-        // const { addTodoItem, addGroceryItem } = this.props;
-        console.log(this.props.count);
+        console.log(this.props.barcodes);
         
-        const { count } = this.props;
-        return(
-            <View style={styles.container}>              
-                <Text>{ JSON.stringify(count) }</Text>
-            </View>);
+        const { barcodes } = this.props;
+        return(              
+            <ScrollView automaticallyAdjustContentInsets={false}>
+                <View style={styles.container}>
+                    { 
+                        barcodes.history.map((val, idx) => {
+                            return (
+                                <TouchableHighlight key={idx}>
+                                    <Text>{ barcodes.history[idx] }</Text>
+                                </TouchableHighlight>
+                            );
+                        })
+                    }
+                </View>
+            </ScrollView>
+            );
     }
 }
 

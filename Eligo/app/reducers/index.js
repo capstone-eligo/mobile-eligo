@@ -3,13 +3,15 @@ import { ActionConst } from 'react-native-router-flux';
 
 import { ACTION_TYPES } from '../actions';
 
-export function countReducer(state={ count: {} }, action) {
-    const count = { ...state.count };
+export function barcodeReducer(state={ barcodes: {history: []} }, action) {
+    const barcodes = { ...state.barcodes };
     switch(action.type) {
-        case ACTION_TYPES.ADD_COUNT:
-            var x = Number(Math.random() * 15)
-            count[x] = action.val
-            return { ...state, count };       
+        case ACTION_TYPES.ADD_BARCODE:
+            var x = Number(Math.random() * 15);
+            barcodes.history.push(action.barcode);
+            barcodes.lastBarcode = action.barcode;
+            
+            return { ...state, barcodes };       
         default:
             return state;
     }
@@ -34,6 +36,6 @@ const sceneReducer = (state = {}, {type, scene}) => {
 
 export const appReducer = combineReducers({
     sceneReducer,
-    countReducer,
+    barcodeReducer,
     shoppingReducer,
 });

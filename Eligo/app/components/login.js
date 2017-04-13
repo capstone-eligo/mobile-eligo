@@ -10,26 +10,19 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { addToCount } from '../actions';
+// import { addToCount } from '../actions';
 import styles from '../styles'
 
-mapStateToProps = (state) => ({ count: state.countReducer.count });
+mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
 
 mapDispatchToProps = (dispatch) => ({
-    addCount: (count) => {
-        dispatch(addToCount(count));
-    },
+    // addCount: (count) => {
+    //     dispatch(addToCount(count));
+    // },
 });
 
 class Login extends React.Component {
-    state = {
-        count: {},
-    }
-    
     render() {
-        const { count, addCount } = this.props;
-        // const { count } = this.state;
-        
         return(
             <View style={styles.container}>
                 <Image source={require('../img/eligo_tp.png')} style={ styles.welcomeLogo }/>
@@ -48,10 +41,6 @@ class Login extends React.Component {
                     onPress={() => { Actions.lists(); }}
                     title="Login"
                 />
-                         
-                <TouchableHighlight onPress={() => { addCount(5); }}>
-                    <Text>Iterate count</Text>
-                </TouchableHighlight>
             </View>);
     }
 }

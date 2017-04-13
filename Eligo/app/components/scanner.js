@@ -3,16 +3,16 @@ import { View, Text, TextInput, TouchableHighlight, TouchableOpacity, AlertIOS }
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { addToCount } from '../actions';
+import { addBarcode } from '../actions';
 
 import styles from '../styles'
 import Camera from 'react-native-camera'
 
-mapStateToProps = (state) => ({ count: state.countReducer.count });
+mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
 
 mapDispatchToProps = (dispatch) => ({
-    addCount: (count) => {
-        dispatch(addToCount(count));
+    addBarcode: (barcode) => {
+        dispatch(addBarcode(barcode));
     },
 });
 
@@ -26,17 +26,16 @@ class Scanner extends React.Component {
     // } 
     
     render() {
-        const { count, addCount } = this.props;
+        const { barcodes, addBarcode } = this.props;
 
-        const showBarcode = (data, bounds) => { addCount(data.data); }
+        const showBarcode = (data, bounds) => { addBarcode(data.data); }
 
-        console.log(this.props.count);
         return(
             <View style={ styles.cameraContainer }>
-                <TouchableOpacity
-                    style={ styles.welcomeButton }>
-                    <Text>Barcode scanner</Text>
-                </TouchableOpacity>
+                <TextInput
+                    style={styles.cameraInput}
+                    placeholder="Search by Product Name/Barcode"
+                />
 
                 <Camera 
                     ref={(cam) => {this.camera = cam;}}

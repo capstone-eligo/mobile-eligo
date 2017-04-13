@@ -7,13 +7,35 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFF',
     padding: 25,
+    marginTop: 50,
+  },
+  tabBarStyle: {
+    borderTopWidth : .5,
+    borderColor    : '#b7b7b7',
+    backgroundColor: 'white',
+    opacity        : 1
   },
   cameraContainer: {
     flex: 1,
-    height: '80%'
+    height: '80%',
+    marginTop: 65,
+    marginBottom: 50,
+  },
+  iconContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cameraInput: {
+    paddingLeft: 15,
+    height: 40,
+    borderRadius: 4,
+    borderColor: '#E6E5ED',
+    backgroundColor: '#DDD',    
   },
   loginInput: {
     // borderWidth: 1,
+    paddingLeft: 15,    
     borderRadius: 4,
     borderColor: '#E6E5ED',
     backgroundColor: '#F8F8F9',
