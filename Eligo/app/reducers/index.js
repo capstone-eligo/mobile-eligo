@@ -8,7 +8,7 @@ export function countReducer(state={ count: {} }, action) {
     switch(action.type) {
         case ACTION_TYPES.ADD_COUNT:
             var x = Number(Math.random() * 15)
-            count[x] = 1
+            count[x] = action.val
             return { ...state, count };       
         default:
             return state;

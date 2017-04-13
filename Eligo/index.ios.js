@@ -18,18 +18,24 @@ import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
 import { appReducer } from './app/reducers';
 import Login from './app/components/login';
 import ShoppingList from './app/components/shoppingList';
-import MainNav from './app/components/MainNav';
+import Scanner from './app/components/scanner';
 
 
+class TabIcon extends React.Component {
+    render(){
+        return (
+            <Text style={{color: this.props.selected ? 'green' :'black'}}>{this.props.title}</Text>
+        );
+    }
+}
 
 const Scenes = Actions.create(
   <Scene key='root'>
-    <Scene key="loginStack">
-      <Scene key='login' title='Login' component={Login}></Scene>
-      <Scene key='mainNav' title='MainNav' component={MainNav} open={false}>
-        <Scene key='shoppingList' title='Shopping List' tabs={true} component={ShoppingList}></Scene>    
+      <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
+      <Scene key='lists' tabs={true} hideNavBar type={ActionConst.REPLACE}>
+          <Scene key='shoppingList' title='Shopping List' component={ShoppingList} icon={TabIcon}></Scene>
+          <Scene key='scanner' title='Scanner' component={Scanner} icon={TabIcon}></Scene>
       </Scene>
-    </Scene>
   </Scene>  
 )
 

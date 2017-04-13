@@ -6,10 +6,18 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFF',
+    padding: 25,
   },
   cameraContainer: {
     flex: 1,
-    // height: '80%'
+    height: '80%'
+  },
+  loginInput: {
+    // borderWidth: 1,
+    borderRadius: 4,
+    borderColor: '#E6E5ED',
+    backgroundColor: '#F8F8F9',
+    height: 40
   },
   welcomeButton: {
     padding:20,
@@ -24,8 +32,8 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   welcomeLogo: {
-      width: 150,
-      height: 150
+    width: 150,
+    height: 150
   },
   icon: {
     width: 24,

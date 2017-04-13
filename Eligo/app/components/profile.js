@@ -5,7 +5,6 @@ import { Actions } from 'react-native-router-flux';
 
 import styles from '../styles'
 
-
 mapStateToProps = (state) => ({ count: state.countReducer.count });
 
 mapDispatchToProps = (dispatch) => ({
@@ -17,7 +16,7 @@ mapDispatchToProps = (dispatch) => ({
     // },
 });
 
-class ShoppingList extends React.Component {
+class Scanner extends React.Component {
 
     render() {
         // const { addTodoItem, addGroceryItem } = this.props;
@@ -25,10 +24,10 @@ class ShoppingList extends React.Component {
         
         const { count } = this.props;
         return(
-            <View style={styles.container}>              
+            <View style={styles.container}>               
                 <Text>{ JSON.stringify(count) }</Text>
             </View>);
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);
+export default connect(mapStateToProps, mapDispatchToProps)(Scanner);

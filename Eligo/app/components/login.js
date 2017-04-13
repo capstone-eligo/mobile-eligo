@@ -1,9 +1,17 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableHighlight } from 'react-native';
+import { 
+    View,
+    Text,
+    TextInput, 
+    TouchableHighlight, 
+    Image, 
+    Button
+} from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import { addToCount } from '../actions';
+import styles from '../styles'
 
 mapStateToProps = (state) => ({ count: state.countReducer.count });
 
@@ -22,40 +30,30 @@ class Login extends React.Component {
         const { count, addCount } = this.props;
         // const { count } = this.state;
         
-
         return(
             <View style={styles.container}>
-                <Text onPress={() => Actions.shoppingList()}>Login</Text>
-                <Text onPress={() => Actions.mainNav()}>To Main Nav</Text>                
-                <TouchableHighlight onPress={() => { addCount(count); }}>
+                <Image source={require('../img/eligo_tp.png')} style={ styles.welcomeLogo }/>
+
+                <TextInput
+                    style={styles.loginInput}
+                    placeholder="Username"
+                />
+
+                <TextInput
+                    style={styles.loginInput}
+                    placeholder="Password"
+                />
+
+                <Button
+                    onPress={() => { Actions.lists(); }}
+                    title="Login"
+                />
+                         
+                <TouchableHighlight onPress={() => { addCount(5); }}>
                     <Text>Iterate count</Text>
                 </TouchableHighlight>
-                <Text>{ JSON.stringify(count) }</Text>
             </View>);
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-const styles = {
-    container: {
-        marginTop: 80,
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        maxHeight: 400,
-        alignItems: 'center',
-    },
-    textInput: {
-        // alignSelf: 'stretch'
-    },
-    button: {
-        padding: 5,
-        borderWidth: 1,
-        borderRadius: 5,
-        backgroundColor: 'black',
-    },
-    buttonText: {
-        color: 'white',
-    }
-};
