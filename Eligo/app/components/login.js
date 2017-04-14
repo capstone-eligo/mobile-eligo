@@ -5,7 +5,8 @@ import {
     TextInput, 
     TouchableHighlight, 
     Image, 
-    Button
+    Button,
+    StatusBar
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -23,8 +24,11 @@ mapDispatchToProps = (dispatch) => ({
 
 class Login extends React.Component {
     render() {
+        StatusBar.setBarStyle('light-content', true)
+
         return(
             <View style={styles.loginContainer}>
+                
                 <Image source={require('../img/eligo_2_tp.png')} style={ styles.loginLogo }/>
 
                 <TextInput
