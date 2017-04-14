@@ -1,7 +1,14 @@
 import { StyleSheet } from 'react-native';
 
 // default ELIGO color palette
-const COLOR_PALETTE = {};
+const COLOR_PALETTE = {
+  teal: '#44B8AE',
+  lightBlue: '#A9DBD7',
+  lightGreen: '#B1D25E',
+  lightOrange: '#F39662',
+  red: '#EA4C2F',
+  grey: '#EFF4F4'
+};
 
 export default StyleSheet.create({
   // containers
@@ -13,11 +20,18 @@ export default StyleSheet.create({
     padding: 25,
     marginTop: 50,
   },
+  loginContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR_PALETTE.teal,
+    padding: 25,    
+  },
   tabBarStyle: {
-    borderTopWidth : .5,
-    borderColor    : '#b7b7b7',
+    borderTopWidth: .5,
+    borderColor: '#b7b7b7',
     backgroundColor: 'white',
-    opacity        : 1
+    opacity: 1
   },
   cameraContainer: {
     flex: 1,
@@ -40,23 +54,30 @@ export default StyleSheet.create({
     backgroundColor: '#DDD',    
   },
   loginInput: {
-    paddingLeft: 15,    
+    paddingLeft: 15,
+    marginBottom: 5,
     borderRadius: 4,
-    borderColor: '#E6E5ED',
-    backgroundColor: '#F8F8F9',
+    borderColor: COLOR_PALETTE.grey,
+    backgroundColor: COLOR_PALETTE.grey,
     height: 40
   },
 
   // others
-  welcomeLogo: {
-    width: 150,
-    height: 150
+  loginLogo: {
+    width: 918/4,
+    height: 709/4,
+    marginBottom: 20
   },
   preview: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
-
-
+  loginBtn: {
+    marginBottom: 5,
+    borderRadius: 4,
+    marginTop: 20,
+    fontSize: 25,
+    color: COLOR_PALETTE.grey
+  }
 });

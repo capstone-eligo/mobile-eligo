@@ -24,8 +24,8 @@ mapDispatchToProps = (dispatch) => ({
 class Login extends React.Component {
     render() {
         return(
-            <View style={styles.container}>
-                <Image source={require('../img/eligo_tp.png')} style={ styles.welcomeLogo }/>
+            <View style={styles.loginContainer}>
+                <Image source={require('../img/eligo_2_tp.png')} style={ styles.loginLogo }/>
 
                 <TextInput
                     style={styles.loginInput}
@@ -37,10 +37,8 @@ class Login extends React.Component {
                     placeholder="Password"
                 />
 
-                <Button
-                    onPress={() => { Actions.lists(); }}
-                    title="Login"
-                />
+                <Text onPress={() => { Actions.lists(); }} style={styles.loginBtn}>Login</Text>
+
             </View>);
     }
 }
