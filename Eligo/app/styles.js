@@ -11,6 +11,20 @@ const COLOR_PALETTE = {
 };
 
 export default StyleSheet.create({
+  // navbar
+  navBar: {
+    backgroundColor: COLOR_PALETTE.teal,
+  },
+  navBarTitle:{
+      color:'#FFF'
+  },
+  barButtonTextStyle:{
+      color:'#FFF'
+  },
+  barButtonIconStyle:{
+      tintColor:'rgb(255,255,255)'
+  },
+
   // containers
   container: {
     flex: 1,

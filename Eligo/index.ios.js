@@ -58,7 +58,7 @@ export default class Eligo extends Component {
   render() {
     return (
       <Provider store={store}>
-        <ConnectedRouter scenes={Scenes} />
+        <ConnectedRouter scenes={Scenes} navigationBarStyle={styles.navBar} titleStyle={styles.navBarTitle}/>
       </Provider>
     );
   }
