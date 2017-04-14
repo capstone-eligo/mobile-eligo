@@ -4,81 +4,64 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
-import {StackNavigator, DrawerNavigator, TabNavigator} from 'react-navigation';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+
+import { Provider, connect } from 'react-redux';
+import { createStore } from 'redux';
+import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
+
+import { appReducer } from './app/reducers';
+import Login from './app/components/login';
+import ShoppingList from './app/components/shoppingList';
+import Scanner from './app/components/scanner';
+import Profile from './app/components/profile';
+import Settings from './app/components/settings';
+
+
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-// Login screens
-import LoginScreen from './app/login/views/LoginScreen'
-
-// Main navigator screens
-import ShoppingListScreen from './app/shoppingList/views/ShoppingListScreen'
-
-// Scanner navigator screens
-import ScannerScreen from './app/scanner/views/ScannerScreen'
-import ResultsScreen from './app/scanner/views/ResultsScreen'
-import ScannerTabScreen2 from './app/scanner/views/ScannerTabScreen2'
+import styles from './app/styles'
 
 
-// scanner tab navigator stuff
-const routeConfigs = {
-  Scanner: {
-    screen: ScannerScreen
-  },
-  Results: {
-    screen: ResultsScreen
-  },
-  // Nutrition: {
-  //   screen: NutritionScreen
-  // }
-};
+class TabIcon extends React.Component {
+    render(){
+        return (
+            <View style={styles.iconContainer}>
+              <Icon style={{color: this.props.selected ? '#44B8AE' :'#BBB'}} name='shopping-cart'/>
+              <Text style={{color: this.props.selected ? '#44B8AE' :'#BBB'}}>{this.props.title}</Text>
+            </View>
+        );
+    }
+}
 
-const tabConfigs = {
-  initialRouteName: "Scanner",
-};
+const Scenes = Actions.create(
+  <Scene key='root'>
+      <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
+      <Scene key='lists' tabs={true} hideNavBar type={ActionConst.REPLACE} style={styles.tabBarStyle}>
+          <Scene key='shoppingList' title='List' component={ShoppingList} icon={TabIcon}></Scene>
+          <Scene key='scanner' title='Scanner' component={Scanner} icon={TabIcon}></Scene>
+          <Scene key='profile' title='Profile' component={Profile} icon={TabIcon}></Scene>
+          <Scene key='settings' title='Settings' component={Settings} icon={TabIcon}></Scene>                              
+      </Scene>
+  </Scene>  
+)
 
-export const ScannerNavigator = TabNavigator(routeConfigs, tabConfigs);
-ScannerNavigator.navigationOptions = {
-      drawer: () => ({
-        label: 'Scanner',
-        icon: ({ tintColor }) => (
-          <Icon name='barcode'/>
-        ),
-    }),
+const ConnectedRouter = connect()(Router);
+const store = createStore(appReducer)
+
+export default class Eligo extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <ConnectedRouter scenes={Scenes} />
+      </Provider>
+    );
   }
+}
 
-// nested drawer stuff
-const drawRouteConfigs = {
-  ShoppingList: {
-    screen: ShoppingListScreen
-  },
-  ScannerNav: {
-    screen: ScannerNavigator
-  }
-};
-
-const drawerConfigs = {
-  initialRouteName: "ShoppingList"
-};
-
-export const mainNavigator = DrawerNavigator(drawRouteConfigs, drawerConfigs);
-
-// parent stack navigator stuff
-const routeConfig = {
-  Login: {
-    screen: LoginScreen,
-  },
-  MainNav: {
-    screen: mainNavigator
-  }
-};
-
-const stackConfig = {
-  initialRouteName: 'Login',
-  headerMode: "none"
-};
-
-
-const ModalStack = StackNavigator(routeConfig, stackConfig);
-
-AppRegistry.registerComponent('Eligo', () => ModalStack);
+AppRegistry.registerComponent('Eligo', () => Eligo);
