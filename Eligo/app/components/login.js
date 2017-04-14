@@ -34,6 +34,7 @@ class Login extends React.Component {
 
                 <TextInput
                     style={styles.loginInput}
+                    secureTextEntry={true}
                     placeholder="Password"
                 />
 

@@ -17,6 +17,16 @@ const myMemberProfile = [
     avatar_url: 'https://c1.staticflickr.com/9/8654/16609336835_4d3c09b4a8_b.jpg',
     subtitle: 'Vice Chairman'
   },
+  {
+    name: 'Pika Chu',
+    avatar_url: 'https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg',
+    subtitle: 'Vice President'
+  },
+  {
+    name: 'Ee Vee',
+    avatar_url: 'https://c1.staticflickr.com/9/8654/16609336835_4d3c09b4a8_b.jpg',
+    subtitle: 'Vice Chairman'
+  },
 ]
 
 mapStateToProps = (state) => ({
