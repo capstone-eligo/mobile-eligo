@@ -14,11 +14,15 @@ export default StyleSheet.create({
   // containers
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#FFF',
-    padding: 25,
-    marginTop: 50,
+    padding: 5,
+    marginTop: 60,
+    marginBottom: 25,
+  },
+  gridContainer: {
+    padding: 10,
   },
   loginContainer: {
     flex: 1,
@@ -79,5 +83,10 @@ export default StyleSheet.create({
     marginTop: 20,
     fontSize: 25,
     color: COLOR_PALETTE.grey
+  },
+  profileHeaders: {
+    paddingLeft: 10,
+    paddingTop: 10,
+    fontWeight: 'bold',
   }
 });
