@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 // default ELIGO color palette
 const COLOR_PALETTE = {
@@ -13,37 +13,47 @@ const COLOR_PALETTE = {
 export default StyleSheet.create({
   // navbar
   navBar: {
-    backgroundColor: COLOR_PALETTE.teal,
+    backgroundColor: COLOR_PALETTE.teal
   },
-  navBarTitle:{
-      color:'#FFF'
+  navBarTitle: {
+    color: '#FFF'
   },
-  barButtonTextStyle:{
-      color:'#FFF'
+  barButtonTextStyle: {
+    color: '#FFF'
   },
-  barButtonIconStyle:{
-      tintColor:'rgb(255,255,255)'
+  barButtonIconStyle: {
+    tintColor: 'rgb(255,255,255)'
   },
 
   // containers
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    // justifyContent: 'center', alignItems: 'center',
     backgroundColor: '#FFF',
     padding: 5,
     marginTop: 60,
-    marginBottom: 25,
+    marginBottom: 25
+  },
+  editProfileContainer: {
+    flex: 1,
+    backgroundColor: '#FFF',
+    padding: 25,
+    marginTop: 70,
+    marginBottom: 25
+  },
+  editProfileInfo: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   gridContainer: {
-    padding: 10,
+    padding: 10
   },
   loginContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLOR_PALETTE.teal,
-    padding: 25,    
+    padding: 25
   },
   tabBarStyle: {
     borderTopWidth: .5,
@@ -55,12 +65,12 @@ export default StyleSheet.create({
     flex: 1,
     height: '80%',
     marginTop: 65,
-    marginBottom: 50,
+    marginBottom: 50
   },
   iconContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   // inputs
@@ -69,7 +79,7 @@ export default StyleSheet.create({
     height: 40,
     borderRadius: 4,
     borderColor: '#E6E5ED',
-    backgroundColor: '#DDD',    
+    backgroundColor: '#DDD'
   },
   loginInput: {
     paddingLeft: 15,
@@ -82,8 +92,8 @@ export default StyleSheet.create({
 
   // others
   loginLogo: {
-    width: 918/4,
-    height: 709/4,
+    width: 918 / 4,
+    height: 709 / 4,
     marginBottom: 20
   },
   preview: {
@@ -101,6 +111,6 @@ export default StyleSheet.create({
   profileHeaders: {
     paddingLeft: 10,
     paddingTop: 10,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   }
 });

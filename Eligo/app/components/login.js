@@ -34,12 +34,14 @@ class Login extends React.Component {
                 <TextInput
                     style={styles.loginInput}
                     placeholder="Username"
+                    autoCapitalize="none"
                 />
 
                 <TextInput
                     style={styles.loginInput}
                     secureTextEntry={true}
                     placeholder="Password"
+                    autoCapitalize="none"
                 />
 
                 <Text onPress={() => { Actions.lists(); }} style={styles.loginBtn}>Login</Text>
