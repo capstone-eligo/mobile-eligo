@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, TouchableHighlight, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import {CheckBox} from 'react-native-elements'
 
 import styles from '../styles'
 
@@ -34,6 +35,26 @@ class ShoppingList extends React.Component {
                             );
                         })
                     }
+
+                    <CheckBox
+                        center
+                        left
+                        title='Waffles'
+                        checkedIcon='check-square-o'
+                        uncheckedIcon='square-o'
+                        onIconPress={() => {console.log("i was pressed")}}
+                        checked={false}
+                    />
+
+                    <CheckBox
+                        center
+                        left
+                        title='Spicy cheetos'
+                        checkedIcon='check-square-o'
+                        uncheckedIcon='square-o'
+                        onIconPress={() => {console.log("i was pressed")}}
+                        checked={false}
+                    />
                 </View>
             </ScrollView>
             );

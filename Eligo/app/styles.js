@@ -111,6 +111,8 @@ export default StyleSheet.create({
   profileHeaders: {
     paddingLeft: 10,
     paddingTop: 10,
+    paddingBottom: 10,
+    fontSize: 18,
     fontWeight: 'bold'
   }
 });

@@ -24,7 +24,7 @@ class Settings extends React.Component {
         // const { addTodoItem, addGroceryItem } = this.props;
         return(
             <View style={styles.container}>               
-                <Text>Settings</Text>
+                <Text style={styles.profileHeaders}>Settings</Text>
             </View>);
     }
 }

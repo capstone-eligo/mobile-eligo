@@ -40,7 +40,7 @@ class Profiles extends React.Component {
         // const { addTodoItem, addGroceryItem } = this.props;
         return (
             <View style={styles.container}>
-                <Text style={styles.profileHeaders}>My profile:</Text>
+                <Text style={styles.profileHeaders}>My profile</Text>
                 <List
                     containerStyle={{
                     marginBottom: 20,
@@ -48,14 +48,13 @@ class Profiles extends React.Component {
                 }}>
                     <ListItem
                         roundAvatar
-                        avatar={{
-                        uri: myMemberProfile[0].avatar_url
-                    }}
+                        avatar={{uri: myMemberProfile[0].avatar_url}}
                         key={1}
-                        title={myMemberProfile[0].name}/>
+                        title={myMemberProfile[0].name}
+                        onPress={() => Actions.editProfile()}/>
                 </List>
 
-                <Text style={styles.profileHeaders}>My members:</Text>
+                <Text style={styles.profileHeaders}>My members</Text>
                 <ScrollView>
                     <List
                         containerStyle={{
@@ -64,13 +63,18 @@ class Profiles extends React.Component {
                     }}>
                         {myMemberProfile.map((l, i) => (<ListItem
                             roundAvatar
-                            avatar={{
-                            uri: l.avatar_url
-                        }}
+                            avatar={{uri: l.avatar_url}}
                             key={i}
                             title={l.name}
-                            onPress={() => Actions.editProfile({name: l.name})}/>
+                            onPress={() => {console.log("pressed")}}/>
                         ))}
+                        <ListItem
+                            key={myMemberProfile.length + 1}
+                            avatar={{uri: "https://c1.staticflickr.com/8/7128/8162953475_25501b86a9.jpg"}}
+                            roundAvatar                            
+                            title="Add new member"
+                            onPress={() => {console.log("create new")}}
+                        />
                     </List>
                 </ScrollView>
             </View>
