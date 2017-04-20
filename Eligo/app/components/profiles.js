@@ -6,28 +6,10 @@ import {List, ListItem} from 'react-native-elements'
 
 import styles from '../styles'
 
-const myMemberProfile = [
-    {
-        name: 'Pika Chu',
-        avatar_url: 'https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg',
-        subtitle: 'Vice President'
-    }, {
-        name: 'Ee Vee',
-        avatar_url: 'https://c1.staticflickr.com/9/8654/16609336835_4d3c09b4a8_b.jpg',
-        subtitle: 'Vice Chairman'
-    }, {
-        name: 'Pika Chu',
-        avatar_url: 'https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg',
-        subtitle: 'Vice President'
-    }, {
-        name: 'Ee Vee',
-        avatar_url: 'https://c1.staticflickr.com/9/8654/16609336835_4d3c09b4a8_b.jpg',
-        subtitle: 'Vice Chairman'
-    }
-];
 
 mapStateToProps = (state) => ({
-    //  count: state.countReducer.count
+    profile: state.profileReducer.profile,
+    members: state.profileReducer.members
 });
 
 mapDispatchToProps = (dispatch) => ({
@@ -37,7 +19,8 @@ mapDispatchToProps = (dispatch) => ({
 
 class Profiles extends React.Component {
     render() {
-        // const { addTodoItem, addGroceryItem } = this.props;
+        const { profile, members } = this.props;
+
         return (
             <View style={styles.container}>
                 <Text style={styles.profileHeaders}>My profile</Text>
@@ -48,9 +31,9 @@ class Profiles extends React.Component {
                 }}>
                     <ListItem
                         roundAvatar
-                        avatar={{uri: myMemberProfile[0].avatar_url}}
+                        avatar={{uri: profile.avatar_url}}
                         key={1}
-                        title={myMemberProfile[0].name}
+                        title={profile.name}
                         onPress={() => Actions.editProfile()}/>
                 </List>
 
@@ -61,7 +44,7 @@ class Profiles extends React.Component {
                         marginBottom: 20,
                         marginTop: 0
                     }}>
-                        {myMemberProfile.map((l, i) => (<ListItem
+                        {members.map((l, i) => (<ListItem
                             roundAvatar
                             avatar={{uri: l.avatar_url}}
                             key={i}
@@ -69,7 +52,7 @@ class Profiles extends React.Component {
                             onPress={() => {console.log("pressed")}}/>
                         ))}
                         <ListItem
-                            key={myMemberProfile.length + 1}
+                            key={members.length + 1}
                             avatar={{uri: "https://c1.staticflickr.com/8/7128/8162953475_25501b86a9.jpg"}}
                             roundAvatar                            
                             title="Add new member"

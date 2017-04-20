@@ -1,8 +1,15 @@
 import React from 'react';
-import {View, ScrollView, Text, TextInput, TouchableHighlight} from 'react-native';
+import {View, ScrollView, Text, TextInput, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {List, ListItem, Avatar, Grid, Row, Col} from 'react-native-elements'
+
+
+import {
+    changeProfileName,
+    changeProfileEmail,
+    getProfile
+} from '../actions';
 
 import styles from '../styles'
 
@@ -11,17 +18,26 @@ mapStateToProps = (state) => ({
 });
 
 mapDispatchToProps = (dispatch) => ({
-    // getProfile: (profileID) => { dispatch(getProfile(profileID)); },
-    submitProfileEdit: (editedProfile) => { dispatch(submitProfileEdit(editedProfile)); },
+    getProfile: (profileID) => { dispatch(getProfile(profileID)); },
+    changeProfileName: (newName) => { dispatch(changeProfileName(newName)); },
+    changeProfileEmail: (newEmail) => { dispatch(changeProfileEmail(newEmail)); },
 });
 
-class EditProfile extends React.Component {
 
+class EditProfile extends React.Component {
+    static renderRightButton = (props) => {
+          return (
+              <TouchableOpacity onPress={() => console.log('attempt to save')}>
+                  <Text style={styles.rightButton}>Save</Text>
+              </TouchableOpacity>
+          );
+    }
+    
     render() {
         const headerSectionSize = 20;
         const drSize = (100 - headerSectionSize) / 2;
         
-        const { profile, getProfile } = this.props;
+        const { profile, changeProfileName, changeProfileEmail } = this.props;
 
         return (
             <View style={styles.editProfileContainer}>
@@ -32,22 +48,24 @@ class EditProfile extends React.Component {
                                 large
                                 rounded
                                 source={{uri: "https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg"}}
-                                onPress={() => test()}
+                                onPress={(text) => console.log('test')}
                                 activeOpacity={0.7}
                             />
                         </Col>
-
                         <Col size={5}></Col>
-
                         <Col size={70}>
                             <TextInput
                                 style={styles.loginInput}
                                 placeholder="Name"
-                            />
+                                onChangeText={(text) => changeProfileName(text)}
+                                value={profile.name}
+                                />
                             <TextInput
                                 style={styles.loginInput}
                                 placeholder="Email"
-                                autoCapitalize="none"                                
+                                autoCapitalize="none"
+                                onChangeText={(text) => changeProfileEmail(text)}
+                                value={profile.email}                                
                             />
                         </Col>
                     </Row>
@@ -58,7 +76,6 @@ class EditProfile extends React.Component {
                         <Text>Dietary restrictions (non-allergy based)</Text>
                     </Row>
                 </Grid>
-              
             </View>
         );
     }
