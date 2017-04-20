@@ -26,16 +26,6 @@ class ShoppingList extends React.Component {
         return(              
             <ScrollView automaticallyAdjustContentInsets={false}>
                 <View style={styles.container}>
-                    { 
-                        barcodes.history.map((val, idx) => {
-                            return (
-                                <TouchableHighlight key={idx}>
-                                    <Text>{ barcodes.history[idx] }</Text>
-                                </TouchableHighlight>
-                            );
-                        })
-                    }
-
                     <CheckBox
                         center
                         left

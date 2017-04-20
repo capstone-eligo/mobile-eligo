@@ -28,7 +28,10 @@ class Scanner extends React.Component {
     render() {
         const { barcodes, addBarcode } = this.props;
 
-        const showBarcode = (data, bounds) => { addBarcode(data.data); }
+        const showBarcode = (data, bounds) => { 
+            addBarcode(data.data);
+            Actions.results();
+        }
 
         return(
             <View style={ styles.cameraContainer }>
