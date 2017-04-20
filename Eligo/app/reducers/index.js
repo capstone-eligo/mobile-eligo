@@ -26,7 +26,7 @@ export function shoppingReducer(state={ count: {} }, action) {
 };
 
 const sceneReducer = (state = {}, {type, scene}) => {
-    switch(type){
+    switch(type) {
         case ActionConst.FOCUS:
             return { ...state, scene };
         default:
@@ -34,8 +34,23 @@ const sceneReducer = (state = {}, {type, scene}) => {
     }    
 }
 
+const profileReducer = (state = {profile: {}}, action) => {
+    switch(action.type) {
+        case ACTION_TYPES.GET_PROFILE:
+            console.log(action);
+            return state;
+        case ACTION_TYPES.SUBMIT_PROFILE_EDIT:
+            const profile = {name: "test", email: "test@test.com"}
+
+            return {...state, profile};
+        default:
+            return state;
+    }
+}
+
 export const appReducer = combineReducers({
     sceneReducer,
     barcodeReducer,
     shoppingReducer,
+    profileReducer,
 });

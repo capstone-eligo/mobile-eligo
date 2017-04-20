@@ -7,12 +7,12 @@ import {List, ListItem, Avatar, Grid, Row, Col} from 'react-native-elements'
 import styles from '../styles'
 
 mapStateToProps = (state) => ({
-    //  count: state.countReducer.count
+     profile: state.profileReducer.profile
 });
 
 mapDispatchToProps = (dispatch) => ({
-    // addGroceryItem: (groceryItem) => { dispatch(addToGroceryList(groceryItem));
-    // }, addTodoItem: (todoItem) => { dispatch(addToTodoList(todoItem)); },
+    // getProfile: (profileID) => { dispatch(getProfile(profileID)); },
+    submitProfileEdit: (editedProfile) => { dispatch(submitProfileEdit(editedProfile)); },
 });
 
 class EditProfile extends React.Component {
@@ -20,7 +20,9 @@ class EditProfile extends React.Component {
     render() {
         const headerSectionSize = 20;
         const drSize = (100 - headerSectionSize) / 2;
-        // const { addTodoItem, addGroceryItem } = this.props;
+        
+        const { profile, getProfile } = this.props;
+
         return (
             <View style={styles.editProfileContainer}>
                 <Grid>
@@ -30,7 +32,7 @@ class EditProfile extends React.Component {
                                 large
                                 rounded
                                 source={{uri: "https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg"}}
-                                onPress={() => console.log("Picture clicked")}
+                                onPress={() => test()}
                                 activeOpacity={0.7}
                             />
                         </Col>

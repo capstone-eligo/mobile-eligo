@@ -43,8 +43,7 @@ class TabIcon extends React.Component {
 
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">
-    <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
-    {/*<Scene key='editProfile' title='Edit Profile' hideNavBar={false} component={EditProfile}></Scene>*/}
+    {/*<Scene key='login' title='Login' component={Login} hideNavBar></Scene>*/}
     
     <Scene
       key='lists'
