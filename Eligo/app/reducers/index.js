@@ -26,7 +26,7 @@ export function shoppingReducer(state={ count: {} }, action) {
 };
 
 const sceneReducer = (state = {}, {type, scene}) => {
-    switch(type){
+    switch(type) {
         case ActionConst.FOCUS:
             return { ...state, scene };
         default:
@@ -34,8 +34,59 @@ const sceneReducer = (state = {}, {type, scene}) => {
     }    
 }
 
+const mainProfile = {
+    name: 'Pika Chu 0',
+    avatar_url: 'https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg',
+    email: 'pika0@eligo.com'
+}
+
+const myMemberProfile = [
+    {
+        name: 'Pika Chu 1',
+        avatar_url: 'https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg',
+        email: 'pika@eligo.com'
+    }, {
+        name: 'Ee Vee 1',
+        avatar_url: 'https://c1.staticflickr.com/9/8654/16609336835_4d3c09b4a8_b.jpg',
+        email: 'eevee@eligo.com'
+    }, {
+        name: 'Pika Chu 2',
+        avatar_url: 'https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg',
+        email: 'pika2@eligo.com'
+    }, {
+        name: 'Ee Vee 2',
+        avatar_url: 'https://c1.staticflickr.com/9/8654/16609336835_4d3c09b4a8_b.jpg',
+        email: 'eevee2@eligo.com'
+    }
+];
+
+export const profileReducer = (state = {profile:mainProfile, members: myMemberProfile}, action) => {
+    const profile = { ...state.profile };
+    const members = { ...state.members };
+    
+    switch(action.type) {
+        case ACTION_TYPES.GET_PROFILE:
+        
+            return state;
+            
+        case ACTION_TYPES.CHANGE_PROFILE_NAME:
+            profile.name = action.newName;
+
+            return {...state, profile};
+
+        case ACTION_TYPES.CHANGE_PROFILE_EMAIL:
+            profile.email = action.newEmail;
+
+            return {...state, profile};
+
+        default:
+            return state;
+    }
+}
+
 export const appReducer = combineReducers({
     sceneReducer,
     barcodeReducer,
     shoppingReducer,
+    profileReducer,
 });

@@ -17,6 +17,7 @@ import Scanner from './app/components/scanner';
 import Profiles from './app/components/profiles';
 import EditProfile from './app/components/editProfile';
 import Settings from './app/components/settings';
+import Results from './app/components/results';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -43,8 +44,7 @@ class TabIcon extends React.Component {
 
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">
-    <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
-    {/*<Scene key='editProfile' title='Edit Profile' hideNavBar={false} component={EditProfile}></Scene>*/}
+    {/*<Scene key='login' title='Login' component={Login} hideNavBar></Scene>*/}
     
     <Scene
       key='lists'
@@ -59,6 +59,7 @@ const Scenes = Actions.create(
     </Scene>
 
     <Scene key='editProfile' title='Edit Profile' hideNavBar={false} component={EditProfile}></Scene>
+    <Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>    
   </Scene>
 )
 
