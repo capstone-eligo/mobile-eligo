@@ -58,12 +58,14 @@ class EditProfile extends React.Component {
                                 style={styles.loginInput}
                                 placeholder="Name"
                                 onChangeText={(text) => changeProfileName(text)}
+                                returnKeyType="done"
                                 value={profile.name}
                                 />
                             <TextInput
                                 style={styles.loginInput}
                                 placeholder="Email"
                                 autoCapitalize="none"
+                                returnKeyType="done"                                
                                 onChangeText={(text) => changeProfileEmail(text)}
                                 value={profile.email}                                
                             />
