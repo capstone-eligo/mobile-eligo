@@ -33,10 +33,15 @@ class Scanner extends React.Component {
             Actions.results();
         }
 
+        const showBarcodeTest = () => { 
+            Actions.results();
+        }
+
         return(
             <View style={ styles.cameraContainer }>
                 <TextInput
                     style={styles.cameraInput}
+                    onChangeText={showBarcodeTest}
                     placeholder="Search by Product Name/Barcode"
                 />
 

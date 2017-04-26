@@ -34,6 +34,7 @@ class Profiles extends React.Component {
                         avatar={{uri: profile.avatar_url}}
                         key={1}
                         title={profile.name}
+                        onLongPress={() => {console.log('long press')}}
                         onPress={() => Actions.editProfile()}/>
                 </List>
 
@@ -49,6 +50,7 @@ class Profiles extends React.Component {
                             avatar={{uri: l.avatar_url}}
                             key={i}
                             title={l.name}
+                            onLongPress={() => {console.log('long press')}}
                             onPress={() => {console.log("pressed")}}/>
                         ))}
                         <ListItem

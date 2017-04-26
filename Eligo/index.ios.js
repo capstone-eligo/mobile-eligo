@@ -4,7 +4,7 @@
  */
 
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, Text, View} from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, Image} from 'react-native';
 
 import {Provider, connect} from 'react-redux';
 import {createStore} from 'redux';
@@ -23,6 +23,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import styles from './app/styles'
 
+// will be discarded later
 class TabIcon extends React.Component {
   render() {
     return (
@@ -42,9 +43,34 @@ class TabIcon extends React.Component {
   }
 }
 
+// can be copied and pasted (this one is for Shopping List)
+class ListIcon extends React.Component {
+  render() {
+    return (
+      <View style={styles.iconContainer}>
+        <Image
+          style={{
+            tintColor: this.props.selected ? '#44B8AE': '#BBB',
+            height: 12,
+            width: 12,
+            paddingBottom: 3,
+          }}
+          source={require('./app/img/shopping-list.png')}/>
+        <Text
+          style={{
+            color: this.props.selected ? '#44B8AE': '#BBB'
+          }}
+        >{this.props.title}</Text>
+      </View>
+    );
+  }
+}
+
+// create icons for scanner, profiles, and settings
+
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">
-    {/*<Scene key='login' title='Login' component={Login} hideNavBar></Scene>*/}
+    <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
     
     <Scene
       key='lists'
@@ -52,7 +78,7 @@ const Scenes = Actions.create(
       hideNavBar
       type={ActionConst.REPLACE}
       style={styles.tabBarStyle}>
-      <Scene key='shoppingList' title='List' component={ShoppingList} icon={TabIcon}></Scene>
+      <Scene key='shoppingList' title='List' component={ShoppingList} icon={ListIcon}></Scene>
       <Scene key='scanner' title='Scanner' component={Scanner} icon={TabIcon}></Scene>
       <Scene key='profiles' title='Profiles' component={Profiles} icon={TabIcon}></Scene>
       <Scene key='settings' title='Settings' component={Settings} icon={TabIcon}></Scene>
