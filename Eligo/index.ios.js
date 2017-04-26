@@ -155,7 +155,7 @@ const Scenes = Actions.create(
     <Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>    
   </Scene>
 )
-
+ 
 const ConnectedRouter = connect()(Router);
 const store = createStore(appReducer)
 
