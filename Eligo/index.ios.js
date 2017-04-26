@@ -66,6 +66,73 @@ class ListIcon extends React.Component {
   }
 }
 
+class ScannerIcon extends React.Component {
+  render() {
+    return (
+      <View style={styles.iconContainer}>
+        <Image
+          style={{
+            tintColor: this.props.selected ? '#44B8AE': '#BBB',
+            height: 12,
+            width: 12,
+            paddingBottom: 3,
+          }}
+          source={require('./app/img/scanner.png')}/>
+        <Text
+          style={{
+            color: this.props.selected ? '#44B8AE': '#BBB'
+          }}
+        >{this.props.title}</Text>
+      </View>
+    );
+  }
+}
+
+class ProfilesIcon extends React.Component {
+  render() {
+    return (
+      <View style={styles.iconContainer}>
+        <Image
+          style={{
+            tintColor: this.props.selected ? '#44B8AE': '#BBB',
+            height: 12,
+            width: 12,
+            paddingBottom: 3,
+          }}
+          source={require('./app/img/profile.png')}/>
+        <Text
+          style={{
+            color: this.props.selected ? '#44B8AE': '#BBB'
+          }}
+        >{this.props.title}</Text>
+      </View>
+    );
+  }
+}
+
+class SettingsIcon extends React.Component {
+  render() {
+    return (
+      <View style={styles.iconContainer}>
+        <Image
+          style={{
+            tintColor: this.props.selected ? '#44B8AE': '#BBB',
+            height: 12,
+            width: 12,
+            paddingBottom: 3,
+          }}
+          source={require('./app/img/settings.png')}/>
+        <Text
+          style={{
+            color: this.props.selected ? '#44B8AE': '#BBB'
+          }}
+        >{this.props.title}</Text>
+      </View>
+    );
+  }
+}
+
+
 // create icons for scanner, profiles, and settings
 
 const Scenes = Actions.create(
@@ -79,16 +146,16 @@ const Scenes = Actions.create(
       type={ActionConst.REPLACE}
       style={styles.tabBarStyle}>
       <Scene key='shoppingList' title='List' component={ShoppingList} icon={ListIcon}></Scene>
-      <Scene key='scanner' title='Scanner' component={Scanner} icon={TabIcon}></Scene>
-      <Scene key='profiles' title='Profiles' component={Profiles} icon={TabIcon}></Scene>
-      <Scene key='settings' title='Settings' component={Settings} icon={TabIcon}></Scene>
+      <Scene key='scanner' title='Scanner' component={Scanner} icon={ScannerIcon}></Scene>
+      <Scene key='profiles' title='Profiles' component={Profiles} icon={ProfilesIcon}></Scene>
+      <Scene key='settings' title='Settings' component={Settings} icon={SettingsIcon}></Scene>
     </Scene>
 
     <Scene key='editProfile' title='Edit Profile' hideNavBar={false} component={EditProfile}></Scene>
     <Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>    
   </Scene>
 )
-
+ 
 const ConnectedRouter = connect()(Router);
 const store = createStore(appReducer)
 
