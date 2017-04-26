@@ -24,6 +24,10 @@ export default StyleSheet.create({
   barButtonIconStyle: {
     tintColor: 'rgb(255,255,255)'
   },
+  rightButton: {
+    fontSize: 16,
+    color: '#FFF'
+  },
 
   // containers
   container: {
@@ -114,5 +118,5 @@ export default StyleSheet.create({
     paddingBottom: 10,
     fontSize: 18,
     fontWeight: 'bold'
-  }
+  },
 });
