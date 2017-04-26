@@ -3,6 +3,7 @@ import { ActionConst } from 'react-native-router-flux';
 
 import { ACTION_TYPES } from '../actions';
 
+// don't touch
 export function barcodeReducer(state={ barcodes: {history: []} }, action) {
     const barcodes = { ...state.barcodes };
     switch(action.type) {
@@ -17,6 +18,7 @@ export function barcodeReducer(state={ barcodes: {history: []} }, action) {
     }
 };
 
+// can touch 
 export function shoppingReducer(state={ count: {} }, action) {
     const count = { ...state.count };
     switch(action.type) {        
@@ -25,6 +27,7 @@ export function shoppingReducer(state={ count: {} }, action) {
     }
 };
 
+// don't touch
 const sceneReducer = (state = {}, {type, scene}) => {
     switch(type){
         case ActionConst.FOCUS:
