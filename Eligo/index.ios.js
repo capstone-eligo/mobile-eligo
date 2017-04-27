@@ -23,27 +23,6 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import styles from './app/styles'
 
-// will be discarded later
-class TabIcon extends React.Component {
-  render() {
-    return (
-      <View style={styles.iconContainer}>
-        <Icon
-          style={{
-          color: this.props.selected ? '#44B8AE': '#BBB'
-          }}
-          name='shopping-cart'/>
-        <Text
-          style={{
-            color: this.props.selected ? '#44B8AE': '#BBB'
-          }}
-        >{this.props.title}</Text>
-      </View>
-    );
-  }
-}
-
-// can be copied and pasted (this one is for Shopping List)
 class ListIcon extends React.Component {
   render() {
     return (
@@ -132,13 +111,12 @@ class SettingsIcon extends React.Component {
   }
 }
 
-
-// create icons for scanner, profiles, and settings
-
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">
     <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
-    
+    {/*Uncomment to use for dev of results page*/}
+    {/*<Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>*/}
+
     <Scene
       key='lists'
       tabs={true}
@@ -152,10 +130,11 @@ const Scenes = Actions.create(
     </Scene>
 
     <Scene key='editProfile' title='Edit Profile' hideNavBar={false} component={EditProfile}></Scene>
-    <Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>    
+    <Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>
+
   </Scene>
 )
- 
+
 const ConnectedRouter = connect()(Router);
 const store = createStore(appReducer)
 

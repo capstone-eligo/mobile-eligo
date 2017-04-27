@@ -11,17 +11,17 @@ export function barcodeReducer(state={ barcodes: {history: []} }, action) {
             var x = Number(Math.random() * 15);
             barcodes.history.push(action.barcode);
             barcodes.lastBarcode = action.barcode;
-            
-            return { ...state, barcodes };       
+
+            return { ...state, barcodes };
         default:
             return state;
     }
 };
 
-// can touch 
+// can touch
 export function shoppingReducer(state={ count: {} }, action) {
     const count = { ...state.count };
-    switch(action.type) {        
+    switch(action.type) {
         default:
             return state;
     }
@@ -34,7 +34,7 @@ const sceneReducer = (state = {}, {type, scene}) => {
             return { ...state, scene };
         default:
             return state;
-    }    
+    }
 }
 
 const mainProfile = {
@@ -66,12 +66,12 @@ const myMemberProfile = [
 export const profileReducer = (state = {profile:mainProfile, members: myMemberProfile}, action) => {
     const profile = { ...state.profile };
     const members = { ...state.members };
-    
+
     switch(action.type) {
         case ACTION_TYPES.GET_PROFILE:
-        
+
             return state;
-            
+
         case ACTION_TYPES.CHANGE_PROFILE_NAME:
             profile.name = action.newName;
 
