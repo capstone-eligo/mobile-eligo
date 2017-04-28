@@ -1,22 +1,8 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
-// import { connect } from 'react-redux';
-// import { Actions } from 'react-native-router-flux';
 
 import styles from '../styles'
-
-
-// mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
-
-// mapDispatchToProps = (dispatch) => ({
-//     // addGroceryItem: (groceryItem) => {
-//     //     dispatch(addToGroceryList(groceryItem));
-//     // },
-//     // addTodoItem: (todoItem) => {
-//     //     dispatch(addToTodoList(todoItem));
-//     // },
-// });
 
 export default class ResultsContent extends React.Component {
     constructor(props) {
@@ -25,7 +11,7 @@ export default class ResultsContent extends React.Component {
 
     renderResultsContent() {
         return(
-            <ScrollView>
+            <ScrollView style={styles.resultsContentScroll}>
                 <Card title='Pikachu (me)'>
                     <Text>No alerts!</Text>
                 </Card>
@@ -34,13 +20,13 @@ export default class ResultsContent extends React.Component {
                     <Text>
                         - Crushed almond (Tree Nut), Butter (Dairy), Soymilk (Soy)</Text>
 
-                </Card>                           
+                </Card>
                 <Card title='Charmander'>
                     <Text>No alerts!</Text>
                 </Card>
                 <Card title='Squirtle'>
                     <Text>No alerts!</Text>
-                </Card>                            
+                </Card>
             </ScrollView>
         )
     }
@@ -48,7 +34,9 @@ export default class ResultsContent extends React.Component {
     renderNutritionContent() {
         return(
             <ScrollView>
-                <Text>Nutrition</Text>                      
+                <Card title='Nutrition'>
+                    <Text>Nutritional info</Text>
+                </Card>
             </ScrollView>
         )
     }
@@ -56,7 +44,7 @@ export default class ResultsContent extends React.Component {
     renderIngredientsContent() {
         return(
             <ScrollView>
-                <Text>Ingredients</Text>                      
+                <Text>Ingredients</Text>
             </ScrollView>
         )
     }
@@ -64,7 +52,7 @@ export default class ResultsContent extends React.Component {
     renderCompareContent() {
         return(
             <ScrollView>
-                <Text>Compare</Text>                      
+                <Text>Compare</Text>
             </ScrollView>
         )
     }
@@ -80,9 +68,9 @@ export default class ResultsContent extends React.Component {
             case 3:
                 return this.renderCompareContent();
             default:
-                return this.renderResultsContent();       
+                return this.renderResultsContent();
         }
-    }    
+    }
 
     render() {
         return(

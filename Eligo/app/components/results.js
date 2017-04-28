@@ -27,7 +27,7 @@ class Results extends React.Component {
     render() {
         console.log(this.props.barcodes);
         const headerSectionSize = 20;
-        
+
         const { barcodes } = this.props;
         const buttons = ['Results', 'Nutrition', 'Ingredients', 'Compare'];
         var selectedTab = 0;
@@ -48,7 +48,7 @@ class Results extends React.Component {
                         <Col size={5}></Col>
                         <Col size={45}>
                             <Text>Product Name</Text>
-                            <Text>Product Details</Text>                            
+                            <Text>Product Details</Text>
                         </Col>
                     </Row>
 
@@ -58,7 +58,7 @@ class Results extends React.Component {
                             onPress={(id) => this.setState({selectedTab: id})}
                             selectedIndex={this.state.selectedTab}
                             buttons={buttons}
-                            containerStyle={{height:30}}/>       
+                            containerStyle={{height:30}}/>
                         </Col>
                     </Row>
 

@@ -131,5 +131,8 @@ export default StyleSheet.create({
   },
   resultsInfo: {
     padding: 25,
-  }
+  },
+  resultsContentScroll: {
+    marginBottom: 20,
+  },
 });
