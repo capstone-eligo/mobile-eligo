@@ -41,9 +41,14 @@ export default StyleSheet.create({
   editProfileContainer: {
     flex: 1,
     backgroundColor: '#FFF',
-    padding: 25,
     marginTop: 70,
-    marginBottom: 25
+    marginBottom: 25,
+    padding: 20,
+  },
+  resultsContainer: {
+    flex: 1,
+    backgroundColor: '#FFF',
+    marginTop: 60,
   },
   editProfileInfo: {
     justifyContent: 'center',
@@ -70,6 +75,11 @@ export default StyleSheet.create({
     height: '80%',
     marginTop: 65,
     marginBottom: 50
+  },
+  showCameraContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   iconContainer: {
     flex: 1,
@@ -118,5 +128,16 @@ export default StyleSheet.create({
     paddingBottom: 10,
     fontSize: 18,
     fontWeight: 'bold'
+  },
+
+  // results
+  resultsBtn: {
+    alignItems: 'center',
+  },
+  resultsInfo: {
+    padding: 25,
+  },
+  resultsContentScroll: {
+    marginBottom: 20,
   },
 });

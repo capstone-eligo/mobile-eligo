@@ -17,25 +17,26 @@ mapDispatchToProps = (dispatch) => ({
 });
 
 class Scanner extends React.Component {
-    // showBarcode(data, bounds) {
-    //     AlertIOS.alert(
-    //         'Barcode recognized',
-    //         data.data)
-    
-    //     // this.props.navigation.navigate('Results', {barcode: data.data})
-    // } 
-    
+    constructor(props) {
+        super(props);
+        this.state = {showCamera: true}
+    }
+
     render() {
         const { barcodes, addBarcode } = this.props;
 
-        const showBarcode = (data, bounds) => { 
+        const showBarcode = (data, bounds) => {
+            this.setState({showCamera: false})
             addBarcode(data.data);
+
             Actions.results();
         }
 
-        const showBarcodeTest = () => { 
+        const showBarcodeTest = () => {
             Actions.results();
         }
+
+        const scanAgain = () => {this.setState({showCamera: true})};
 
         return(
             <View style={ styles.cameraContainer }>
@@ -45,14 +46,22 @@ class Scanner extends React.Component {
                     placeholder="Search by Product Name/Barcode"
                 />
 
-                <Camera 
+                {this.state.showCamera && <Camera
                     ref={(cam) => {this.camera = cam;}}
                     style={styles.preview}
                     onFocusChanged={() => {}}
                     defaultOnFocusComponent={true}
                     aspect={Camera.constants.Aspect.fill}
                     onBarCodeRead={showBarcode.bind(this)}>
-                </Camera>
+                </Camera>}
+
+                {!this.state.showCamera &&
+                <View style={styles.showCameraContainer}>
+                    <TouchableOpacity onPress={scanAgain}>
+                        <Text>Scan another</Text>
+                    </TouchableOpacity>
+                </View>
+                }
             </View>
       );
     }

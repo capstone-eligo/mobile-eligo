@@ -33,10 +33,10 @@ class ShoppingList extends React.Component {
     }
 
     render() {
-        console.log(this.props.barcodes);
-        
+        // console.log(this.props.barcodes);
+
         const { barcodes } = this.props;
-        return(              
+        return(
             <ScrollView automaticallyAdjustContentInsets={false}>
                 <View style={styles.container}>
                     <CheckBox
@@ -48,7 +48,7 @@ class ShoppingList extends React.Component {
                         //onIconPress={() => {console.log("i was pressed")}}
                         checked={this.state.isChecked}
                         onIconPress={this.handlePressCheckedBox}
-                        
+
                     />
 
                     <CheckBox
