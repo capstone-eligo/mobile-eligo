@@ -111,11 +111,7 @@ class SettingsIcon extends React.Component {
   }
 }
 
-// const refreshOnBack = () => { Actions.pop();
-//   // setTimeout(() => {
-//   //   Actions.refresh();
-//   // }, 10);
-// }
+// const refreshOnBack = () => { Actions.pop({ refresh: {} }); }
 
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">

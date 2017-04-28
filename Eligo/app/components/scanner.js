@@ -36,6 +36,8 @@ class Scanner extends React.Component {
             Actions.results();
         }
 
+        const scanAgain = () => {this.setState({showCamera: true})};
+
         return(
             <View style={ styles.cameraContainer }>
                 <TextInput
@@ -52,6 +54,14 @@ class Scanner extends React.Component {
                     aspect={Camera.constants.Aspect.fill}
                     onBarCodeRead={showBarcode.bind(this)}>
                 </Camera>}
+
+                {!this.state.showCamera &&
+                <View style={styles.showCameraContainer}>
+                    <TouchableOpacity onPress={scanAgain}>
+                        <Text>Scan another</Text>
+                    </TouchableOpacity>
+                </View>
+                }
             </View>
       );
     }
