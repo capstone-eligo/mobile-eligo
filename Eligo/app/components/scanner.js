@@ -25,16 +25,16 @@ class Scanner extends React.Component {
     render() {
         const { barcodes, fetchBarcode } = this.props;
 
-        const showBarcode = (data, bounds) => {
+        const scanBarcode = (data, bounds) => {
             this.setState({showCamera: false})
             fetchBarcode(data.data);
 
             Actions.results();
         }
 
-        const showBarcodeTest = () => {
+        const scanBarcodeTest = () => {
             Actions.results();
-            fetchBarcode('1231294718941289471897');
+            fetchBarcode('posts');
         }
 
         const scanAgain = () => {this.setState({showCamera: true})};
@@ -43,8 +43,8 @@ class Scanner extends React.Component {
             <View style={ styles.cameraContainer }>
                 <TextInput
                     style={styles.cameraInput}
-                    onChangeText={showBarcodeTest}
-                    placeholder="Search by Product Name/Barcode"
+                    onChangeText={scanBarcodeTest}
+                    placeholder="Search by barcode number"
                 />
 
                 {this.state.showCamera && <Camera
@@ -53,7 +53,7 @@ class Scanner extends React.Component {
                     onFocusChanged={() => {}}
                     defaultOnFocusComponent={true}
                     aspect={Camera.constants.Aspect.fill}
-                    onBarCodeRead={showBarcode.bind(this)}>
+                    onBarCodeRead={scanBarcode.bind(this)}>
                 </Camera>}
 
                 {!this.state.showCamera &&

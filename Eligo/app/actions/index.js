@@ -13,7 +13,7 @@ export const addBarcode = (barcode) => {
 export const fetchBarcode = (barcode) => {
     return dispatch => {
         dispatch(addBarcode(barcode))
-        return fetch('https://jsonplaceholder.typicode.com/posts/1')
+        return fetch('https://jsonplaceholder.typicode.com/' + barcode)
             .then(response => response.json())
             .then(json => dispatch(receivedBarcode(barcode, json)))
     }
