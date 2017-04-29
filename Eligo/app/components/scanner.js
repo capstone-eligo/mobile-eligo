@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableHighlight, TouchableOpacity, AlertIOS }
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { addBarcode } from '../actions';
+import { fetchBarcode } from '../actions';
 
 import styles from '../styles'
 import Camera from 'react-native-camera'
@@ -11,8 +11,8 @@ import Camera from 'react-native-camera'
 mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
 
 mapDispatchToProps = (dispatch) => ({
-    addBarcode: (barcode) => {
-        dispatch(addBarcode(barcode));
+    fetchBarcode: (barcode) => {
+        dispatch(fetchBarcode(barcode));
     },
 });
 
@@ -23,17 +23,18 @@ class Scanner extends React.Component {
     }
 
     render() {
-        const { barcodes, addBarcode } = this.props;
+        const { barcodes, fetchBarcode } = this.props;
 
         const showBarcode = (data, bounds) => {
             this.setState({showCamera: false})
-            addBarcode(data.data);
+            fetchBarcode(data.data);
 
             Actions.results();
         }
 
         const showBarcodeTest = () => {
             Actions.results();
+            fetchBarcode('1231294718941289471897');
         }
 
         const scanAgain = () => {this.setState({showCamera: true})};

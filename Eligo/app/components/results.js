@@ -7,7 +7,7 @@ import ResultsContent from './resultsContent';
 
 import styles from '../styles'
 
-mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
+mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes, product: state.barcodeReducer.product });
 
 mapDispatchToProps = (dispatch) => ({
     // addGroceryItem: (groceryItem) => {
@@ -26,6 +26,8 @@ class Results extends React.Component {
 
     render() {
         console.log(this.props.barcodes);
+        console.log(this.props.product);
+
         const headerSectionSize = 20;
 
         const { barcodes } = this.props;
