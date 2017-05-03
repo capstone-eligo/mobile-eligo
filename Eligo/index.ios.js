@@ -116,7 +116,7 @@ class SettingsIcon extends React.Component {
 
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">
-    <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
+    {/*<Scene key='login' title='Login' component={Login} hideNavBar></Scene>*/}
     {/*Uncomment to use for dev of results page*/}
     {/*<Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>*/}
 

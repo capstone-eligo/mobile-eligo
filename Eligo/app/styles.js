@@ -140,4 +140,11 @@ export default StyleSheet.create({
   resultsContentScroll: {
     marginBottom: 20,
   },
+  resultsItemContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  resultsItemName: {
+    fontSize: 16,
+  },
 });

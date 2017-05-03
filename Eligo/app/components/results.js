@@ -25,12 +25,11 @@ class Results extends React.Component {
     }
 
     render() {
-        console.log(this.props.barcodes);
         console.log(this.props.product);
 
         const headerSectionSize = 20;
 
-        const { barcodes } = this.props;
+        const { barcodes, product } = this.props;
         const buttons = ['Results', 'Nutrition', 'Ingredients', 'Compare'];
         var selectedTab = 0;
 
@@ -43,14 +42,13 @@ class Results extends React.Component {
                                 xlarge
                                 rounded
                                 source={{uri: "https://static01.nyt.com/images/2013/01/13/magazine/13wmt/13wmt-jumbo-v3.jpg"}}
-                                onPress={(text) => console.log('test')}
                                 activeOpacity={0.7}
                             />
                         </Col>
                         <Col size={5}></Col>
-                        <Col size={45}>
-                            <Text>Product Name</Text>
-                            <Text>Product Details</Text>
+                        <Col size={45} containerStyle={styles.resultsItemContainer}>
+                            <Text style={styles.resultsItemName}>{product.item_name ? product.item_name : "Loading..." }</Text>
+                            <Text style={styles.resultsItemName}>{product.brand_name ? product.brand_name : ""}</Text>
                         </Col>
                     </Row>
 
@@ -67,7 +65,7 @@ class Results extends React.Component {
                     <Row size={2}></Row>
 
                     <Row size={63}>
-                        <ResultsContent selectedTab={this.state.selectedTab}/>
+                        <ResultsContent selectedTab={this.state.selectedTab} product={product}/>
                     </Row>
                 </Grid>
 

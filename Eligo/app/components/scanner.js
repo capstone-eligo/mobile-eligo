@@ -34,7 +34,7 @@ class Scanner extends React.Component {
 
         const scanBarcodeTest = () => {
             Actions.results();
-            fetchBarcode('posts');
+            fetchBarcode('123456789');
         }
 
         const scanAgain = () => {this.setState({showCamera: true})};
