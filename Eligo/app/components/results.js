@@ -69,7 +69,10 @@ class Results extends React.Component {
                             onPress={(id) => this.setState({selectedTab: id})}
                             selectedIndex={this.state.selectedTab}
                             buttons={buttons}
-                            containerStyle={{height:30}}/>
+                            buttonStyle={{color:"#000"}}
+                            selectedBackgroundColor='#B1D25E'
+                            textStyle={{color:"#000", fontWeight:"normal"}}
+                            containerStyle={{height:30, backgroundColor:"#C2E36F"}}/>
                         </Col>
                     </Row>
 

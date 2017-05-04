@@ -63,15 +63,18 @@ export default class ResultsContent extends React.Component {
         )
     }
 
-    renderRowInfo(col1, col2, s1=90, s2=10, div=false) {
+    renderRowInfo(t0, t1, t2, s1=90, s2=10, div=false) {
         return(
             <View style={{paddingTop: 5, paddingBottom: 5}}>
                 <Row>
                     <Col size={s1}>
-                        <Text>{col1}</Text>
+                        <Text>
+                            <Text style={{fontWeight:"bold"}}>{t0}</Text>
+                            <Text>{t1}</Text>
+                        </Text>
                     </Col>
                         <Col size={s2}>
-                        <Text style={{textAlign: "right"}}>{col2}</Text>
+                        <Text style={{textAlign: "right"}}>{t2}</Text>
                     </Col>
                 </Row>
                 {div && <Divider style={{ height: 1, backgroundColor: '#000' }} />}
@@ -98,9 +101,9 @@ export default class ResultsContent extends React.Component {
                     <Text>Amount Per Serving</Text>
                     {this.renderRowInfo('Calories 230', 'Calories from Fat 40', 45, 45, true)}
 
-                    {this.renderRowInfo('', '% Daily Value', 10, 90, true)}
-                    {this.renderRowInfo('Total Fat 8g', '12%', 90, 10, true)}
-                    {this.renderRowInfo('Calories', '90%', 90, 10, true)}
+                    {this.renderRowInfo('', '', '% Daily Value', 10, 90, true)}
+                    {this.renderRowInfo('Total Fat', '8g', '12%', 90, 10, true)}
+                    {this.renderRowInfo('Saturated Fat', '1g', '5%', 80, 10, true)}
 
                 </Card>
             </ScrollView>
@@ -114,14 +117,14 @@ export default class ResultsContent extends React.Component {
             <ScrollView>
                 <List containerStyle={{marginBottom: 20}}>
                 {
-                ingredients.map((l, i) => (
-                <ListItem
-                    key={i}
-                    title={l.trim()}
-                    hideChevron={true}
-                />
-                ))
-                }
+                    ingredients.map((l, i) => (
+                    <ListItem
+                        key={i}
+                        title={l.trim()}
+                        hideChevron={true}
+                    />
+                    ))
+                    }
                 </List>
             </ScrollView>
         )
