@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup, List, ListItem} from 'react-native-elements'
+import {Card, Avatar, List, ListItem, Badge, Row, Col, Divider} from 'react-native-elements'
 
 import styles from '../styles'
 
@@ -43,40 +43,65 @@ export default class ResultsContent extends React.Component {
 
         return(
             <ScrollView style={styles.resultsContentScroll}>
+                <Card title='Me'>
+                    <Text style={{color: '#44B8AE'}}>No alerts detected!</Text>
+                </Card>
                 {
                     Object.keys(restrictionsMapped).map((d,i) => (
                         <Card key={i} title={d}>
+                            <Text style={{color: '#EA4C2F'}}>
+                                {Object.keys(restrictionsMapped[d]).length} potential ingredients
+                            </Text>
                             {Object.keys(restrictionsMapped[d]).map((e, i) => (
-                                <Text key={i}>{e} ({Array.from(restrictionsMapped[d][e])})</Text>
+                                <Text key={i}>  {e} ({Array.from(restrictionsMapped[d][e])})</Text>
                             ))
                             }
                         </Card>
                     ))
                 }
-                {/*<Card title='Pikachu (me)'>
-                    <Text>No alerts!</Text>
-                </Card>
-                    <Card title='Eevee'>
-                    <Text>3 potential ingredient alerts:</Text>
-                    <Text>
-                        - Crushed almond (Tree Nut), Butter (Dairy), Soymilk (Soy)</Text>
-
-                </Card>
-                <Card title='Charmander'>
-                    <Text>No alerts!</Text>
-                </Card>
-                <Card title='Squirtle'>
-                    <Text>No alerts!</Text>
-                </Card>*/}
             </ScrollView>
         )
     }
 
+    renderRowInfo(col1, col2, s1=90, s2=10, div=false) {
+        return(
+            <View style={{paddingTop: 5, paddingBottom: 5}}>
+                <Row>
+                    <Col size={s1}>
+                        <Text>{col1}</Text>
+                    </Col>
+                        <Col size={s2}>
+                        <Text style={{textAlign: "right"}}>{col2}</Text>
+                    </Col>
+                </Row>
+                {div && <Divider style={{ height: 1, backgroundColor: '#000' }} />}
+            </View>
+
+        )
+    }
+
     renderNutritionContent() {
+        const {product} = this.props;
+        const dividerColor = '#333';
+        const dividerSize = {
+            sm: 1,
+            lg: 3,
+        };
+
         return(
             <ScrollView>
-                <Card title='Nutrition'>
-                    <Text>Nutritional info</Text>
+                <Card>
+                    <Text>Serving Size {product.nf_serving_size_qty} {product.nf_serving_size_unit} ({product.nf_serving_weight_grams}g)</Text>
+                    <Text>Servings Per Container {product.nf_servings_per_container}</Text>
+                    <Divider style={{ height: dividerSize.lg, backgroundColor: dividerColor }} />
+
+                    <Text>Amount Per Serving</Text>
+                    {this.renderRowInfo('Calories 230', 'Calories from Fat 40', 45, 45, true)}
+
+                    {this.renderRowInfo('', '% Daily Value', 10, 90, true)}
+                    {this.renderRowInfo('Total Fat 8g', '12%', 90, 10, true)}
+                    {this.renderRowInfo('Calories', '90%', 90, 10, true)}
+
                 </Card>
             </ScrollView>
         )

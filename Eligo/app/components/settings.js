@@ -8,7 +8,7 @@ import {List, ListItem} from 'react-native-elements'
 import styles from '../styles'
 
 mapStateToProps = (state) => ({
-    //  count: state.countReducer.count 
+    //  count: state.countReducer.count
 });
 
 mapDispatchToProps = (dispatch) => ({
@@ -33,11 +33,15 @@ class Settings extends React.Component {
                 location: "TBA"
             },
             {
+                title: "View dietary restrictions list",
+                location: "TBA"
+            },
+            {
                 title: "Logout",
                 location: "TBA"
             },
         ];
-        
+
         return(
             <View style={styles.container}>
                 <ScrollView>

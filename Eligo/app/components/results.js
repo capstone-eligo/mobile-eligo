@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
 import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -24,7 +24,18 @@ class Results extends React.Component {
         this.state = {selectedTab: 0}
     }
 
-    render() {
+    overlay() {
+        return(
+            <View style={styles.overlayContainer}>
+                <ActivityIndicator
+                    animating={true}
+                    color="#44B8AE"
+                    size="large"/>
+            </View>
+        )
+    }
+
+    productLoaded() {
         console.log(this.props.product);
 
         const headerSectionSize = 20;
@@ -71,6 +82,14 @@ class Results extends React.Component {
 
                 </View>
             );
+    }
+
+    render() {
+        if (Object.keys(this.props.product).length === 0) {
+            return this.overlay();
+        } else {
+            return this.productLoaded();
+        }
     }
 }
 
