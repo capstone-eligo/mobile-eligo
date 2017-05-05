@@ -52,7 +52,8 @@ class Results extends React.Component {
                             <Avatar
                                 xlarge
                                 rounded
-                                source={{uri: "https://static01.nyt.com/images/2013/01/13/magazine/13wmt/13wmt-jumbo-v3.jpg"}}
+                                overlayContainerStyle={{backgroundColor: 'white'}}
+                                source={require('../img/picture-placeholder.png')}
                                 activeOpacity={0.7}
                             />
                         </Col>
@@ -62,6 +63,8 @@ class Results extends React.Component {
                             <Text style={styles.resultsItemName}>{product.brand_name ? product.brand_name : ""}</Text>
                         </Col>
                     </Row>
+
+                    <Row size={2}></Row>
 
                     <Row size={5}>
                         <Col size={100}>

@@ -5,7 +5,6 @@ import {Actions} from 'react-native-router-flux';
 import {List, ListItem} from 'react-native-elements'
 
 import styles from '../styles'
-import {LoginManager, AccessToken} from 'react-native-fbsdk'
 
 mapStateToProps = (state) => ({
     profile: state.profileReducer.profile,
@@ -51,7 +50,7 @@ class Profiles extends React.Component {
                             key={i}
                             title={l.name}
                             onLongPress={() => {console.log('long press')}}
-                            onPress={() => {LoginManager.logOut(); Actions.login()}}/>
+                            onPress={() => {console.log('regular press')}}/>
                         ))}
                         <ListItem
                             key={members.length + 1}

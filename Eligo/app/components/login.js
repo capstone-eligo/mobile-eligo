@@ -26,21 +26,23 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {spinnerActive: false};
+
+        this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
     }
 
     handleFacebookLogin() {
         LoginManager
             .logInWithReadPermissions(['public_profile'])
-            .then(function (result) {
+            .then((result) => {
                 if (result.isCancelled) {
                     console.log('Login cancelled')
                 } else {
-                    () => this.setState({spinnerActive: true})
+                    this.setState({spinnerActive: true})
                     console.log('Login success with permissions: ' + result.grantedPermissions.toString())
                     AccessToken.getCurrentAccessToken().then((data) => {
                         const { accessToken } = data
                         console.log(data);
-                        () => this.setState({spinnerActive: false})
+                        this.setState({spinnerActive: false})
                         Actions.lists();
                     });
                 }
@@ -50,7 +52,7 @@ class Login extends React.Component {
     }
 
     render() {
-        // StatusBar.setBarStyle('light-content', true)
+        StatusBar.setBarStyle('light-content', true)
 
         return (
             <View style={styles.loginContainer}>
@@ -75,7 +77,7 @@ class Login extends React.Component {
                 </TouchableHighlight>
 
                 <ActivityIndicator
-                    animating={false}
+                    animating={this.state.spinnerActive}
                     color="#FFF"
                     size="large"/>
 

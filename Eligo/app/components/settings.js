@@ -3,8 +3,7 @@ import { View, Text, TextInput, TouchableHighlight, ScrollView } from 'react-nat
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import {List, ListItem} from 'react-native-elements'
-
-
+import {LoginManager, AccessToken} from 'react-native-fbsdk'
 
 import styles from '../styles'
 
@@ -37,10 +36,6 @@ class Settings extends React.Component {
                 title: "View dietary restrictions list",
                 location: "TBA"
             },
-            {
-                title: "Logout",
-                location: "TBA"
-            },
         ];
 
         return(
@@ -56,6 +51,12 @@ class Settings extends React.Component {
                             title={l.title}
                             onPress={() => {console.log("pressed")}}/>
                         ))}
+
+                    <ListItem
+                        key={99}
+                        title="Logout"
+                        onLongPress={() => {console.log('long press')}}
+                        onPress={() => {LoginManager.logOut(); Actions.login()}}/>
                     </List>
                 </ScrollView>
             </View>
