@@ -20,50 +20,6 @@ mapDispatchToProps = (dispatch) => ({
     // },
 });
 
-/*class Settings extends React.Component {
-
-    render() {
-        const settingItems = [
-            {
-                title: "Terms and agreement",
-                location: () => {Actions.terms()}
-            },
-            {
-                title: "Privacy policy",
-                location: "./app/components/privacy"
-            },
-            {
-                title: "View dietary restrictions list",
-                location: "TBA"
-            },
-        ];
-
-        return(
-            <View style={styles.container}>
-                <ScrollView>
-                    <List
-                        containerStyle={{
-                        marginBottom: 20,
-                        marginTop: 0
-                    }}>
-                        {settingItems.map((l, i) => (<ListItem
-                            key={i}
-                            title={l.title}
-                            onPress={() => {settingItems[i].location.call(this)}}/>//{console.log("pressed")}}/>
-                        ))}
-
-                    <ListItem
-                        key={99}
-                        title="Logout"
-                        onLongPress={() => {console.log('long press')}}
-                        onPress={() => {LoginManager.logOut(); Actions.login()}}/>
-                    </List>
-                </ScrollView>
-            </View>
-        )
-    }
-} */
-
 class Settings extends React.Component {
     render() {
         return (
@@ -85,7 +41,7 @@ class Settings extends React.Component {
                         <ListItem
                             key={3}
                             title="Logout"
-                            onPress={() => console.log("Logout")}/>
+                            onPress={() => {LoginManager.logOut(); Actions.login()}}/>
                     </List>
                 </ScrollView>
             </View>
