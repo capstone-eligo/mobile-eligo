@@ -20,17 +20,17 @@ mapDispatchToProps = (dispatch) => ({
     // },
 });
 
-class Settings extends React.Component {
+/*class Settings extends React.Component {
 
     render() {
         const settingItems = [
             {
                 title: "Terms and agreement",
-                location: "TBA"
+                location: () => {Actions.terms()}
             },
             {
                 title: "Privacy policy",
-                location: "TBA"
+                location: "./app/components/privacy"
             },
             {
                 title: "View dietary restrictions list",
@@ -49,7 +49,7 @@ class Settings extends React.Component {
                         {settingItems.map((l, i) => (<ListItem
                             key={i}
                             title={l.title}
-                            onPress={() => {console.log("pressed")}}/>
+                            onPress={() => {settingItems[i].location.call(this)}}/>//{console.log("pressed")}}/>
                         ))}
 
                     <ListItem
@@ -62,6 +62,36 @@ class Settings extends React.Component {
             </View>
         )
     }
+} */
+
+class Settings extends React.Component {
+    render() {
+        return (
+            <View style={styles.container}>
+                <ScrollView>
+                    <List
+                        containerStyle={{
+                        marginBottom: 20,
+                        marginTop: 0
+                    }}>
+                        <ListItem
+                            key={1}
+                            title="Terms and agreement"
+                            onPress={() => {Actions.terms()}}/>
+                        <ListItem
+                            key={2}
+                            title="Privacy"
+                            onPress={() => {Actions.privacy()}}/>
+                        <ListItem
+                            key={3}
+                            title="Logout"
+                            onPress={() => console.log("Logout")}/>
+                    </List>
+                </ScrollView>
+            </View>
+        );
+    }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
