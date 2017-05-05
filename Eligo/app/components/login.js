@@ -6,7 +6,8 @@ import {
     TouchableHighlight,
     Image,
     Button,
-    StatusBar
+    StatusBar,
+    ActivityIndicator
 } from 'react-native';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
@@ -22,6 +23,11 @@ mapDispatchToProps = (dispatch) => ({
 });
 
 class Login extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {spinnerActive: false};
+    }
+
     handleFacebookLogin() {
         LoginManager
             .logInWithReadPermissions(['public_profile'])
@@ -29,10 +35,12 @@ class Login extends React.Component {
                 if (result.isCancelled) {
                     console.log('Login cancelled')
                 } else {
+                    () => this.setState({spinnerActive: true})
                     console.log('Login success with permissions: ' + result.grantedPermissions.toString())
                     AccessToken.getCurrentAccessToken().then((data) => {
                         const { accessToken } = data
                         console.log(data);
+                        () => this.setState({spinnerActive: false})
                         Actions.lists();
                     });
                 }
@@ -62,9 +70,15 @@ class Login extends React.Component {
                     onLogoutFinished={() => alert("User logged out")}/>*/}
                 <TouchableHighlight
                     onPress={this.handleFacebookLogin}
-                    style={{backgroundColor: "#3B5998", padding: 10, borderRadius:7, borderWidth: 1, borderColor: '#3B5998'}}>
+                    style={{backgroundColor: "#3B5998", padding: 10, borderRadius:7, borderWidth: 1, borderColor: '#3B5998', paddingBottom: 10}}>
                     <Text style={{color:"#FFF"}}>Login with Facebook</Text>
                 </TouchableHighlight>
+
+                <ActivityIndicator
+                    animating={false}
+                    color="#FFF"
+                    size="large"/>
+
             </View>
         );
     }

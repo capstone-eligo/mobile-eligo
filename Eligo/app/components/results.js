@@ -70,9 +70,9 @@ class Results extends React.Component {
                             selectedIndex={this.state.selectedTab}
                             buttons={buttons}
                             buttonStyle={{color:"#000"}}
-                            selectedBackgroundColor='#B1D25E'
+                            selectedBackgroundColor='#C6DC7E'
                             textStyle={{color:"#000", fontWeight:"normal"}}
-                            containerStyle={{height:30, backgroundColor:"#C2E36F"}}/>
+                            containerStyle={{height:30, backgroundColor:"#B1D25E"}}/>
                         </Col>
                     </Row>
 

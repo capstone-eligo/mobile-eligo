@@ -73,7 +73,7 @@ export default class ResultsContent extends React.Component {
                             <Text>{t1}</Text>
                         </Text>
                     </Col>
-                        <Col size={s2}>
+                    <Col size={s2}>
                         <Text style={{textAlign: "right"}}>{t2}</Text>
                     </Col>
                 </Row>
@@ -99,11 +99,11 @@ export default class ResultsContent extends React.Component {
                     <Divider style={{ height: dividerSize.lg, backgroundColor: dividerColor }} />
 
                     <Text>Amount Per Serving</Text>
-                    {this.renderRowInfo('Calories 230', 'Calories from Fat 40', 45, 45, true)}
+                    {this.renderRowInfo('Calories ', '230', 'Calories from Fat 40', 45, 45, true)}
 
                     {this.renderRowInfo('', '', '% Daily Value', 10, 90, true)}
-                    {this.renderRowInfo('Total Fat', '8g', '12%', 90, 10, true)}
-                    {this.renderRowInfo('Saturated Fat', '1g', '5%', 80, 10, true)}
+                    {this.renderRowInfo('Total Fat ', '8g', '12%', 90, 10, true)}
+                    {this.renderRowInfo('Saturated Fat ', '1g', '5%', 80, 10, true)}
 
                 </Card>
             </ScrollView>
