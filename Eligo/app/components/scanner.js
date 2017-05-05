@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableHighlight, TouchableOpacity, AlertIOS }
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { addBarcode } from '../actions';
+import { fetchBarcode } from '../actions';
 
 import styles from '../styles'
 import Camera from 'react-native-camera'
@@ -11,8 +11,8 @@ import Camera from 'react-native-camera'
 mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
 
 mapDispatchToProps = (dispatch) => ({
-    addBarcode: (barcode) => {
-        dispatch(addBarcode(barcode));
+    fetchBarcode: (barcode) => {
+        dispatch(fetchBarcode(barcode));
     },
 });
 
@@ -23,17 +23,18 @@ class Scanner extends React.Component {
     }
 
     render() {
-        const { barcodes, addBarcode } = this.props;
+        const { barcodes, fetchBarcode } = this.props;
 
-        const showBarcode = (data, bounds) => {
+        const scanBarcode = (data, bounds) => {
             this.setState({showCamera: false})
-            addBarcode(data.data);
+            fetchBarcode(data.data);
 
             Actions.results();
         }
 
-        const showBarcodeTest = () => {
+        const scanBarcodeTest = () => {
             Actions.results();
+            fetchBarcode('123456789');
         }
 
         const scanAgain = () => {this.setState({showCamera: true})};
@@ -42,8 +43,8 @@ class Scanner extends React.Component {
             <View style={ styles.cameraContainer }>
                 <TextInput
                     style={styles.cameraInput}
-                    onChangeText={showBarcodeTest}
-                    placeholder="Search by Product Name/Barcode"
+                    onChangeText={scanBarcodeTest}
+                    placeholder="Search by barcode number"
                 />
 
                 {this.state.showCamera && <Camera
@@ -52,7 +53,7 @@ class Scanner extends React.Component {
                     onFocusChanged={() => {}}
                     defaultOnFocusComponent={true}
                     aspect={Camera.constants.Aspect.fill}
-                    onBarCodeRead={showBarcode.bind(this)}>
+                    onBarCodeRead={scanBarcode.bind(this)}>
                 </Camera>}
 
                 {!this.state.showCamera &&

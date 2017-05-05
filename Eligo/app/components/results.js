@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
 import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -7,7 +7,7 @@ import ResultsContent from './resultsContent';
 
 import styles from '../styles'
 
-mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
+mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes, product: state.barcodeReducer.product });
 
 mapDispatchToProps = (dispatch) => ({
     // addGroceryItem: (groceryItem) => {
@@ -24,11 +24,23 @@ class Results extends React.Component {
         this.state = {selectedTab: 0}
     }
 
-    render() {
-        console.log(this.props.barcodes);
+    overlay() {
+        return(
+            <View style={styles.overlayContainer}>
+                <ActivityIndicator
+                    animating={true}
+                    color="#44B8AE"
+                    size="large"/>
+            </View>
+        )
+    }
+
+    productLoaded() {
+        console.log(this.props.product);
+
         const headerSectionSize = 20;
 
-        const { barcodes } = this.props;
+        const { barcodes, product } = this.props;
         const buttons = ['Results', 'Nutrition', 'Ingredients', 'Compare'];
         var selectedTab = 0;
 
@@ -40,17 +52,19 @@ class Results extends React.Component {
                             <Avatar
                                 xlarge
                                 rounded
-                                source={{uri: "https://static01.nyt.com/images/2013/01/13/magazine/13wmt/13wmt-jumbo-v3.jpg"}}
-                                onPress={(text) => console.log('test')}
+                                overlayContainerStyle={{backgroundColor: 'white'}}
+                                source={require('../img/picture-placeholder.png')}
                                 activeOpacity={0.7}
                             />
                         </Col>
                         <Col size={5}></Col>
-                        <Col size={45}>
-                            <Text>Product Name</Text>
-                            <Text>Product Details</Text>
+                        <Col size={45} containerStyle={styles.resultsItemContainer}>
+                            <Text style={styles.resultsItemName}>{product.item_name ? product.item_name : "Loading..." }</Text>
+                            <Text style={styles.resultsItemName}>{product.brand_name ? product.brand_name : ""}</Text>
                         </Col>
                     </Row>
+
+                    <Row size={2}></Row>
 
                     <Row size={5}>
                         <Col size={100}>
@@ -58,19 +72,30 @@ class Results extends React.Component {
                             onPress={(id) => this.setState({selectedTab: id})}
                             selectedIndex={this.state.selectedTab}
                             buttons={buttons}
-                            containerStyle={{height:30}}/>
+                            buttonStyle={{color:"#000"}}
+                            selectedBackgroundColor='#C6DC7E'
+                            textStyle={{color:"#000", fontWeight:"normal"}}
+                            containerStyle={{height:30, backgroundColor:"#B1D25E"}}/>
                         </Col>
                     </Row>
 
                     <Row size={2}></Row>
 
                     <Row size={63}>
-                        <ResultsContent selectedTab={this.state.selectedTab}/>
+                        <ResultsContent selectedTab={this.state.selectedTab} product={product}/>
                     </Row>
                 </Grid>
 
                 </View>
             );
+    }
+
+    render() {
+        if (Object.keys(this.props.product).length === 0) {
+            return this.overlay();
+        } else {
+            return this.productLoaded();
+        }
     }
 }
 

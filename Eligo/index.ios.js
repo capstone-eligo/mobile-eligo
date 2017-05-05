@@ -4,11 +4,12 @@
  */
 
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, Text, View, Image} from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, Image, StatusBar} from 'react-native';
 
 import {Provider, connect} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Actions, ActionConst, Router, Scene} from 'react-native-router-flux';
+import thunkMiddleware from 'redux-thunk';
 
 import {appReducer} from './app/reducers';
 import Login from './app/components/login';
@@ -142,7 +143,8 @@ const Scenes = Actions.create(
 )
 
 const ConnectedRouter = connect()(Router);
-const store = createStore(appReducer)
+const store = createStore(appReducer,
+                applyMiddleware(thunkMiddleware));
 
 export default class Eligo extends Component {
   render() {

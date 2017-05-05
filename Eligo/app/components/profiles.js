@@ -6,7 +6,6 @@ import {List, ListItem} from 'react-native-elements'
 
 import styles from '../styles'
 
-
 mapStateToProps = (state) => ({
     profile: state.profileReducer.profile,
     members: state.profileReducer.members
@@ -51,12 +50,12 @@ class Profiles extends React.Component {
                             key={i}
                             title={l.name}
                             onLongPress={() => {console.log('long press')}}
-                            onPress={() => {console.log("pressed")}}/>
+                            onPress={() => {console.log('regular press')}}/>
                         ))}
                         <ListItem
                             key={members.length + 1}
                             avatar={{uri: "https://c1.staticflickr.com/8/7128/8162953475_25501b86a9.jpg"}}
-                            roundAvatar                            
+                            roundAvatar
                             title="Add new member"
                             onPress={() => {console.log("create new")}}
                         />

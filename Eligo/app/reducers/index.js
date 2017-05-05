@@ -4,15 +4,20 @@ import { ActionConst } from 'react-native-router-flux';
 import { ACTION_TYPES } from '../actions';
 
 // don't touch
-export function barcodeReducer(state={ barcodes: {history: []} }, action) {
+export function barcodeReducer(state={ barcodes: {history: []}, product:{} }, action) {
     const barcodes = { ...state.barcodes };
+    var product = { ...state.product };
+
     switch(action.type) {
         case ACTION_TYPES.ADD_BARCODE:
             var x = Number(Math.random() * 15);
             barcodes.history.push(action.barcode);
             barcodes.lastBarcode = action.barcode;
-
             return { ...state, barcodes };
+        case ACTION_TYPES.FETCHED_BARCODE:
+            console.log(action);
+            var product = action.product;
+            return { ...state, product };
         default:
             return state;
     }

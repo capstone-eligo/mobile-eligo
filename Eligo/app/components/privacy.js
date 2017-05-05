@@ -10,20 +10,20 @@ export default class Privacy extends React.Component {
 
     render() {
         return(
-            <ScrollView>
-                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                    Curabitur lobortis at ante at tempor. Nulla maximus, sapien 
-                    vehicula accumsan aliquam, neque urna mattis lorem, ut rhoncus 
-                    enim nunc eget erat. Aliquam quis viverra enim. Phasellus at 
-                    augue condimentum, imperdiet dui ut, vestibulum est. Suspendisse 
-                    interdum sit amet metus porta elementum. Etiam gravida, tortor 
-                    nec dictum maximus, massa tortor fermentum magna, ac vehicula 
-                    elit arcu vel neque. Sed aliquet porttitor neque, quis facilisis 
-                    leo auctor non. Suspendisse erat magna, pretium ut tincidunt 
-                    sit amet, iaculis at neque. Phasellus in dignissim velit. 
-                    Morbi ultrices ligula nec tempor pharetra. Cras imperdiet 
-                    posuere nunc, vel feugiat ante vestibulum eu. Nullam at laoreet 
-                    dui. Mauris justo purus, condimentum sed eros nec, suscipit 
+            <ScrollView style={styles.container}>
+                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Curabitur lobortis at ante at tempor. Nulla maximus, sapien
+                    vehicula accumsan aliquam, neque urna mattis lorem, ut rhoncus
+                    enim nunc eget erat. Aliquam quis viverra enim. Phasellus at
+                    augue condimentum, imperdiet dui ut, vestibulum est. Suspendisse
+                    interdum sit amet metus porta elementum. Etiam gravida, tortor
+                    nec dictum maximus, massa tortor fermentum magna, ac vehicula
+                    elit arcu vel neque. Sed aliquet porttitor neque, quis facilisis
+                    leo auctor non. Suspendisse erat magna, pretium ut tincidunt
+                    sit amet, iaculis at neque. Phasellus in dignissim velit.
+                    Morbi ultrices ligula nec tempor pharetra. Cras imperdiet
+                    posuere nunc, vel feugiat ante vestibulum eu. Nullam at laoreet
+                    dui. Mauris justo purus, condimentum sed eros nec, suscipit
                     feugiat neque. Nam aliquam fermentum cursus.</Text>
             </ScrollView>
       );
