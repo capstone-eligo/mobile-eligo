@@ -5,7 +5,7 @@ import {Actions} from 'react-native-router-flux';
 import {List, ListItem} from 'react-native-elements'
 
 import styles from '../styles'
-
+import {LoginManager, AccessToken} from 'react-native-fbsdk'
 
 mapStateToProps = (state) => ({
     profile: state.profileReducer.profile,
@@ -51,12 +51,12 @@ class Profiles extends React.Component {
                             key={i}
                             title={l.name}
                             onLongPress={() => {console.log('long press')}}
-                            onPress={() => {console.log("pressed")}}/>
+                            onPress={() => {LoginManager.logOut(); Actions.login()}}/>
                         ))}
                         <ListItem
                             key={members.length + 1}
                             avatar={{uri: "https://c1.staticflickr.com/8/7128/8162953475_25501b86a9.jpg"}}
-                            roundAvatar                            
+                            roundAvatar
                             title="Add new member"
                             onPress={() => {console.log("create new")}}
                         />

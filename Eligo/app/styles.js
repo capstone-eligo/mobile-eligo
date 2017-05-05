@@ -62,7 +62,6 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: COLOR_PALETTE.teal,
-        padding: 25
     },
     tabBarStyle: {
         borderTopWidth: .5,
@@ -111,9 +110,9 @@ export default StyleSheet.create({
 
     // others
     loginLogo: {
-        width: 918 / 4,
-        height: 709 / 4,
-        marginBottom: 20
+        width: 2689 / 10,
+        height: 1704 / 10,
+        marginBottom: 30,
     },
     preview: {
         flex: 1,
