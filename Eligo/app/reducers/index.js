@@ -84,13 +84,14 @@ const myMemberProfile = [
 ];
 
 export const profileReducer = (state = {profile: mainProfile, members: myMemberProfile}, action) => {
-    const profile = { ...state.profile };
+    var profile = { ...state.profile };
     const members = { ...state.members };
 
     switch(action.type) {
         case ACTION_TYPES.SET_ACCOUNT:
+            profile = action.acc
             console.log(action);
-            return state;
+            return {...state, profile};
 
         case ACTION_TYPES.GET_PROFILE:
             return state;

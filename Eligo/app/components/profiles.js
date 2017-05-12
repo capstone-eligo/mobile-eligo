@@ -8,7 +8,6 @@ import styles from '../styles'
 
 mapStateToProps = (state) => ({
     profile: state.profileReducer.profile,
-    members: state.profileReducer.members
 });
 
 mapDispatchToProps = (dispatch) => ({
@@ -18,7 +17,7 @@ mapDispatchToProps = (dispatch) => ({
 
 class Profiles extends React.Component {
     render() {
-        const { profile, members } = this.props;
+        const { profile } = this.props;
 
         return (
             <View style={styles.container}>
@@ -30,9 +29,9 @@ class Profiles extends React.Component {
                 }}>
                     <ListItem
                         roundAvatar
-                        avatar={{uri: profile.avatar_url}}
+                        avatar={{uri: "https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg"}}
                         key={"my profile"}
-                        title={profile.name}
+                        title={profile.users[0].first + ' ' + profile.users[0].last}
                         onLongPress={() => {console.log('long press')}}
                         onPress={() => Actions.editProfile()}/>
                 </List>
@@ -44,16 +43,20 @@ class Profiles extends React.Component {
                         marginBottom: 20,
                         marginTop: 0
                     }}>
-                        {members.map((l, i) => (<ListItem
-                            roundAvatar
-                            avatar={{uri: l.avatar_url}}
-                            key={i}
-                            title={l.name}
-                            onLongPress={() => {console.log('long press')}}
-                            onPress={() => {console.log('regular press')}}/>
-                        ))}
+                        {profile.users.map((m, i) => {
+                            if (i != 0) {
+                                return (<ListItem
+                                    roundAvatar
+                                    avatar={{uri: "https://c1.staticflickr.com/9/8654/16609336835_4d3c09b4a8_b.jpg"}}
+                                    key={i}
+                                    title={m.first + " " + m.last}
+                                    onLongPress={() => {console.log('long press')}}
+                                    onPress={() => {console.log('regular press')}}/>
+                                )
+                            }
+                        })}
                         <ListItem
-                            key={members.length + 1}
+                            key={profile.users.length + 1}
                             avatar={{uri: "https://c1.staticflickr.com/8/7128/8162953475_25501b86a9.jpg"}}
                             roundAvatar
                             title="Add new member"

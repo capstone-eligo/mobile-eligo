@@ -19,8 +19,6 @@ mapStateToProps = (state) => ({
 
 mapDispatchToProps = (dispatch) => ({
     getProfile: (profileID) => { dispatch(getProfile(profileID)); },
-    changeProfileName: (newName) => { dispatch(changeProfileName(newName)); },
-    changeProfileEmail: (newEmail) => { dispatch(changeProfileEmail(newEmail)); },
 });
 
 class DietaryRestriction extends React.Component {
@@ -57,6 +55,11 @@ class DietaryRestriction extends React.Component {
 
 
 class EditProfile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {first: this.props.profile.users[0].first, last: this.props.profile.users[0].last}
+    }
+
     static renderRightButton = (props) => {
           return (
               <TouchableHighlight onPress={() => console.log('attempt to save')}>
@@ -68,6 +71,14 @@ class EditProfile extends React.Component {
     render() {
         const headerSectionSize = 20;
         const drSize = (100 - headerSectionSize) / 2;
+
+        _changeProfileFirst = (t) => {
+            this.setState({first: t})
+        }
+
+        _changeProfileLast = (t) => {
+            this.setState({last: t})
+        }
 
         const { profile, changeProfileName, changeProfileEmail } = this.props;
 
@@ -101,17 +112,17 @@ class EditProfile extends React.Component {
                         <Col size={70}>
                             <TextInput
                                 style={styles.loginInput}
-                                placeholder="Name"
-                                onChangeText={(text) => changeProfileName(text)}
+                                placeholder="First name"
+                                onChangeText={(text) => _changeProfileFirst(text)}
                                 returnKeyType="done"
-                                value={profile.name}/>
+                                value={this.state.first}/>
                             <TextInput
                                 style={styles.loginInput}
-                                placeholder="Email"
+                                placeholder="Last name"
                                 autoCapitalize="none"
                                 returnKeyType="done"
-                                onChangeText={(text) => changeProfileEmail(text)}
-                                value={profile.email}
+                                onChangeText={(text) => _changeProfileLast(text)}
+                                value={this.state.last}
                             />
                         </Col>
                     </Row>

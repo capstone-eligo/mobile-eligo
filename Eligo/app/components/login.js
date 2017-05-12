@@ -53,7 +53,7 @@ class Login extends React.Component {
                             .then(response => response.json())
                             .then(json => {
                                 json.accountId = userID;
-                                setAccount(json);
+                                this.props.setAccount(json);
                                 this.setState({spinnerActive: false});
                                 Actions.lists();
                         });
