@@ -48,7 +48,7 @@ class Results extends React.Component {
             <View style={styles.resultsContainer}>
                 <Grid>
                     <Row containerStyle={styles.resultsInfo} size={headerSectionSize}>
-                        <Col size={50}>
+                        <Col size={40}>
                             <Avatar
                                 xlarge
                                 rounded
@@ -58,9 +58,9 @@ class Results extends React.Component {
                             />
                         </Col>
                         <Col size={5}></Col>
-                        <Col size={45} containerStyle={styles.resultsItemContainer}>
-                            <Text style={styles.resultsItemName}>{product.item_name ? product.item_name : "Loading..." }</Text>
-                            <Text style={styles.resultsItemName}>{product.brand_name ? product.brand_name : ""}</Text>
+                        <Col size={55} containerStyle={styles.resultsItemContainer}>
+                            <Text style={styles.resultsItemName}>{product.item_name ? product.item_name : "N/A" }</Text>
+                            <Text style={styles.resultsItemName}>{product.brand_name ? "(" + product.brand_name + ")": "N/A"}</Text>
                         </Col>
                     </Row>
 

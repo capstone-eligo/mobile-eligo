@@ -31,7 +31,7 @@ class Profiles extends React.Component {
                     <ListItem
                         roundAvatar
                         avatar={{uri: profile.avatar_url}}
-                        key={1}
+                        key={"my profile"}
                         title={profile.name}
                         onLongPress={() => {console.log('long press')}}
                         onPress={() => Actions.editProfile()}/>

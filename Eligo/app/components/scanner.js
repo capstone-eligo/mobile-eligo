@@ -8,11 +8,11 @@ import { fetchBarcode } from '../actions';
 import styles from '../styles'
 import Camera from 'react-native-camera'
 
-mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
+mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes, profile: state.profileReducer.profile });
 
 mapDispatchToProps = (dispatch) => ({
-    fetchBarcode: (barcode) => {
-        dispatch(fetchBarcode(barcode));
+    fetchBarcode: (barcode, accountId) => {
+        dispatch(fetchBarcode(barcode, accountId));
     },
 });
 
@@ -24,6 +24,7 @@ class Scanner extends React.Component {
 
     render() {
         const { barcodes, fetchBarcode } = this.props;
+        const { accountId } = this.props.profile;
 
         const scanBarcode = (data, bounds) => {
             this.setState({showCamera: false})
@@ -33,8 +34,8 @@ class Scanner extends React.Component {
         }
 
         const scanBarcodeTest = () => {
+            fetchBarcode('123456789', "tinyMikeHands");
             Actions.results();
-            fetchBarcode('123456789');
         }
 
         const scanAgain = () => {this.setState({showCamera: true})};

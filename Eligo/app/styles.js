@@ -145,7 +145,7 @@ export default StyleSheet.create({
         marginBottom: 20
     },
     resultsItemContainer: {
-        alignItems: 'center',
+        // alignItems: 'center',
         justifyContent: 'center'
     },
     resultsItemName: {

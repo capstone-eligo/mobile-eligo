@@ -3,6 +3,21 @@ import { ActionConst } from 'react-native-router-flux';
 
 import { ACTION_TYPES } from '../actions';
 
+export function loginReducer(state={login:{}, auth:{}}, action) {
+    const login = {...state.login}
+    const auth = {...state.auth}
+
+    switch(action.type) {
+        case ACTION_TYPES.SEND_LOGIN:
+            return {...state, login};
+        case ACTION_TYPES.RECEIVED_LOGIN:
+            console.log(action);
+            return state;
+        default:
+            return state;
+    }
+}
+
 // don't touch
 export function barcodeReducer(state={ barcodes: {history: []}, product:{} }, action) {
     const barcodes = { ...state.barcodes };
@@ -10,7 +25,6 @@ export function barcodeReducer(state={ barcodes: {history: []}, product:{} }, ac
 
     switch(action.type) {
         case ACTION_TYPES.ADD_BARCODE:
-            var x = Number(Math.random() * 15);
             barcodes.history.push(action.barcode);
             barcodes.lastBarcode = action.barcode;
             return { ...state, barcodes };
@@ -43,9 +57,10 @@ const sceneReducer = (state = {}, {type, scene}) => {
 }
 
 const mainProfile = {
-    name: 'Pika Chu 0',
+    name: "Test",
     avatar_url: 'https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg',
-    email: 'pika0@eligo.com'
+    email: 'pika0@eligo.com',
+    accountId: "tinyMikeHands",
 }
 
 const myMemberProfile = [
@@ -68,18 +83,20 @@ const myMemberProfile = [
     }
 ];
 
-export const profileReducer = (state = {profile:mainProfile, members: myMemberProfile}, action) => {
+export const profileReducer = (state = {profile: mainProfile, members: myMemberProfile}, action) => {
     const profile = { ...state.profile };
     const members = { ...state.members };
 
     switch(action.type) {
-        case ACTION_TYPES.GET_PROFILE:
+        case ACTION_TYPES.SET_ACCOUNT:
+            console.log(action);
+            return state;
 
+        case ACTION_TYPES.GET_PROFILE:
             return state;
 
         case ACTION_TYPES.CHANGE_PROFILE_NAME:
             profile.name = action.newName;
-
             return {...state, profile};
 
         case ACTION_TYPES.CHANGE_PROFILE_EMAIL:
