@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, TouchableHighlight, TouchableOpacity, AlertIOS } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-elements';
 
 import { fetchBarcode } from '../actions';
 
@@ -44,7 +45,8 @@ class Scanner extends React.Component {
             <View style={ styles.cameraContainer }>
                 <TextInput
                     style={styles.cameraInput}
-                    onChangeText={scanBarcodeTest}
+                    onSubmitEditing={scanBarcodeTest}
+                    returnKeyType="done"
                     placeholder="Search by barcode number"
                 />
 
