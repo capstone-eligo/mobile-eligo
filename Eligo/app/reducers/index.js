@@ -56,24 +56,25 @@ const sceneReducer = (state = {}, {type, scene}) => {
     }
 }
 
-const mainProfile = {"auth":"80833","users":[{"dr":["fish"],"first":"Mike","last":"Wleklinski"},{"dr":["wheat"],"first":"Nick","last":"Monfeli"},{"dr":["dairy","wheat"],"first":"Jordan","last":"Spina"}],"accountId":"tinyMikeHands"};
+// const mainProfile = {"auth":"80833","users":[{"dr":["fish"],"first":"Mike","last":"Wleklinski"},{"dr":["wheat"],"first":"Nick","last":"Monfeli"},{"dr":["dairy","wheat"],"first":"Jordan","last":"Spina"}],"accountId":"tinyMikeHands"};
+const mainProfile = {};
 
 
-export const profileReducer = (state = {profile: mainProfile}, action) => {
+export const profileReducer = (state = {profile: mainProfile, accID: ""}, action) => {
     var profile = { ...state.profile };
 
     switch(action.type) {
         case ACTION_TYPES.SET_ACCOUNT:
-            profile = action.acc
             return {...state, profile: action.acc };
 
         case ACTION_TYPES.GET_PROFILE:
             return state;
 
         case ACTION_TYPES.FETCHED_NEW_USER:
-            console.log(action);
+            var refreshed = Object.assign({}, action.account);
+            refreshed.accountId = profile.accountId;
 
-            return state;
+            return {...state, profile: refreshed};
 
         case ACTION_TYPES.CHANGE_PROFILE_NAME:
             profile.name = action.newName;

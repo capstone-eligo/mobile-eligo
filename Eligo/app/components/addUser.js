@@ -69,7 +69,7 @@ class AddUser extends React.Component {
         // Takes JSON object with “accountId”, “subUserId”, “first”, “last”, and “dr”
         var newUser = {
             "accountId": this.props.profile.accountId,
-            "subUserId": this.props.profile.users.length + 1,
+            "subUserId": this.props.profile.users.length,
             "first": this.state.first,
             "last": this.state.last,
             "dr": Object.keys(this.state.drs)
@@ -77,6 +77,7 @@ class AddUser extends React.Component {
 
         // console.log(this.props.profile);
         this.props.fetchNewUser(newUser);
+        Actions.profiles();
     }
 
     renderRightButton = () => {
