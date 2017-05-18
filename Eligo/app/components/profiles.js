@@ -60,7 +60,7 @@ class Profiles extends React.Component {
                             avatar={{uri: "https://c1.staticflickr.com/8/7128/8162953475_25501b86a9.jpg"}}
                             roundAvatar
                             title="Add new member"
-                            onPress={() => {console.log("create new")}}
+                            onPress={Actions.addUser}
                         />
                     </List>
                 </ScrollView>

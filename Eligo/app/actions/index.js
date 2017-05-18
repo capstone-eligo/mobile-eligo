@@ -2,9 +2,11 @@ export const ACTION_TYPES = {
     ADD_BARCODE: 'ADD_BARCODE',
     FETCHED_BARCODE: 'FETCHED_BARCODE',
     SET_ACCOUNT: 'SET_ACCOUNT',
-    CHANGE_PROFILE_NAME: "CHANGE_PROFILE_NAME",
-    CHANGE_PROFILE_EMAIL: "CHANGE_PROFILE_EMAIL",
     GET_PROFILE: "GET_PROFILE",
+
+    ADD_NEW_USER: "ADD_NEW_USER",
+    FETCH_NEW_USER: "FETCH_NEW_USER",
+    FETCHED_NEW_USER: "FETCHED_NEW_USER",
 }
 
 export const addBarcode = (barcode) => {
@@ -21,25 +23,42 @@ export const fetchBarcode = (barcode, accountId) => {
 }
 
 export const receivedBarcode = (barcode, json) => {
-  return {
-    type: 'FETCHED_BARCODE',
-    barcode,
-    product: json,
-    receivedAt: Date.now()
-  }
+    return {
+        type: 'FETCHED_BARCODE',
+        barcode,
+        product: json,
+        receivedAt: Date.now()
+    }
 }
 
 export const setAccount = (acc) => {
     return { type: 'SET_ACCOUNT', acc };
 }
 
-export const changeProfileName = (newName) => {
-    return { type: 'CHANGE_PROFILE_NAME', newName };
+export const addNewUser = (newUser) => {
+    return { type: 'ADD_NEW_USER', newUser };
 }
 
-export const changeProfileEmail = (newEmail) => {
-    return { type: 'CHANGE_PROFILE_EMAIL', newEmail };
+export const fetchNewUser = (newUser) => {
+    return dispatch => {
+        dispatch(addNewUser(newUser))
+        return fetch('https://infinite-journey-83753.herokuapp.com/users',
+            {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(newUser)})
+            .then(response => {console.log(response); return response.json()})
+            .then(json => dispatch(receivedNewUser(newUser, json)))
+    }
 }
+
+export const receivedNewUser = (newUser, json) => {
+    console.log(json);
+    return {
+        type: 'FETCHED_NEW_USER',
+        newUser: newUser,
+        account: json,
+        receivedAt: Date.now()
+    }
+}
+
 
 export const getProfile = (profileID) => {
     return { type: 'GET_PROFILE', profileID };
