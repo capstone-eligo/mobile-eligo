@@ -33,7 +33,7 @@ class Profiles extends React.Component {
                         key={"my profile"}
                         title={profile.users[0].first + ' ' + profile.users[0].last}
                         onLongPress={() => {console.log('long press')}}
-                        onPress={() => Actions.editProfile()}/>
+                        onPress={() => Actions.editProfile({userIndex: 0})}/>
                 </List>
 
                 <Text style={styles.profileHeaders}>My members</Text>
@@ -51,7 +51,7 @@ class Profiles extends React.Component {
                                     key={i}
                                     title={m.first + " " + m.last}
                                     onLongPress={() => {console.log('long press')}}
-                                    onPress={() => {console.log('regular press')}}/>
+                                    onPress={() => Actions.editProfile({userIndex: i})}/>
                                 )
                             }
                         })}

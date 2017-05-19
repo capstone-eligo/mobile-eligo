@@ -41,7 +41,7 @@ export const addNewUser = (newUser) => {
 
 export const fetchNewUser = (newUser) => {
     return dispatch => {
-        dispatch(addNewUser(newUser))
+        dispatch(addNewUser(newUser));
         return fetch('https://infinite-journey-83753.herokuapp.com/users',
             {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(newUser)})
             .then(response => {console.log(response); return response.json()})
@@ -50,7 +50,6 @@ export const fetchNewUser = (newUser) => {
 }
 
 export const receivedNewUser = (newUser, json) => {
-    console.log(json);
     return {
         type: 'FETCHED_NEW_USER',
         newUser: newUser,
@@ -58,7 +57,6 @@ export const receivedNewUser = (newUser, json) => {
         receivedAt: Date.now()
     }
 }
-
 
 export const getProfile = (profileID) => {
     return { type: 'GET_PROFILE', profileID };

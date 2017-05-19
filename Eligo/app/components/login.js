@@ -52,7 +52,7 @@ class Login extends React.Component {
                             {method:"POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(login)})
                             .then(response => {console.log(response); return response.json()})
                             .then(json => {
-                                json.accountId = userID;
+                                json.accountId = login.accountId;
                                 this.props.setAccount(json);
                                 this.setState({spinnerActive: false});
                                 Actions.lists();
