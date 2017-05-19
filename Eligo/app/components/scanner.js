@@ -2,17 +2,18 @@ import React from 'react';
 import { View, Text, TextInput, TouchableHighlight, TouchableOpacity, AlertIOS } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-elements';
 
 import { fetchBarcode } from '../actions';
 
 import styles from '../styles'
 import Camera from 'react-native-camera'
 
-mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes });
+mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes, profile: state.profileReducer.profile });
 
 mapDispatchToProps = (dispatch) => ({
-    fetchBarcode: (barcode) => {
-        dispatch(fetchBarcode(barcode));
+    fetchBarcode: (barcode, accountId) => {
+        dispatch(fetchBarcode(barcode, accountId));
     },
 });
 
@@ -24,17 +25,18 @@ class Scanner extends React.Component {
 
     render() {
         const { barcodes, fetchBarcode } = this.props;
+        const { accountId } = this.props.profile;
 
         const scanBarcode = (data, bounds) => {
             this.setState({showCamera: false})
-            fetchBarcode(data.data);
+            fetchBarcode(data.data, "tinyMikeHands");
 
             Actions.results();
         }
 
         const scanBarcodeTest = () => {
+            fetchBarcode('038000356216', "tinyMikeHands");
             Actions.results();
-            fetchBarcode('123456789');
         }
 
         const scanAgain = () => {this.setState({showCamera: true})};
@@ -43,7 +45,8 @@ class Scanner extends React.Component {
             <View style={ styles.cameraContainer }>
                 <TextInput
                     style={styles.cameraInput}
-                    onChangeText={scanBarcodeTest}
+                    onSubmitEditing={scanBarcodeTest}
+                    returnKeyType="done"
                     placeholder="Search by barcode number"
                 />
 

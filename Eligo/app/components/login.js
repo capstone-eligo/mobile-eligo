@@ -13,13 +13,15 @@ import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {LoginManager, AccessToken} from 'react-native-fbsdk'
 
-// import { addToCount } from '../actions';
+import { setAccount } from '../actions';
 import styles from '../styles'
 
-mapStateToProps = (state) => ({barcodes: state.barcodeReducer.barcodes});
+mapStateToProps = (state) => ({ profile: state.profileReducer.profile});
 
 mapDispatchToProps = (dispatch) => ({
-    // addCount: (count) => {     dispatch(addToCount(count)); },
+    setAccount: (acc) => {
+        dispatch(setAccount(acc));
+    },
 });
 
 class Login extends React.Component {
@@ -40,10 +42,21 @@ class Login extends React.Component {
                     this.setState({spinnerActive: true})
                     console.log('Login success with permissions: ' + result.grantedPermissions.toString())
                     AccessToken.getCurrentAccessToken().then((data) => {
-                        const { accessToken } = data
-                        console.log(data);
-                        this.setState({spinnerActive: false})
-                        Actions.lists();
+                        // userID = accountID in server
+                        const { accessToken, userID } = data
+
+                        // var login = {"auth": accessToken, "accountId": userID};
+                        var login = {"auth": "80833", "accountId": "tinyMikeHands"};
+
+                        fetch('https://infinite-journey-83753.herokuapp.com/login',
+                            {method:"POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(login)})
+                            .then(response => {console.log(response); return response.json()})
+                            .then(json => {
+                                json.accountId = userID;
+                                this.props.setAccount(json);
+                                this.setState({spinnerActive: false});
+                                Actions.lists();
+                        });
                     });
                 }
             }, function (error) {
@@ -58,18 +71,7 @@ class Login extends React.Component {
             <View style={styles.loginContainer}>
 
                 <Image source={require('../img/eligo_4_tp.png')} style={styles.loginLogo}/>
-                {/*<LoginButton
-                    publishPermissions={["publish_actions"]}
-                    onLoginFinished={(error, result) => {
-                    if (error) {
-                        alert("Login failed with error: " + result.error);
-                    } else if (result.isCancelled) {
-                        alert("Login was cancelled");
-                    } else {
-                        alert("Login was successful with permissions: " + result.grantedPermissions)
-                    }
-                }}
-                    onLogoutFinished={() => alert("User logged out")}/>*/}
+
                 <TouchableHighlight
                     onPress={this.handleFacebookLogin}
                     style={{backgroundColor: "#3B5998", padding: 10, borderRadius:7, borderWidth: 1, borderColor: '#3B5998', paddingBottom: 10}}>

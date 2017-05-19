@@ -33,8 +33,6 @@ class ShoppingList extends React.Component {
     }
 
     render() {
-        // console.log(this.props.barcodes);
-
         const { barcodes } = this.props;
         return(
             <ScrollView automaticallyAdjustContentInsets={false}>

@@ -4,10 +4,8 @@ import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {List, ListItem, Avatar, Grid, Row, Col, Card, Divider} from 'react-native-elements'
 
-
 import {
-    changeProfileName,
-    changeProfileEmail,
+    fetchNewUser,
     getProfile
 } from '../actions';
 
@@ -19,6 +17,7 @@ mapStateToProps = (state) => ({
 
 mapDispatchToProps = (dispatch) => ({
     getProfile: (profileID) => { dispatch(getProfile(profileID)); },
+    fetchNewUser: (newUser) => { dispatch(fetchNewUser(newUser)); }
 });
 
 class DietaryRestriction extends React.Component {
@@ -34,7 +33,7 @@ class DietaryRestriction extends React.Component {
     }
 
     _toggleDR = function(d) {
-        console.log(d)
+        this.props.onPress();
         this.setState({checked: !this.state.checked})
     }
 
@@ -54,18 +53,39 @@ class DietaryRestriction extends React.Component {
 }
 
 
-class EditProfile extends React.Component {
+class AddUser extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {first: this.props.profile.users[0].first, last: this.props.profile.users[0].last}
+
+        this.state = {first: '', last: '', drs: {}}
     }
 
-    static renderRightButton = (props) => {
-          return (
-              <TouchableHighlight onPress={() => console.log('attempt to save')}>
-                  <Text style={styles.rightButton}>Save</Text>
-              </TouchableHighlight>
-          );
+    componentDidMount() {
+        Actions.refresh({renderRightButton: this.renderRightButton});
+    }
+
+
+    processNewUser = function() {
+        // Takes JSON object with “accountId”, “subUserId”, “first”, “last”, and “dr”
+        var newUser = {
+            "accountId": this.props.profile.accountId,
+            "subUserId": this.props.profile.users.length,
+            "first": this.state.first,
+            "last": this.state.last,
+            "dr": Object.keys(this.state.drs)
+        };
+
+        // console.log(this.props.profile);
+        this.props.fetchNewUser(newUser);
+        Actions.profiles();
+    }
+
+    renderRightButton = () => {
+        return (
+            <TouchableHighlight onPress={() => {this.processNewUser()}}>
+                <Text style={styles.rightButton}>Add</Text>
+            </TouchableHighlight>
+        );
     }
 
     render() {
@@ -73,11 +93,21 @@ class EditProfile extends React.Component {
         const drSize = (100 - headerSectionSize) / 2;
 
         _changeProfileFirst = (t) => {
-            this.setState({first: t})
+            this.setState({first: t});
         }
 
         _changeProfileLast = (t) => {
-            this.setState({last: t})
+            this.setState({last: t});
+        }
+
+        _toggleDR = (t) => {
+            let newDR = Object.assign({}, this.state.drs);
+            newDR[t] = !newDR[t];
+            if (!newDR[t]) {
+                delete newDR[t];
+            }
+
+            this.setState({drs: newDR});
         }
 
         const { profile, changeProfileName, changeProfileEmail } = this.props;
@@ -133,9 +163,9 @@ class EditProfile extends React.Component {
                     <Row size={50}>
                         <ScrollView horizontal={true}>
                             {drs.map((d, i) => (
-                                <DietaryRestriction key={d.name} name={d.name} img={d.img}/>
+                                <DietaryRestriction key={d.name} name={d.name} img={d.img}
+                                    onPress={() => {_toggleDR(d.name)}}/>
                             ))}
-
                         </ScrollView>
                     </Row>
                 </Grid>
@@ -144,4 +174,4 @@ class EditProfile extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(AddUser);

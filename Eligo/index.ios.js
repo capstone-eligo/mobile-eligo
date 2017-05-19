@@ -17,6 +17,7 @@ import ShoppingList from './app/components/shoppingList';
 import Scanner from './app/components/scanner';
 import Profiles from './app/components/profiles';
 import EditProfile from './app/components/editProfile';
+import AddUser from './app/components/addUser';
 import Settings from './app/components/settings';
 import Results from './app/components/results';
 import Terms from './app/components/terms';
@@ -119,8 +120,6 @@ class SettingsIcon extends React.Component {
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">
     <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
-    {/*Uncomment to use for dev of results page*/}
-    {/*<Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>*/}
 
     <Scene
       key='lists'
@@ -135,6 +134,7 @@ const Scenes = Actions.create(
     </Scene>
 
     <Scene key='editProfile' title='Edit Profile' hideNavBar={false} component={EditProfile}></Scene>
+    <Scene key='addUser' title='Add User' hideNavBar={false} component={AddUser}></Scene>
     <Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>
     <Scene key='terms' title='Terms and agreement' hideNavBar={false} component={Terms}></Scene>
     <Scene key='privacy' title='Privacy' hideNavBar={false} component={Privacy}></Scene>
