@@ -26,9 +26,7 @@ class DietaryRestriction extends React.Component {
         this.state = {checked: this.props.checked ? this.props.checked : false};
 
         this.checkActive = () => {
-            return {
-                color: this.state.checked ? "green" : "red"
-            }
+            return this.state.checked ? "#EA4C2F" : "#000"
         }
     }
 
@@ -41,11 +39,11 @@ class DietaryRestriction extends React.Component {
         return(
             <TouchableOpacity style={{margin: 10, alignItems: "center"}} onPress={() => {this._toggleDR(this.props.name)}}>
                 <Row size={10}>
-                    <Text style={this.checkActive()}>{this.props.name}</Text>
+                    <Text style={{color: this.checkActive()}}>{this.props.name}</Text>
                 </Row>
 
                 <Row size={90}>
-                    <Image source={this.props.img} style={{flex: 1, width: 50,height: 50,resizeMode: 'contain'}}/>
+                    <Image source={this.props.img} style={{flex: 1, width: 50,height: 50,resizeMode: 'contain', tintColor: this.checkActive()}}/>
                 </Row>
             </TouchableOpacity>
         )
@@ -80,7 +78,6 @@ class EditProfile extends React.Component {
             "dr": Object.keys(this.state.drs)
         };
 
-        // console.log(this.props.profile);
         this.props.fetchNewUser(newUser);
         Actions.profiles();
     }
