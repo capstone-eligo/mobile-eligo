@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, ScrollView, Text, TextInput, TouchableOpacity, TouchableHighlight, Image} from 'react-native';
+import {View, ScrollView, Text, TextInput, TouchableOpacity, TouchableHighlight, Image, AlertIOS} from 'react-native';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
-import {List, ListItem, Avatar, Grid, Row, Col, Card, Divider} from 'react-native-elements'
+import {List, ListItem, Avatar, Grid, Row, Col, Button} from 'react-native-elements'
 
 import {
     fetchNewUser,
@@ -37,14 +37,14 @@ class DietaryRestriction extends React.Component {
 
     render() {
         return(
-            <TouchableOpacity style={{margin: 10, alignItems: "center"}} onPress={() => {this._toggleDR(this.props.name)}}>
-                <Row size={10}>
+            <TouchableOpacity style={{marginRight: 10, alignItems: "center"}} onPress={() => {this._toggleDR(this.props.name)}}>
+                {/*<Row size={10}>*/}
                     <Text style={{color: this.checkActive()}}>{this.props.name}</Text>
-                </Row>
+                {/*</Row>*/}
 
-                <Row size={90}>
+                {/*<Row size={90}>*/}
                     <Image source={this.props.img} style={{flex: 1, width: 50,height: 50,resizeMode: 'contain', tintColor: this.checkActive()}}/>
-                </Row>
+                {/*</Row>*/}
             </TouchableOpacity>
         )
     }
@@ -91,9 +91,6 @@ class EditProfile extends React.Component {
     }
 
     render() {
-        const headerSectionSize = 20;
-        const drSize = (100 - headerSectionSize) / 2;
-
         _changeProfileFirst = (t) => {
             this.setState({first: t});
         }
@@ -130,7 +127,7 @@ class EditProfile extends React.Component {
         return (
             <View style={styles.editProfileContainer}>
                 <Grid>
-                    <Row size={headerSectionSize}>
+                    <Row size={20}>
                         <Col size={25}>
                             <Avatar
                                 large
@@ -159,18 +156,42 @@ class EditProfile extends React.Component {
                         </Col>
                     </Row>
                     <Row size={5}>
-                        <Text>Dietary restrictions (allergy-based)</Text>
-
+                        <Text style={{fontWeight: 'bold'}}>Dietary restrictions (allergy-based)</Text>
                     </Row>
-                    <Row size={50}>
-                        <ScrollView horizontal={true}>
+                    <Row size={20}>
+                        <ScrollView horizontal={true} style={{backgroundColor: '#F9F9F9', padding: 5}}>
                             {drs.map((d, i) => (
                                 <DietaryRestriction key={d.name} name={d.name} img={d.img}
                                     onPress={() => {_toggleDR(d.name)}} checked={this.state.drs[d.name]}/>
                             ))}
                         </ScrollView>
                     </Row>
+
+                    <Row size={55}>
+
+                    </Row>
                 </Grid>
+
+                {
+                    this.props.userIndex > 0 ?
+                        <Button
+                        title='DELETE USER'
+                        backgroundColor="#EA4C2F"
+                        onPress={() => {
+
+                            AlertIOS.prompt(
+                                'Are you sure?',
+                                'Press ok to delete user',
+                                [
+                                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                                {text: 'OK', onPress: () => console.log('OK Pressed')},
+                                ],
+                                'default'
+                                );
+                            }}/> :
+                        <Text></Text>
+                }
+
             </View>
         );
     }

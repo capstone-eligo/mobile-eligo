@@ -42,7 +42,7 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         marginTop: 70,
-        marginBottom: 25,
+        marginBottom: 10,
         padding: 20
     },
     resultsContainer: {
