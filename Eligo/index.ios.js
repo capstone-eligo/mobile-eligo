@@ -15,6 +15,7 @@ import {appReducer} from './app/reducers';
 import Login from './app/components/login';
 import ShoppingList from './app/components/shoppingList';
 import Scanner from './app/components/scanner';
+import ScanHistory from './app/components/scanHistory';
 import Profiles from './app/components/profiles';
 import EditProfile from './app/components/editProfile';
 import AddUser from './app/components/addUser';
@@ -138,7 +139,7 @@ const Scenes = Actions.create(
     <Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>
     <Scene key='terms' title='Terms and agreement' hideNavBar={false} component={Terms}></Scene>
     <Scene key='privacy' title='Privacy' hideNavBar={false} component={Privacy}></Scene>
-
+    <Scene key='history' title='History' hideNavBar={false} component={ScanHistory}></Scene>
   </Scene>
 )
 

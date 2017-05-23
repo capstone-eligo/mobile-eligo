@@ -62,7 +62,6 @@ class AddUser extends React.Component {
         Actions.refresh({renderRightButton: this.renderRightButton});
     }
 
-
     processNewUser = function() {
         // Takes JSON object with “accountId”, “subUserId”, “first”, “last”, and “dr”
         var newUser = {
