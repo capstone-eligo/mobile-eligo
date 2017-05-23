@@ -81,7 +81,8 @@ class Login extends React.Component {
                 <ActivityIndicator
                     animating={this.state.spinnerActive}
                     color="#FFF"
-                    size="large"/>
+                    size="large"
+                    style={{marginTop: 5}}/>
 
             </View>
         );
