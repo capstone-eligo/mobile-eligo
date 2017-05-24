@@ -91,8 +91,14 @@ class Settings extends React.Component {
                                 'default'
                                 );
                             }}/>
+                    </List>
 
-                        <ListItem
+                    <List
+                        containerStyle={{
+                        marginBottom: 20,
+                        marginTop: 0
+                    }}>
+                         <ListItem
                             key={'logout_item'}
                             title="Logout"
                             leftIcon={{name: 'exit-to-app'}}
