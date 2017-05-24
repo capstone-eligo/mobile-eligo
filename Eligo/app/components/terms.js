@@ -3,8 +3,6 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
 
 import {Actions} from 'react-native-router-flux';
-import { ActionConst } from 'react-native-router-flux';
-
 
 import styles from '../styles'
 

@@ -3,8 +3,6 @@ import {View, ScrollView, Text, TextInput, TouchableOpacity, TouchableHighlight,
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {List, ListItem, Avatar, Grid, Row, Col, Button} from 'react-native-elements'
-import { ActionConst } from 'react-native-router-flux';
-
 
 import {
     fetchNewUser,
