@@ -31,15 +31,19 @@ class Settings extends React.Component {
                         marginTop: 0
                     }}>
                         <ListItem
-                            key={1}
+                            key={'terms_item'}
                             title="Terms and agreement"
                             onPress={() => {Actions.terms()}}/>
                         <ListItem
-                            key={2}
+                            key={'privacy_item'}
                             title="Privacy"
                             onPress={() => {Actions.privacy()}}/>
+                         <ListItem
+                            key={'acknowledgements_item'}
+                            title="Acknowledgements"
+                            onPress={() => {Actions.acknowledgements()}}/>
                         <ListItem
-                            key={3}
+                            key={'logout_item'}
                             title="Logout"
                             onPress={() => {LoginManager.logOut(); Actions.login()}}/>
                     </List>

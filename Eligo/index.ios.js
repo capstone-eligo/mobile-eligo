@@ -23,6 +23,7 @@ import Settings from './app/components/settings';
 import Results from './app/components/results';
 import Terms from './app/components/terms';
 import Privacy from './app/components/privacy';
+import Acknowledge from './app/components/acknowledge';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -132,12 +133,14 @@ const Scenes = Actions.create(
       <Scene key='settings' title='Settings' component={Settings} icon={SettingsIcon}></Scene>
     </Scene>
 
+    <Scene key='history' title='History' hideNavBar={false} component={ScanHistory}></Scene>
     <Scene key='editProfile' title='Edit Profile' hideNavBar={false} component={EditProfile}></Scene>
     <Scene key='addUser' title='Add User' hideNavBar={false} component={AddUser}></Scene>
     <Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>
     <Scene key='terms' title='Terms and agreement' hideNavBar={false} component={Terms}></Scene>
     <Scene key='privacy' title='Privacy' hideNavBar={false} component={Privacy}></Scene>
-    <Scene key='history' title='History' hideNavBar={false} component={ScanHistory}></Scene>
+    <Scene key='acknowledgements' title='Acknowledgements' hideNavBar={false} component={Acknowledge}></Scene>
+
   </Scene>
 )
 

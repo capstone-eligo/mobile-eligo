@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
+// import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
 
 import {Actions} from 'react-native-router-flux';
 
