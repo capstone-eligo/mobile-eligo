@@ -178,7 +178,7 @@ class EditProfile extends React.Component {
                                 ],
                                 'default'
                                 );
-                            }}/> : <Text>{this.props.userIndex}</Text>
+                            }}/> : <Text></Text>
                 }
 
             </View>
