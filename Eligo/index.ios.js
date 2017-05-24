@@ -121,7 +121,7 @@ class SettingsIcon extends React.Component {
 
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">
-    {/*<Scene key='login' title='Login' component={Login} hideNavBar></Scene>*/}
+    <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
 
     <Scene key='onboardOne' title='History' hideNavBar component={OnboardOne}></Scene>
 

@@ -28,10 +28,18 @@ class Scanner extends React.Component {
     }
 
     showHistory = function() {
-        Actions.history({history: this.props.profile.history,
-             parseBarcode: this.props.fetchBarcode,
-             accountId: this.props.profile.accountId
-            });
+        if (this.props.history) {
+            Actions.history({history: this.props.profile.history,
+                parseBarcode: this.props.fetchBarcode,
+                accountId: this.props.profile.accountId
+                });
+        } else {
+            AlertIOS.alert(
+                'No history',
+                'Scan a product to create a history!'
+            );
+        }
+
     }
 
     renderRightButton = () => {
@@ -48,13 +56,13 @@ class Scanner extends React.Component {
 
         const scanBarcode = (data, bounds) => {
             this.setState({showCamera: false})
-            fetchBarcode(data.data, "tinyMikeHands");
+            fetchBarcode(data.data, accountId);
 
             Actions.results();
         }
 
         const scanBarcodeTest = () => {
-            fetchBarcode('038000356216', "tinyMikeHands");
+            fetchBarcode('038000356216', accountId);
             Actions.results();
         }
 

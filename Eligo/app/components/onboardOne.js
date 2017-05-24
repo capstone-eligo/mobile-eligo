@@ -75,7 +75,8 @@ export default class OnboardOne extends React.Component {
                     <Button
                         buttonStyle={{backgroundColor: '#B1D25E'}}
                         fontWeight="bold"
-                        title='Get started now!'/>
+                        title='Create your profile now!'
+                        onPress={() => {Actions.addUser({initialSetup: true})}}/>
                 </ScrollView>
             </View>
       );

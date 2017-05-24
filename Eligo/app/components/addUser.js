@@ -36,17 +36,21 @@ class AddUser extends React.Component {
         // Takes JSON object with “accountId”, “subUserId”, “first”, “last”, and “dr”
         var newUser = {
             "accountId": this.props.profile.accountId,
-            "subUserId": this.props.profile.users.length,
+            "subUserId": this.props.profile.users ? this.props.profile.users.length : 0,
             "first": this.state.first,
             "last": this.state.last,
             "dr": Object.keys(this.state.drs)
         };
 
         this.props.fetchNewUser(newUser);
-        setTimeout(() => {
-            Actions.pop();
-            Actions.profiles();
-        }, 250);
+        if (this.props.initialSetup) {
+            Actions.lists();
+        } else {
+            setTimeout(() => {
+                Actions.pop();
+                Actions.profiles();
+            }, 250);
+        }
     }
 
     renderRightButton = () => {

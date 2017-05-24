@@ -55,7 +55,6 @@ class Profiles extends React.Component {
                                 )
                             }
                         })}
-                        {/*TODO do an actions pop?*/}
                         <ListItem
                             key={'addUserListItem'}
                             avatar={{uri: "https://c1.staticflickr.com/8/7128/8162953475_25501b86a9.jpg"}}
