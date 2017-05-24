@@ -13,6 +13,7 @@ import thunkMiddleware from 'redux-thunk';
 
 import {appReducer} from './app/reducers';
 import Login from './app/components/login';
+import OnboardOne from './app/components/onboardOne';
 import ShoppingList from './app/components/shoppingList';
 import Scanner from './app/components/scanner';
 import ScanHistory from './app/components/scanHistory';
@@ -120,7 +121,9 @@ class SettingsIcon extends React.Component {
 
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">
-    <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
+    {/*<Scene key='login' title='Login' component={Login} hideNavBar></Scene>*/}
+
+    <Scene key='onboardOne' title='History' hideNavBar component={OnboardOne}></Scene>
 
     <Scene
       key='lists'
@@ -143,6 +146,8 @@ const Scenes = Actions.create(
     <Scene key='acknowledgements' title='Acknowledgements' hideNavBar={false} component={Acknowledge}></Scene>
     <Scene key='drList' title='Dietary Restrictions' hideNavBar={false} component={DRList}></Scene>
 
+    {/*TODO Add onboarding scenes*/}
+    {/*TODO Add submit new ingredients to add*/}
   </Scene>
 )
 

@@ -55,7 +55,13 @@ class Login extends React.Component {
                                 json.accountId = login.accountId;
                                 this.props.setAccount(json);
                                 this.setState({spinnerActive: false});
-                                Actions.lists();
+
+                                if (json.users && json.users[0]) {
+                                    Actions.lists();
+                                } else {
+                                    // Onboarding here
+                                    Actions.onboardOne();
+                                }
                         });
                     });
                 }
