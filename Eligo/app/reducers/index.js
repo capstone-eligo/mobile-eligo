@@ -88,8 +88,10 @@ export const profileReducer = (state = {profile: mainProfile, accID: ""}, action
             return {...state, profile};
 
         case ACTION_TYPES.FETCHED_DELETED_USER:
-            console.log(action);
             return {...state, profile: action.account};
+
+        case ACTION_TYPES.CLEAR_PROFILE:
+            return {...state, profile: mainProfile}
 
         default:
             return state;

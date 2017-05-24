@@ -10,6 +10,8 @@ export const ACTION_TYPES = {
 
     DELETE_USER: "DELETE_USER",
     FETCHED_DELETED_USER: "FETCHED_DELETED_USER",
+
+    CLEAR_PROFILE: "CLEAR_PROFILE",
 }
 
 const baseURL = 'https://infinite-journey-83753.herokuapp.com/';
@@ -89,4 +91,8 @@ export const receivedDeletedUser = (dUser, json) => {
 
 export const getProfile = (profileID) => {
     return { type: 'GET_PROFILE', profileID };
+}
+
+export const clearProfile = () => {
+    return { type: 'CLEAR_PROFILE' };
 }

@@ -1,26 +1,44 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableHighlight, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableHighlight, ScrollView, AlertIOS } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import {List, ListItem} from 'react-native-elements'
-import {LoginManager, AccessToken} from 'react-native-fbsdk'
+import {List, ListItem} from 'react-native-elements';
+import {LoginManager, AccessToken} from 'react-native-fbsdk';
+
+import { clearProfile } from '../actions';
 
 import styles from '../styles'
 
 mapStateToProps = (state) => ({
-    //  count: state.countReducer.count
+     profile: state.profileReducer.profile
 });
 
 mapDispatchToProps = (dispatch) => ({
-    // addGroceryItem: (groceryItem) => {
-    //     dispatch(addToGroceryList(groceryItem));
-    // },
-    // addTodoItem: (todoItem) => {
-    //     dispatch(addToTodoList(todoItem));
-    // },
+    clearProfile: () => {
+        dispatch(clearProfile);
+    },
 });
 
 class Settings extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    _deleteProfile = () => {
+        console.log(this.props.profile);
+        var data = {"accountId": this.props.profile.accountId};
+
+        fetch('https://infinite-journey-83753.herokuapp.com/deleteAccount',
+            {method:"POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(data)})
+            .then(response => {
+                if (response.status == 200) {
+                    this.props.clearProfile();
+                    LoginManager.logOut();
+                    setTimeout(() => {Actions.pop(); Actions.login();}, 250);
+                }
+            });
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -50,7 +68,37 @@ class Settings extends React.Component {
                             title="Dietary restrictions (allergy-based)"
                             leftIcon={{name: 'local-dining'}}
                             onPress={() => {Actions.drList()}}/>
+                    </List>
+
+                    <List
+                        containerStyle={{
+                        marginBottom: 20,
+                        marginTop: 0
+                    }}>
                         <ListItem
+                            key={'delete_user'}
+                            title="Delete user"
+                            leftIcon={{name: 'local-dining'}}
+                            onPress={() => {AlertIOS.prompt(
+                                'Are you sure? :(',
+                                'Press ok to delete account',
+                                [
+                                {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+                                {text: 'OK', onPress: () => {
+                                    this._deleteProfile();
+                                }},
+                                ],
+                                'default'
+                                );
+                            }}/>
+                    </List>
+
+                    <List
+                        containerStyle={{
+                        marginBottom: 20,
+                        marginTop: 0
+                    }}>
+                         <ListItem
                             key={'logout_item'}
                             title="Logout"
                             leftIcon={{name: 'exit-to-app'}}

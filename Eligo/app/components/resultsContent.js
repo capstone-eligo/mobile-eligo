@@ -14,6 +14,7 @@ export default class ResultsContent extends React.Component {
         var profile = this.props.profile;
 
         var restrictionsMapped = {};
+        console.log(restrictions);
 
         if (restrictions) {
             restrictions = restrictions.split("***")

@@ -45,8 +45,8 @@ class Login extends React.Component {
                         // userID = accountID in server
                         const { accessToken, userID } = data
 
-                        // var login = {"auth": accessToken, "accountId": userID};
-                        var login = {"auth": "80833", "accountId": "tinyMikeHands"};
+                        var login = {"auth": accessToken, "accountId": userID};
+                        // var login = {"auth": "80833", "accountId": "tinyMikeHands"};
 
                         fetch('https://infinite-journey-83753.herokuapp.com/login',
                             {method:"POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(login)})
@@ -55,7 +55,13 @@ class Login extends React.Component {
                                 json.accountId = login.accountId;
                                 this.props.setAccount(json);
                                 this.setState({spinnerActive: false});
-                                Actions.lists();
+
+                                if (json.users && json.users[0]) {
+                                    Actions.lists();
+                                } else {
+                                    // Onboarding here
+                                    Actions.onboardOne();
+                                }
                         });
                     });
                 }
