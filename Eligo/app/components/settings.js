@@ -33,18 +33,22 @@ class Settings extends React.Component {
                         <ListItem
                             key={'terms_item'}
                             title="Terms and agreement"
+                            leftIcon={{name: 'flag'}}
                             onPress={() => {Actions.terms()}}/>
                         <ListItem
                             key={'privacy_item'}
                             title="Privacy"
+                            leftIcon={{name: 'lock'}}
                             onPress={() => {Actions.privacy()}}/>
                          <ListItem
                             key={'acknowledgements_item'}
                             title="Acknowledgements"
+                            leftIcon={{name: 'favorite'}}
                             onPress={() => {Actions.acknowledgements()}}/>
                         <ListItem
                             key={'logout_item'}
                             title="Logout"
+                            leftIcon={{name: 'exit-to-app'}}
                             onPress={() => {LoginManager.logOut(); Actions.login()}}/>
                     </List>
                 </ScrollView>
