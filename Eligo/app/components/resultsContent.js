@@ -47,15 +47,13 @@ export default class ResultsContent extends React.Component {
             });
 
             profile.users.forEach((u, i) => {
-                if (!restrictionsMapped[i]) {
+                if (u && !restrictionsMapped[i]) {
                     restrictionsMapped[i] = {
                         firstName: u.first,
                         lastName: u.last,
                     };
                 }
             });
-
-            console.log(restrictionsMapped);
         }
 
         const cardDividerStyle = {height: 0}
@@ -63,7 +61,6 @@ export default class ResultsContent extends React.Component {
         const cardContainerStyle = {backgroundColor: '#F9F9F9'}
 
         // ***[user#]:[user's dietary restriction]:[restriction's ingredient]:[ingredient in the scanned food]***
-        // TODO: fix rendering (for profiles that don't have any alerts)
         return(
             <ScrollView style={styles.resultsContentScroll}>
                 {

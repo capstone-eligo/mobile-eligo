@@ -72,7 +72,6 @@ class AddUser extends React.Component {
             "dr": Object.keys(this.state.drs)
         };
 
-        // console.log(this.props.profile);
         this.props.fetchNewUser(newUser);
         setTimeout(() => {
             Actions.pop();
