@@ -24,6 +24,7 @@ import Results from './app/components/results';
 import Terms from './app/components/terms';
 import Privacy from './app/components/privacy';
 import Acknowledge from './app/components/acknowledge';
+import DRList from './app/components/drList';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -140,6 +141,7 @@ const Scenes = Actions.create(
     <Scene key='terms' title='Terms and agreement' hideNavBar={false} component={Terms}></Scene>
     <Scene key='privacy' title='Privacy' hideNavBar={false} component={Privacy}></Scene>
     <Scene key='acknowledgements' title='Acknowledgements' hideNavBar={false} component={Acknowledge}></Scene>
+    <Scene key='drList' title='Dietary Restrictions' hideNavBar={false} component={DRList}></Scene>
 
   </Scene>
 )

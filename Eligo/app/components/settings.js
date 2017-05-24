@@ -46,6 +46,11 @@ class Settings extends React.Component {
                             leftIcon={{name: 'favorite'}}
                             onPress={() => {Actions.acknowledgements()}}/>
                         <ListItem
+                            key={'dr_item'}
+                            title="Dietary restrictions (allergy-based)"
+                            leftIcon={{name: 'local-dining'}}
+                            onPress={() => {Actions.drList()}}/>
+                        <ListItem
                             key={'logout_item'}
                             title="Logout"
                             leftIcon={{name: 'exit-to-app'}}

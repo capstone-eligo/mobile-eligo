@@ -33,7 +33,7 @@ export default class Acknowledge extends React.Component {
                     dividerStyle={cardDividerStyle}
                     titleStyle={cardTitleStyle}
                     containerStyle={cardContainerStyle}>
-                    <Text>Built by Eligo with love</Text>
+                    <Text>Built by the Eligo team with love</Text>
                 </Card>
             </ScrollView>
       );
