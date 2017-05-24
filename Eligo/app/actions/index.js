@@ -7,7 +7,12 @@ export const ACTION_TYPES = {
     ADD_NEW_USER: "ADD_NEW_USER",
     FETCH_NEW_USER: "FETCH_NEW_USER",
     FETCHED_NEW_USER: "FETCHED_NEW_USER",
+
+    DELETE_USER: "DELETE_USER",
+    FETCHED_DELETED_USER: "FETCHED_DELETED_USER",
 }
+
+const baseURL = 'https://infinite-journey-83753.herokuapp.com/';
 
 export const addBarcode = (barcode) => {
     return { type: 'ADD_BARCODE', barcode };
@@ -16,7 +21,7 @@ export const addBarcode = (barcode) => {
 export const fetchBarcode = (barcode, accountId) => {
     return dispatch => {
         dispatch(addBarcode(barcode))
-        return fetch('https://infinite-journey-83753.herokuapp.com/upc/' + barcode + "?" + "accountId=" + accountId)
+        return fetch(baseURL + 'upc/' + barcode + "?" + "accountId=" + accountId)
             .then(response => response.json())
             .then(json => dispatch(receivedBarcode(barcode, json)))
     }
@@ -41,16 +46,15 @@ export const addNewUser = (newUser) => {
 
 export const fetchNewUser = (newUser) => {
     return dispatch => {
-        dispatch(addNewUser(newUser))
-        return fetch('https://infinite-journey-83753.herokuapp.com/users',
+        dispatch(addNewUser(newUser));
+        return fetch(baseURL + 'users',
             {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(newUser)})
-            .then(response => {console.log(response); return response.json()})
+            .then(response => {return response.json()})
             .then(json => dispatch(receivedNewUser(newUser, json)))
     }
 }
 
 export const receivedNewUser = (newUser, json) => {
-    console.log(json);
     return {
         type: 'FETCHED_NEW_USER',
         newUser: newUser,
@@ -59,6 +63,29 @@ export const receivedNewUser = (newUser, json) => {
     }
 }
 
+export const deleteUser = (dUser) => {
+    return { type: 'DELETE_USER', dUser };
+}
+
+export const fetchDeleteUser = (dUser) => {
+    return dispatch => {
+        console.log('here');
+        dispatch(deleteUser(dUser));
+        return fetch(baseURL + 'deleteUser',
+            {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(dUser)})
+            .then(response => {console.log(response); return response.json()})
+            .then(json => dispatch(receivedDeletedUser(dUser, json)))
+    }
+}
+
+export const receivedDeletedUser = (dUser, json) => {
+    return {
+        type: 'FETCHED_DELETED_USER',
+        dUser: dUser,
+        account: json,
+        receivedAt: Date.now()
+    }
+}
 
 export const getProfile = (profileID) => {
     return { type: 'GET_PROFILE', profileID };

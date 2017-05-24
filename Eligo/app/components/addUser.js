@@ -3,6 +3,7 @@ import {View, ScrollView, Text, TextInput, TouchableOpacity, TouchableHighlight,
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {List, ListItem, Avatar, Grid, Row, Col, Card, Divider} from 'react-native-elements'
+import DietaryRestriction from './dietaryRestriction';
 
 import {
     fetchNewUser,
@@ -20,39 +21,6 @@ mapDispatchToProps = (dispatch) => ({
     fetchNewUser: (newUser) => { dispatch(fetchNewUser(newUser)); }
 });
 
-class DietaryRestriction extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {checked: false};
-
-        this.checkActive = () => {
-            return {
-                color: this.state.checked ? "green" : "red"
-            }
-        }
-    }
-
-    _toggleDR = function(d) {
-        this.props.onPress();
-        this.setState({checked: !this.state.checked})
-    }
-
-    render() {
-        return(
-            <TouchableOpacity style={{margin: 10, alignItems: "center"}} onPress={() => {this._toggleDR(this.props.name)}}>
-                <Row size={10}>
-                    <Text style={this.checkActive()}>{this.props.name}</Text>
-                </Row>
-
-                <Row size={90}>
-                    <Image source={this.props.img} style={{flex: 1, width: 50,height: 50,resizeMode: 'contain'}}/>
-                </Row>
-            </TouchableOpacity>
-        )
-    }
-}
-
-
 class AddUser extends React.Component {
     constructor(props) {
         super(props);
@@ -64,7 +32,6 @@ class AddUser extends React.Component {
         Actions.refresh({renderRightButton: this.renderRightButton});
     }
 
-
     processNewUser = function() {
         // Takes JSON object with “accountId”, “subUserId”, “first”, “last”, and “dr”
         var newUser = {
@@ -75,9 +42,11 @@ class AddUser extends React.Component {
             "dr": Object.keys(this.state.drs)
         };
 
-        // console.log(this.props.profile);
         this.props.fetchNewUser(newUser);
-        Actions.profiles();
+        setTimeout(() => {
+            Actions.pop();
+            Actions.profiles();
+        }, 250);
     }
 
     renderRightButton = () => {
@@ -157,16 +126,19 @@ class AddUser extends React.Component {
                         </Col>
                     </Row>
                     <Row size={5}>
-                        <Text>Dietary restrictions (allergy-based)</Text>
-
+                        <Text style={{fontWeight: 'bold'}}>Dietary restrictions (allergy-based)</Text>
                     </Row>
-                    <Row size={50}>
-                        <ScrollView horizontal={true}>
+                    <Row size={20}>
+                        <ScrollView horizontal={true} style={{backgroundColor: '#F9F9F9', padding: 5}}>
                             {drs.map((d, i) => (
                                 <DietaryRestriction key={d.name} name={d.name} img={d.img}
-                                    onPress={() => {_toggleDR(d.name)}}/>
+                                    onPress={() => {_toggleDR(d.name)}} checked={this.state.drs[d.name]}/>
                             ))}
                         </ScrollView>
+                    </Row>
+
+                    <Row size={55}>
+
                     </Row>
                 </Grid>
             </View>

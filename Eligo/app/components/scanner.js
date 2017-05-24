@@ -23,6 +23,25 @@ class Scanner extends React.Component {
         this.state = {showCamera: true}
     }
 
+    componentDidMount() {
+        Actions.refresh({renderRightButton: this.renderRightButton});
+    }
+
+    showHistory = function() {
+        Actions.history({history: this.props.profile.history,
+             parseBarcode: this.props.fetchBarcode,
+             accountId: this.props.profile.accountId
+            });
+    }
+
+    renderRightButton = () => {
+        return (
+            <TouchableHighlight onPress={() => {this.showHistory()}}>
+                <Text style={styles.rightButton}>History</Text>
+            </TouchableHighlight>
+        );
+    }
+
     render() {
         const { barcodes, fetchBarcode } = this.props;
         const { accountId } = this.props.profile;

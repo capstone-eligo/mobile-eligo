@@ -31,16 +31,29 @@ class Settings extends React.Component {
                         marginTop: 0
                     }}>
                         <ListItem
-                            key={1}
+                            key={'terms_item'}
                             title="Terms and agreement"
+                            leftIcon={{name: 'flag'}}
                             onPress={() => {Actions.terms()}}/>
                         <ListItem
-                            key={2}
+                            key={'privacy_item'}
                             title="Privacy"
+                            leftIcon={{name: 'lock'}}
                             onPress={() => {Actions.privacy()}}/>
+                         <ListItem
+                            key={'acknowledgements_item'}
+                            title="Acknowledgements"
+                            leftIcon={{name: 'favorite'}}
+                            onPress={() => {Actions.acknowledgements()}}/>
                         <ListItem
-                            key={3}
+                            key={'dr_item'}
+                            title="Dietary restrictions (allergy-based)"
+                            leftIcon={{name: 'local-dining'}}
+                            onPress={() => {Actions.drList()}}/>
+                        <ListItem
+                            key={'logout_item'}
                             title="Logout"
+                            leftIcon={{name: 'exit-to-app'}}
                             onPress={() => {LoginManager.logOut(); Actions.login()}}/>
                     </List>
                 </ScrollView>

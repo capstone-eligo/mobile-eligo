@@ -7,7 +7,11 @@ import ResultsContent from './resultsContent';
 
 import styles from '../styles'
 
-mapStateToProps = (state) => ({ barcodes: state.barcodeReducer.barcodes, product: state.barcodeReducer.product });
+mapStateToProps = (state) => ({
+    barcodes: state.barcodeReducer.barcodes,
+    product: state.barcodeReducer.product,
+    profile: state.profileReducer.profile,
+});
 
 mapDispatchToProps = (dispatch) => ({
     // addGroceryItem: (groceryItem) => {
@@ -40,7 +44,7 @@ class Results extends React.Component {
 
         const headerSectionSize = 20;
 
-        const { barcodes, product } = this.props;
+        const { barcodes, product, profile } = this.props;
         const buttons = ['Results', 'Nutrition', 'Ingredients', 'Compare'];
         var selectedTab = 0;
 
@@ -82,7 +86,7 @@ class Results extends React.Component {
                     <Row size={2}></Row>
 
                     <Row size={63}>
-                        <ResultsContent selectedTab={this.state.selectedTab} product={product}/>
+                        <ResultsContent selectedTab={this.state.selectedTab} product={product} profile={profile}/>
                     </Row>
                 </Grid>
 

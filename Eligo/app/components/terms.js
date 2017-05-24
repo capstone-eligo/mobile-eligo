@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
+// import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
 
 import {Actions} from 'react-native-router-flux';
 
@@ -11,7 +11,8 @@ export default class Terms extends React.Component {
     render() {
         return(
             <ScrollView style={styles.container}>
-                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Curabitur lobortis at ante at tempor. Nulla maximus, sapien
                     vehicula accumsan aliquam, neque urna mattis lorem, ut rhoncus
                     enim nunc eget erat. Aliquam quis viverra enim. Phasellus at

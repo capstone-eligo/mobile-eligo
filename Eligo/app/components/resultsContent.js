@@ -11,6 +11,8 @@ export default class ResultsContent extends React.Component {
 
     renderResultsContent() {
         var restrictions = this.props.product.Restrictions;
+        var profile = this.props.profile;
+
         var restrictionsMapped = {};
 
         if (restrictions) {
@@ -43,30 +45,48 @@ export default class ResultsContent extends React.Component {
 
                 restrictionsMapped[user.idx].alerts[user.foodIng].add(user.dr);
             });
+
+            profile.users.forEach((u, i) => {
+                if (u && !restrictionsMapped[i]) {
+                    restrictionsMapped[i] = {
+                        firstName: u.first,
+                        lastName: u.last,
+                    };
+                }
+            });
         }
 
-        // ***[user#]:[user's dietary restriction]:[restriction's ingredient]:[ingredient in the scanned food]***
+        const cardDividerStyle = {height: 0}
+        const cardTitleStyle = {textAlign: 'left', marginBottom: 0}
+        const cardContainerStyle = {backgroundColor: '#F9F9F9'}
 
+        // ***[user#]:[user's dietary restriction]:[restriction's ingredient]:[ingredient in the scanned food]***
         return(
             <ScrollView style={styles.resultsContentScroll}>
-                <Card title='Me'>
-                    <Text style={{color: '#44B8AE'}}>No alerts detected!</Text>
-                </Card>
                 {
                     Object.keys(restrictionsMapped).map((d,i) => (
-                        <Card key={i} title={restrictionsMapped[d].firstName + " " + restrictionsMapped[d].lastName}>
-                                <Text style={{color: '#EA4C2F'}}>
-                                    {Object.keys(restrictionsMapped[d].alerts).length} potential ingredients
-                                </Text>
+                        <Card key={i} title={restrictionsMapped[d].firstName + " " + restrictionsMapped[d].lastName}
+                            dividerStyle={cardDividerStyle} titleStyle={cardTitleStyle} containerStyle={cardContainerStyle}>
 
-                            <Row>
-                                <Col size={3}></Col>
-                                <Col size={97}>
-                                    {Object.keys(restrictionsMapped[d].alerts).map((e, i) => (
-                                        <Text key={i}>{'- ' + e} ({Array.from(restrictionsMapped[d].alerts[e])})</Text>
-                                    ))}
-                                </Col>
-                            </Row>
+                            { restrictionsMapped[d].alerts ?
+                                <View>
+                                    <Text style={{color: '#EA4C2F', fontWeight: 'bold'}}>
+                                        {Object.keys(restrictionsMapped[d].alerts).length} potential ingredients
+
+                                    </Text>
+
+                                    <Row>
+                                        <Col size={3}></Col>
+                                        <Col size={97}>
+                                            {Object.keys(restrictionsMapped[d].alerts).map((e, i) => (
+                                                <Text key={i}>{'- ' + e} ({Array.from(restrictionsMapped[d].alerts[e])})</Text>
+                                            ))}
+                                        </Col>
+                                    </Row>
+                                </View>
+
+                                : <Text style={{color: '#44B8AE', fontWeight: 'bold'}}>No alerts detected!</Text>
+                            }
                         </Card>
                     ))
                 }
@@ -90,7 +110,6 @@ export default class ResultsContent extends React.Component {
                 </Row>
                 {div && <Divider style={{ height: 1, backgroundColor: '#DDD' }} />}
             </View>
-
         )
     }
 
@@ -101,6 +120,9 @@ export default class ResultsContent extends React.Component {
             sm: 1,
             lg: 3,
         };
+
+        const cardDividerStyle = {height: 0};
+        const cardTitleStyle = {marginBottom: 0};
 
         const dv = {
             totalFat: (g) => {return (g / 65 * 100).toFixed(0) + "%"},
@@ -113,7 +135,7 @@ export default class ResultsContent extends React.Component {
 
         return(
             <ScrollView>
-                <Card title="General info">
+                <Card title="General info" dividerStyle={cardDividerStyle} titleStyle={cardTitleStyle}>
                     <Text>Serving Size {p.nf_serving_size_qty} {p.nf_serving_size_unit} ({p.nf_serving_weight_grams != null ? p.nf_serving_weight_grams : "- "}g)</Text>
                     <Text>Servings Per Container {p.nf_servings_per_container}</Text>
                     {this.renderRowInfo('Calories ', p.nf_calories, 'Calories from Fat ' + p.nf_calories_from_fat, 45, 45, false)}
@@ -122,7 +144,7 @@ export default class ResultsContent extends React.Component {
 
                 <Text style={{marginTop: 10, textAlign: "center"}}>* % Daily value based off of 2000 calorie diet</Text>
 
-                <Card title="Fat and cholesterol">
+                <Card title="Fat and cholesterol" dividerStyle={cardDividerStyle} titleStyle={cardTitleStyle}>
                     {this.renderRowInfo('', '', '% Daily Value*', 10, 90, true)}
                     {this.renderRowInfo('Total Fat ', p.nf_total_fat + "g", dv.totalFat(p.nf_total_fat), 90, 10, true)}
                     {this.renderRowInfo('   Saturated Fat ', p.nf_saturated_fat + "g", dv.satFat(p.nf_saturated_fat), 80, 10, true)}
@@ -130,7 +152,7 @@ export default class ResultsContent extends React.Component {
                     {this.renderRowInfo('Cholesterol ', p.nf_cholesterol + "mg", dv.cholesterol(p.nf_cholesterol), 80, 10, true)}
                 </Card>
 
-                <Card title="Salts, sugars, proteins">
+                <Card title="Salts, sugars, proteins" dividerStyle={cardDividerStyle} titleStyle={cardTitleStyle}>
                     {this.renderRowInfo('', '', '% Daily Value*', 10, 90, true)}
                     {this.renderRowInfo('Sodium ', p.nf_sodium + "mg", dv.na(p.nf_sodium), 90, 10, true)}
                     {this.renderRowInfo('Total Carbohydrate ', p.nf_total_carbohydrate + "g", dv.carbs(p.nf_total_carbohydrate), 80, 10, true)}

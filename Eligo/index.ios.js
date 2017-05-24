@@ -15,6 +15,7 @@ import {appReducer} from './app/reducers';
 import Login from './app/components/login';
 import ShoppingList from './app/components/shoppingList';
 import Scanner from './app/components/scanner';
+import ScanHistory from './app/components/scanHistory';
 import Profiles from './app/components/profiles';
 import EditProfile from './app/components/editProfile';
 import AddUser from './app/components/addUser';
@@ -22,6 +23,8 @@ import Settings from './app/components/settings';
 import Results from './app/components/results';
 import Terms from './app/components/terms';
 import Privacy from './app/components/privacy';
+import Acknowledge from './app/components/acknowledge';
+import DRList from './app/components/drList';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -115,8 +118,6 @@ class SettingsIcon extends React.Component {
   }
 }
 
-// const refreshOnBack = () => { Actions.pop({ refresh: {} }); }
-
 const Scenes = Actions.create(
   <Scene key='root' statusBarStyle="dark-content">
     <Scene key='login' title='Login' component={Login} hideNavBar></Scene>
@@ -133,11 +134,14 @@ const Scenes = Actions.create(
       <Scene key='settings' title='Settings' component={Settings} icon={SettingsIcon}></Scene>
     </Scene>
 
+    <Scene key='history' title='History' hideNavBar={false} component={ScanHistory}></Scene>
     <Scene key='editProfile' title='Edit Profile' hideNavBar={false} component={EditProfile}></Scene>
     <Scene key='addUser' title='Add User' hideNavBar={false} component={AddUser}></Scene>
     <Scene key='results' title='Results' hideNavBar={false} component={Results}></Scene>
     <Scene key='terms' title='Terms and agreement' hideNavBar={false} component={Terms}></Scene>
     <Scene key='privacy' title='Privacy' hideNavBar={false} component={Privacy}></Scene>
+    <Scene key='acknowledgements' title='Acknowledgements' hideNavBar={false} component={Acknowledge}></Scene>
+    <Scene key='drList' title='Dietary Restrictions' hideNavBar={false} component={DRList}></Scene>
 
   </Scene>
 )

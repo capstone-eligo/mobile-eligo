@@ -33,7 +33,7 @@ class Profiles extends React.Component {
                         key={"my profile"}
                         title={profile.users[0].first + ' ' + profile.users[0].last}
                         onLongPress={() => {console.log('long press')}}
-                        onPress={() => Actions.editProfile()}/>
+                        onPress={() => Actions.editProfile({userIndex: 0})}/>
                 </List>
 
                 <Text style={styles.profileHeaders}>My members</Text>
@@ -44,23 +44,24 @@ class Profiles extends React.Component {
                         marginTop: 0
                     }}>
                         {profile.users.map((m, i) => {
-                            if (i != 0) {
+                            if (i != 0 && profile.users[i]) {
                                 return (<ListItem
                                     roundAvatar
                                     avatar={{uri: "https://c1.staticflickr.com/9/8654/16609336835_4d3c09b4a8_b.jpg"}}
                                     key={i}
                                     title={m.first + " " + m.last}
                                     onLongPress={() => {console.log('long press')}}
-                                    onPress={() => {console.log('regular press')}}/>
+                                    onPress={() => Actions.editProfile({userIndex: i})}/>
                                 )
                             }
                         })}
+                        {/*TODO do an actions pop?*/}
                         <ListItem
-                            key={profile.users.length + 1}
+                            key={'addUserListItem'}
                             avatar={{uri: "https://c1.staticflickr.com/8/7128/8162953475_25501b86a9.jpg"}}
                             roundAvatar
                             title="Add new member"
-                            onPress={Actions.addUser}
+                            onPress={() => {Actions.addUser()}}
                         />
                     </List>
                 </ScrollView>
