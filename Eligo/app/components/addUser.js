@@ -74,7 +74,10 @@ class AddUser extends React.Component {
 
         // console.log(this.props.profile);
         this.props.fetchNewUser(newUser);
-        Actions.profiles();
+        setTimeout(() => {
+            Actions.pop();
+            Actions.profiles();
+        }, 250);
     }
 
     renderRightButton = () => {

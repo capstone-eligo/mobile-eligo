@@ -7,6 +7,9 @@ export const ACTION_TYPES = {
     ADD_NEW_USER: "ADD_NEW_USER",
     FETCH_NEW_USER: "FETCH_NEW_USER",
     FETCHED_NEW_USER: "FETCHED_NEW_USER",
+
+    DELETE_USER: "DELETE_USER",
+    FETCHED_DELETED_USER: "FETCHED_DELETED_USER",
 }
 
 export const addBarcode = (barcode) => {
@@ -44,7 +47,7 @@ export const fetchNewUser = (newUser) => {
         dispatch(addNewUser(newUser));
         return fetch('https://infinite-journey-83753.herokuapp.com/users',
             {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(newUser)})
-            .then(response => {console.log(response); return response.json()})
+            .then(response => {return response.json()})
             .then(json => dispatch(receivedNewUser(newUser, json)))
     }
 }
@@ -53,6 +56,30 @@ export const receivedNewUser = (newUser, json) => {
     return {
         type: 'FETCHED_NEW_USER',
         newUser: newUser,
+        account: json,
+        receivedAt: Date.now()
+    }
+}
+
+export const deleteUser = (dUser) => {
+    return { type: 'DELETE_USER', dUser };
+}
+
+export const fetchDeleteUser = (dUser) => {
+    return dispatch => {
+        console.log('here');
+        dispatch(deleteUser(dUser));
+        return fetch('https://infinite-journey-83753.herokuapp.com/deleteUser',
+            {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(dUser)})
+            .then(response => {console.log(response); return response.json()})
+            .then(json => dispatch(receivedDeletedUser(dUser, json)))
+    }
+}
+
+export const receivedDeletedUser = (dUser, json) => {
+    return {
+        type: 'FETCHED_DELETED_USER',
+        dUser: dUser,
         account: json,
         receivedAt: Date.now()
     }

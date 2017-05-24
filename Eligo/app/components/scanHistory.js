@@ -43,7 +43,6 @@ class ScanHistory extends React.Component {
 
                             const product = this.props.history[h];
                             const time = new Date(product.dateTime);
-                            console.log(time);
                             const timeString = `${time.getMonth() + 1}/${time.getDate()} - ${time.getHours()}:${(time.getMinutes()<10?'0':'') + time.getMinutes()}`;
                             return (
                                 <ListItem

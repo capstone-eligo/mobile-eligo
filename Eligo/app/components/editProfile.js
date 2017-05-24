@@ -3,10 +3,13 @@ import {View, ScrollView, Text, TextInput, TouchableOpacity, TouchableHighlight,
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {List, ListItem, Avatar, Grid, Row, Col, Button} from 'react-native-elements'
+import { ActionConst } from 'react-native-router-flux';
+
 
 import {
     fetchNewUser,
-    getProfile
+    getProfile,
+    fetchDeleteUser
 } from '../actions';
 
 import styles from '../styles'
@@ -17,7 +20,8 @@ mapStateToProps = (state) => ({
 
 mapDispatchToProps = (dispatch) => ({
     getProfile: (profileID) => { dispatch(getProfile(profileID)); },
-    fetchNewUser: (newUser) => { dispatch(fetchNewUser(newUser)); }
+    fetchNewUser: (newUser) => { dispatch(fetchNewUser(newUser)); },
+    fetchDeleteUser: (dUser) => { dispatch(fetchDeleteUser(dUser)); }
 });
 
 class DietaryRestriction extends React.Component {
@@ -78,8 +82,13 @@ class EditProfile extends React.Component {
             "dr": Object.keys(this.state.drs)
         };
 
+        // THIS IS THE CORRECT WAY TO NAVIGATE BACK TO LISTS - https://stackoverflow.com/questions/42429213
+
         this.props.fetchNewUser(newUser);
-        Actions.profiles();
+        setTimeout(() => {
+            Actions.pop();
+            Actions.profiles();
+        }, 250);
     }
 
     renderRightButton = () => {
@@ -124,6 +133,7 @@ class EditProfile extends React.Component {
             {name: "wheat", img: require("../img/wheat.png")}
         ];
 
+        console.log(this.props.userIndex);
         return (
             <View style={styles.editProfileContainer}>
                 <Grid>
@@ -171,25 +181,34 @@ class EditProfile extends React.Component {
 
                     </Row>
                 </Grid>
-
+                {/*TODO for some reason the button disappears after new user added*/}
                 {
-                    this.props.userIndex > 0 ?
+                    this.props.userIndex != 0 ?
                         <Button
                         title='DELETE USER'
                         backgroundColor="#EA4C2F"
                         onPress={() => {
-
                             AlertIOS.prompt(
                                 'Are you sure?',
                                 'Press ok to delete user',
                                 [
-                                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                                {text: 'OK', onPress: () => console.log('OK Pressed')},
+                                {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+                                {text: 'OK', onPress: () => {
+                                    var deleteData = {
+                                        "accountId": this.props.profile.accountId,
+                                        "subUserId": this.props.userIndex
+                                    };
+
+                                    this.props.fetchDeleteUser(deleteData);
+                                    setTimeout(() => {
+                                        Actions.pop();
+                                        Actions.profiles();
+                                    }, 250);
+                                }},
                                 ],
                                 'default'
                                 );
-                            }}/> :
-                        <Text></Text>
+                            }}/> : <Text>{this.props.userIndex}</Text>
                 }
 
             </View>

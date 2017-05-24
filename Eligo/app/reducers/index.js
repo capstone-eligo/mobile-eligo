@@ -51,6 +51,8 @@ const sceneReducer = (state = {}, {type, scene}) => {
     switch(type) {
         case ActionConst.FOCUS:
             return { ...state, scene };
+        case ActionConst.PUSH_OR_POP:
+            return state;
         default:
             return state;
     }
@@ -84,6 +86,10 @@ export const profileReducer = (state = {profile: mainProfile, accID: ""}, action
             profile.email = action.newEmail;
 
             return {...state, profile};
+
+        case ACTION_TYPES.FETCHED_DELETED_USER:
+            console.log(action);
+            return {...state, profile: action.account};
 
         default:
             return state;
