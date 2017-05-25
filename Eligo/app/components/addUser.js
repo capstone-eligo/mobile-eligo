@@ -65,7 +65,6 @@ class AddUser extends React.Component {
         const headerSectionSize = 20;
         const drSize = (100 - headerSectionSize) / 2;
 
-        console.log(this.props.profile);
         _changeProfileFirst = (t) => {
             this.setState({first: t});
         }

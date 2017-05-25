@@ -93,11 +93,10 @@ export const deleteUser = (dUser) => {
 
 export const fetchDeleteUser = (dUser) => {
     return dispatch => {
-        console.log('here');
         dispatch(deleteUser(dUser));
         return fetch(baseURL + 'deleteUser',
             {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(dUser)})
-            .then(response => {console.log(response); return response.json()})
+            .then(response => {return response.json()})
             .then(json => dispatch(receivedDeletedUser(dUser, json)))
     }
 }

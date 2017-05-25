@@ -25,7 +25,6 @@ class Settings extends React.Component {
     }
 
     _deleteProfile = () => {
-        console.log(this.props.profile);
         var data = {"accountId": this.props.profile.accountId};
 
         fetch('https://infinite-journey-83753.herokuapp.com/deleteAccount',
