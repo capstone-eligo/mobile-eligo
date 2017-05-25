@@ -81,7 +81,7 @@ class Login extends React.Component {
                 <TouchableHighlight
                     onPress={this.handleFacebookLogin}
                     style={{backgroundColor: "#3B5998", marginTop: 15, padding: 10, borderRadius:7, borderWidth: 1, borderColor: '#3B5998'}}>
-                    <Text style={{color:"#FFF"}}>Login with Facebook</Text>
+                    <Text style={{color:"#FFF", fontWeight: 'bold'}}>Login with Facebook</Text>
                 </TouchableHighlight>
 
                 <ActivityIndicator
