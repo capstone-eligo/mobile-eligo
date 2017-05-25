@@ -110,5 +110,4 @@ class Settings extends React.Component {
     }
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

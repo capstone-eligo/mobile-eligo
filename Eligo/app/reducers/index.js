@@ -93,7 +93,10 @@ export const profileReducer = (state = {profile: mainProfile, accID: ""}, action
             return {...state, profile};
 
         case ACTION_TYPES.FETCHED_DELETED_USER:
-            return {...state, profile: action.account};
+            var refreshed = Object.assign({}, action.account);
+            refreshed.accountId = profile.accountId;
+
+            return {...state, profile: refreshed};
 
         case ACTION_TYPES.CLEAR_PROFILE:
             return {...state, profile: mainProfile}
