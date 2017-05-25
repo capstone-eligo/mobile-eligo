@@ -19,13 +19,12 @@ export function loginReducer(state={login:{}, auth:{}}, action) {
 }
 
 // don't touch
-export function barcodeReducer(state={ barcodes: {history: []}, product:{} }, action) {
+export function barcodeReducer(state={ barcodes: {}, product:{} }, action) {
     const barcodes = { ...state.barcodes };
     var product = { ...state.product };
 
     switch(action.type) {
         case ACTION_TYPES.ADD_BARCODE:
-            barcodes.history.push(action.barcode);
             barcodes.lastBarcode = action.barcode;
             return { ...state, barcodes };
         case ACTION_TYPES.FETCHED_BARCODE:
@@ -71,8 +70,13 @@ export const profileReducer = (state = {profile: mainProfile, accID: ""}, action
         case ACTION_TYPES.GET_PROFILE:
             return state;
 
+        case ACTION_TYPES.FETCHED_HISTORY:
+            var refreshed = Object.assign({}, profile);
+            refreshed.history = action.history;
+
+            return {...state, profile: refreshed}
+
         case ACTION_TYPES.FETCHED_NEW_USER:
-            console.log(action);
             var refreshed = Object.assign({}, action.account);
             refreshed.accountId = profile.accountId;
 
@@ -88,7 +92,10 @@ export const profileReducer = (state = {profile: mainProfile, accID: ""}, action
             return {...state, profile};
 
         case ACTION_TYPES.FETCHED_DELETED_USER:
-            return {...state, profile: action.account};
+            var refreshed = Object.assign({}, action.account);
+            refreshed.accountId = profile.accountId;
+
+            return {...state, profile: refreshed};
 
         case ACTION_TYPES.CLEAR_PROFILE:
             return {...state, profile: mainProfile}

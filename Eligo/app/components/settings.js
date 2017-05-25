@@ -25,7 +25,6 @@ class Settings extends React.Component {
     }
 
     _deleteProfile = () => {
-        console.log(this.props.profile);
         var data = {"accountId": this.props.profile.accountId};
 
         fetch('https://infinite-journey-83753.herokuapp.com/deleteAccount',
@@ -78,7 +77,7 @@ class Settings extends React.Component {
                         <ListItem
                             key={'delete_user'}
                             title="Delete user"
-                            leftIcon={{name: 'local-dining'}}
+                            leftIcon={{name: 'cancel'}}
                             onPress={() => {AlertIOS.prompt(
                                 'Are you sure? :(',
                                 'Press ok to delete account',
@@ -109,6 +108,5 @@ class Settings extends React.Component {
         );
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

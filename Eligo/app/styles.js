@@ -112,7 +112,7 @@ export default StyleSheet.create({
     loginLogo: {
         width: 2689 / 10,
         height: 1704 / 10,
-        marginBottom: 30,
+        marginBottom: 35,
     },
     preview: {
         flex: 1,

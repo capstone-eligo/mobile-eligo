@@ -28,8 +28,9 @@ class Scanner extends React.Component {
     }
 
     showHistory = function() {
-        if (this.props.history) {
-            Actions.history({history: this.props.profile.history,
+        if (this.props.profile.history) {
+            Actions.history({
+                history: this.props.profile.history,
                 parseBarcode: this.props.fetchBarcode,
                 accountId: this.props.profile.accountId
                 });

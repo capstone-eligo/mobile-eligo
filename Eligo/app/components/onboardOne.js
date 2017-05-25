@@ -78,6 +78,14 @@ export default class OnboardOne extends React.Component {
                         title='Create your profile now!'
                         onPress={() => {Actions.addUser({initialSetup: true})}}/>
                 </ScrollView>
+
+                <View style={{marginBottom: 10, marginLeft: 10, marginRight: 10}}>
+                    <Text style={{fontSize:12, color: '#fff', textAlign: 'center'}}>
+                        By creating an account, you agree to our
+                        <Text style={{color: '#A9DBD7'}} onPress={() => {Actions.terms()}}> Terms and Agreements</Text> and
+                        <Text style={{color: '#A9DBD7'}} onPress={() => {Actions.privacy()}}> Privacy policy</Text>
+                    </Text>
+                </View>
             </View>
       );
     }
