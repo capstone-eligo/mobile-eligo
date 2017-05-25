@@ -16,6 +16,10 @@ mapDispatchToProps = (dispatch) => ({
 });
 
 class Profiles extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         const { profile } = this.props;
 
@@ -29,7 +33,7 @@ class Profiles extends React.Component {
                 }}>
                     <ListItem
                         roundAvatar
-                        avatar={{uri: "https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg"}}
+                        leftIcon={{name: 'person'}}
                         key={"my profile"}
                         title={profile.users[0].first + ' ' + profile.users[0].last}
                         onLongPress={() => {console.log('long press')}}
@@ -46,8 +50,7 @@ class Profiles extends React.Component {
                         {profile.users.map((m, i) => {
                             if (i != 0 && profile.users[i]) {
                                 return (<ListItem
-                                    roundAvatar
-                                    avatar={{uri: "https://c1.staticflickr.com/9/8654/16609336835_4d3c09b4a8_b.jpg"}}
+                                    leftIcon={{name: 'person'}}
                                     key={i}
                                     title={m.first + " " + m.last}
                                     onLongPress={() => {console.log('long press')}}
@@ -57,8 +60,7 @@ class Profiles extends React.Component {
                         })}
                         <ListItem
                             key={'addUserListItem'}
-                            avatar={{uri: "https://c1.staticflickr.com/8/7128/8162953475_25501b86a9.jpg"}}
-                            roundAvatar
+                            leftIcon={{name: 'person-add'}}
                             title="Add new member"
                             onPress={() => {Actions.addUser()}}
                         />

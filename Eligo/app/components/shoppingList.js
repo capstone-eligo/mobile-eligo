@@ -3,7 +3,6 @@ import { View, Text, TextInput, TouchableHighlight, ScrollView, Component } from
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import {CheckBox, Button} from 'react-native-elements'
-//import CheckBox from 'react-native-icon-checkbox';
 
 import styles from '../styles'
 
@@ -22,47 +21,46 @@ class ShoppingList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isChecked: false,
+            checked: false,
         };
     }
 
-    handlePressCheckedBox = (checked) => {
-        this.setState({
-            isChecked: checked,
-        });
+    _toggleItem = () => {
+        this.setState({checked: !this.state.checked});
     }
 
     render() {
         const { barcodes } = this.props;
+
+        const textStyling = {fontWeight: 'normal'};
         return(
             <ScrollView automaticallyAdjustContentInsets={false}>
                 <View style={styles.container}>
                     <CheckBox
-                       // center
                         left
                         title='Waffles'
+                        textStyle={textStyling}
                         checkedIcon='check-square-o'
                         uncheckedIcon='square-o'
-                        //onIconPress={() => {console.log("i was pressed")}}
-                        checked={this.state.isChecked}
-                        onIconPress={this.handlePressCheckedBox}
-
+                        checked={this.state.checked}
+                        onPress={() => {this._toggleItem()}}
+                        onIconPress={() => {this._toggleItem()}}
                     />
 
                     <CheckBox
-//center
                         left
                         title='Spicy cheetos'
+                        textStyle={textStyling}
                         checkedIcon='check-square-o'
                         uncheckedIcon='square-o'
                         onIconPress={() => {console.log("i was pressed")}}
                         checked={false}
                     />
 
-                  <CheckBox
-                      //  center
+                    <CheckBox
                         left
                         title='Bananas'
+                        textStyle={textStyling}
                         checkedIcon='check-square-o'
                         uncheckedIcon='square-o'
                         onIconPress={() => {console.log("i was pressed")}}
@@ -70,9 +68,9 @@ class ShoppingList extends React.Component {
                     />
 
                     <Button
-                        raised
-                        icon={{name: 'cached'}}
-                        title='Add Item' />
+                        icon={{name: 'add'}}
+                        buttonStyle={{backgroundColor: '#B1D25E'}}
+                        title='Add' />
                 </View>
             </ScrollView>
             );

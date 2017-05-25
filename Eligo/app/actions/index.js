@@ -1,6 +1,8 @@
 export const ACTION_TYPES = {
     ADD_BARCODE: 'ADD_BARCODE',
     FETCHED_BARCODE: 'FETCHED_BARCODE',
+    FETCHED_HISTORY: 'FETCHED_HISTORY',
+
     SET_ACCOUNT: 'SET_ACCOUNT',
     GET_PROFILE: "GET_PROFILE",
 
@@ -25,7 +27,10 @@ export const fetchBarcode = (barcode, accountId) => {
         dispatch(addBarcode(barcode))
         return fetch(baseURL + 'upc/' + barcode + "?" + "accountId=" + accountId)
             .then(response => response.json())
-            .then(json => dispatch(receivedBarcode(barcode, json)))
+            .then(json => {
+                dispatch(receivedBarcode(barcode, json));
+                dispatch(updateHistory(accountId));
+            })
     }
 }
 
@@ -34,6 +39,23 @@ export const receivedBarcode = (barcode, json) => {
         type: 'FETCHED_BARCODE',
         barcode,
         product: json,
+        receivedAt: Date.now()
+    }
+}
+
+export const updateHistory = (accountId) => {
+    return dispatch => {
+        return fetch(baseURL + 'history',
+            {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify({'accountId': accountId})})
+            .then(response => response.json())
+            .then(json => dispatch(receivedHistory(json)))
+    }
+}
+
+export const receivedHistory = (json) => {
+    return {
+        type: "FETCHED_HISTORY",
+        history: json,
         receivedAt: Date.now()
     }
 }

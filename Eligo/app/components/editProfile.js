@@ -103,7 +103,6 @@ class EditProfile extends React.Component {
             {name: "wheat", img: require("../img/wheat.png")}
         ];
 
-        console.log(this.props.userIndex);
         return (
             <View style={styles.editProfileContainer}>
                 <Grid>
