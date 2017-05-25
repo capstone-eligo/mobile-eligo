@@ -71,11 +71,9 @@ export const profileReducer = (state = {profile: mainProfile, accID: ""}, action
             return state;
 
         case ACTION_TYPES.FETCHED_HISTORY:
-            console.log(action);
             var refreshed = Object.assign({}, profile);
             refreshed.history = action.history;
 
-            console.log(refreshed);
             return {...state, profile: refreshed}
 
         case ACTION_TYPES.FETCHED_NEW_USER:
