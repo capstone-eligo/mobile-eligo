@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {List, ListItem, Avatar, Grid, Row, Col, Card, Divider} from 'react-native-elements'
 import DietaryRestriction from './dietaryRestriction';
-import {ProfilePlaceholder} from '../img/profile_64';
 
 import {
     fetchNewUser,
