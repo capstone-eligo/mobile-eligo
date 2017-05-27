@@ -34,7 +34,12 @@ class EditProfile extends React.Component {
         selectedUser.dr.forEach((d) => {
             drs[d] = true;
         });
-        this.state = {first: selectedUser.first, last: selectedUser.last, drs: drs};
+        this.state = {
+            first: selectedUser.first,
+            last: selectedUser.last,
+            drs: drs,
+            pic: selectedUser.image
+        };
     }
 
     componentDidMount() {
@@ -49,7 +54,8 @@ class EditProfile extends React.Component {
             "subUserId": this.props.userIndex,
             "first": this.state.first,
             "last": this.state.last,
-            "dr": Object.keys(this.state.drs)
+            "dr": Object.keys(this.state.drs),
+            "image": this.state.pic
         };
 
         // THIS IS THE CORRECT WAY TO NAVIGATE BACK TO LISTS - https://stackoverflow.com/questions/42429213
@@ -67,6 +73,35 @@ class EditProfile extends React.Component {
                 <Text style={styles.rightButton}>Save</Text>
             </TouchableHighlight>
         );
+    }
+
+    openImagePicker = () => {
+        var ImagePicker = require('react-native-image-picker');
+
+        var options = {
+            title: 'Select Avatar',
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            },
+            quality: 0,
+            allowsEditing: true,
+        };
+
+        ImagePicker.launchImageLibrary(options, (response) => {
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                // let source = { uri: response.uri };
+
+                let source = 'data:image/jpeg;base64,' + response.data;
+                this.setState({pic: source})
+            }
+        });
     }
 
     render() {
@@ -111,8 +146,9 @@ class EditProfile extends React.Component {
                             <Avatar
                                 large
                                 rounded
-                                source={{uri: "https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg"}}
-                                onPress={(text) => console.log('test')}
+                                title={this.state.first.substring(0, 1) + this.state.last.substring(0, 1)}
+                                source={this.state.pic && this.state.pic != "no image" ? {uri: this.state.pic} : null}
+                                onPress={this.openImagePicker}
                                 activeOpacity={0.7}
                             />
                         </Col>

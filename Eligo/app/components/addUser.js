@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {List, ListItem, Avatar, Grid, Row, Col, Card, Divider} from 'react-native-elements'
 import DietaryRestriction from './dietaryRestriction';
+import {ProfilePlaceholder} from '../img/profile_64';
 
 import {
     fetchNewUser,
@@ -25,7 +26,11 @@ class AddUser extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {first: '', last: '', drs: {}}
+        this.state = {
+            first: '',
+            last: '',
+            drs: {},
+            pic: 'no image'}
     }
 
     componentDidMount() {
@@ -33,13 +38,14 @@ class AddUser extends React.Component {
     }
 
     processNewUser = function() {
-        // Takes JSON object with “accountId”, “subUserId”, “first”, “last”, and “dr”
+        // Takes JSON object with “accountId”, “subUserId”, “first”, “last”, "dr", and "image"
         var newUser = {
             "accountId": this.props.profile.accountId,
             "subUserId": this.props.profile.users ? this.props.profile.users.length : 0,
             "first": this.state.first,
             "last": this.state.last,
-            "dr": Object.keys(this.state.drs)
+            "dr": Object.keys(this.state.drs),
+            "image": this.state.pic
         };
 
         this.props.fetchNewUser(newUser);
@@ -59,6 +65,35 @@ class AddUser extends React.Component {
                 <Text style={styles.rightButton}>Add</Text>
             </TouchableHighlight>
         );
+    }
+
+    openImagePicker = () => {
+        var ImagePicker = require('react-native-image-picker');
+
+        var options = {
+            title: 'Select Avatar',
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            },
+            quality: 0,
+            allowsEditing: true,
+        };
+
+        ImagePicker.launchImageLibrary(options, (response) => {
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                // let source = { uri: response.uri };
+
+                let source = 'data:image/jpeg;base64,' + response.data;
+                this.setState({pic: source})
+            }
+        });
     }
 
     render() {
@@ -106,8 +141,9 @@ class AddUser extends React.Component {
                             <Avatar
                                 large
                                 rounded
-                                source={{uri: "https://c1.staticflickr.com/9/8598/16590802906_95dd43fa9a.jpg"}}
-                                onPress={(text) => console.log('test')}
+                                title={this.state.first.substring(0, 1) + this.state.last.substring(0, 1)}
+                                source={this.state.pic != "no image" ? {uri: this.state.pic} : null}
+                                onPress={this.openImagePicker}
                                 activeOpacity={0.7}
                             />
                         </Col>

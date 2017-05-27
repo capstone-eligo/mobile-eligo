@@ -7,7 +7,7 @@ import {
     Image,
     Button,
     StatusBar,
-    ActivityIndicator
+    ActivityIndicator,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';

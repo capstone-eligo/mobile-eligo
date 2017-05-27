@@ -12,6 +12,7 @@
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-elements": "^0.10.3",
     "react-native-fbsdk": "^0.5.0",
+    "react-native-image-picker": "^0.26.3",
     "react-native-router-flux": "^3.38.0",
     "react-native-vector-icons": "^4.0.0",
     "react-navigation": "https://github.com/react-community/react-navigation/tarball/master",
