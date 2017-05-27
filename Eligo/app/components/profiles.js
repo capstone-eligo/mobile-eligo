@@ -22,8 +22,6 @@ class Profiles extends React.Component {
 
     render() {
         const { profile } = this.props;
-        console.log(profile.users[0])
-
 
         if (profile.users) {
             return (
