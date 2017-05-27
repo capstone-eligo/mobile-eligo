@@ -40,8 +40,6 @@ class Results extends React.Component {
     }
 
     productLoaded() {
-        console.log(this.props.product);
-
         const headerSectionSize = 20;
 
         const { barcodes, product, profile } = this.props;

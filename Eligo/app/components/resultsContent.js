@@ -1,12 +1,56 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import {Card, Avatar, List, ListItem, Badge, Row, Col, Divider} from 'react-native-elements'
+import {Card, Avatar, List, ListItem, Row, Col, Divider} from 'react-native-elements'
 
 import styles from '../styles'
 
 export default class ResultsContent extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    parseRestrictions(restrictions, profile) {
+        var restrictionsMapped = {};
+        restrictions = restrictions.split("***")
+
+        if (restrictions[0] == "") {
+        restrictions.shift()
+        }
+
+        restrictions.map(function(r, i) {
+            var item = r.split("$");
+            var user = {
+                idx: item[0],
+                firstName: item[1],
+                lastName: item[2],
+                dr: item[3],
+                drIng: item[4],
+                foodIng: item[5]
+            }
+
+            if (!restrictionsMapped[user.idx]) {
+                restrictionsMapped[user.idx] = {alerts:{}};
+                restrictionsMapped[user.idx].firstName = user.firstName;
+                restrictionsMapped[user.idx].lastName = user.lastName;
+            }
+
+            if (!restrictionsMapped[user.idx].alerts[user.foodIng]) {
+                restrictionsMapped[user.idx].alerts[user.foodIng] = new Set();
+            }
+
+            restrictionsMapped[user.idx].alerts[user.foodIng].add(user.dr);
+        });
+
+        profile.users.forEach((u, i) => {
+            if (u && !restrictionsMapped[i]) {
+                restrictionsMapped[i] = {
+                    firstName: u.first,
+                    lastName: u.last,
+                };
+            }
+        });
+
+        return restrictionsMapped;
     }
 
     renderResultsContent() {
@@ -16,50 +60,13 @@ export default class ResultsContent extends React.Component {
         var restrictionsMapped = {};
 
         if (restrictions) {
-            restrictions = restrictions.split("***")
-
-            if (restrictions[0] == "") {
-            restrictions.shift()
-            }
-
-            restrictions.map(function(r, i) {
-                var item = r.split("$");
-                var user = {
-                    idx: item[0],
-                    firstName: item[1],
-                    lastName: item[2],
-                    dr: item[3],
-                    drIng: item[4],
-                    foodIng: item[5]
-                }
-
-                if (!restrictionsMapped[user.idx]) {
-                    restrictionsMapped[user.idx] = {alerts:{}};
-                    restrictionsMapped[user.idx].firstName = user.firstName;
-                    restrictionsMapped[user.idx].lastName = user.lastName;
-                }
-
-                if (!restrictionsMapped[user.idx].alerts[user.foodIng]) {
-                    restrictionsMapped[user.idx].alerts[user.foodIng] = new Set();
-                }
-
-                restrictionsMapped[user.idx].alerts[user.foodIng].add(user.dr);
-            });
-
-            profile.users.forEach((u, i) => {
-                if (u && !restrictionsMapped[i]) {
-                    restrictionsMapped[i] = {
-                        firstName: u.first,
-                        lastName: u.last,
-                    };
-                }
-            });
-
+            restrictionsMapped = this.parseRestrictions(restrictions, profile)
         }
 
         const cardDividerStyle = {height: 0}
         const cardTitleStyle = {textAlign: 'left', marginBottom: 0}
-        const cardContainerStyle = {backgroundColor: '#F9F9F9'}
+        const cardContainerStyle = {backgroundColor: '#F9F9F9', borderWidth: 0, shadowRadius: 0, shadowColor: '#44B8AE'}
+
 
         // ***[user#]:[user's dietary restriction]:[restriction's ingredient]:[ingredient in the scanned food]***
         return(
@@ -185,9 +192,45 @@ export default class ResultsContent extends React.Component {
     }
 
     renderCompareContent() {
+        var restrictions = this.props.product.Restrictions;
+        var profile = this.props.profile;
+
+        var restrictionsMapped = {};
+
+        if (restrictions) {
+            restrictionsMapped = this.parseRestrictions(restrictions, profile)
+        }
+
         return(
-            <ScrollView>
-                <Card title="Work in progress"></Card>
+            <ScrollView style={{margin: 15}}>
+                <Row>
+                    <Col size={50}>
+                    <Text>{this.props.product.item_name}</Text>
+                    {
+                        Object.keys(restrictionsMapped).map((d,i) => (
+                            <View key={i}>
+                                <Text>{restrictionsMapped[d].firstName + " " + restrictionsMapped[d].lastName}</Text>
+                                { restrictionsMapped[d].alerts ?
+                                    <View>
+                                        <Text style={{color: '#EA4C2F', fontWeight: 'bold'}}>
+                                            {Object.keys(restrictionsMapped[d].alerts).length} potential ingredients
+                                        </Text>
+
+                                        {Object.keys(restrictionsMapped[d].alerts).map((e, i) => (
+                                            <Text key={i}>{'- ' + e} ({Array.from(restrictionsMapped[d].alerts[e])})</Text>
+                                        ))}
+                                    </View>
+
+                                    : <Text style={{color: '#44B8AE', fontWeight: 'bold'}}>0</Text>
+                                }
+                            </View>
+                        ))
+                    }
+                    </Col>
+                    <Col size={50}>
+                        <Text>Tap to select item from history</Text>
+                    </Col>
+                </Row>
             </ScrollView>
         )
     }
