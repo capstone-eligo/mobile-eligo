@@ -14,6 +14,8 @@ export const ACTION_TYPES = {
     FETCHED_DELETED_USER: "FETCHED_DELETED_USER",
 
     CLEAR_PROFILE: "CLEAR_PROFILE",
+
+    FETCHED_SHOPPING_LIST: "FETCHED_SHOPPING_LIST",
 }
 
 const baseURL = 'https://infinite-journey-83753.herokuapp.com/';
@@ -60,6 +62,8 @@ export const receivedHistory = (json) => {
         receivedAt: Date.now()
     }
 }
+
+/* profile */
 
 export const setAccount = (acc) => {
     return { type: 'SET_ACCOUNT', acc };
@@ -117,4 +121,22 @@ export const getProfile = (profileID) => {
 
 export const clearProfile = () => {
     return { type: 'CLEAR_PROFILE' };
+}
+
+/* shopping list */
+export const updateShoppingList = (accountId, shopList) => {
+    var updatedShop = {"accountId": accountId, "list": shopList};
+    return dispatch => {
+        return fetch(baseURL + 'list',
+            {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(updatedShop)})
+            .then(response => dispatch(receivedShoppingList(shopList)))
+    }
+}
+
+export const receivedShoppingList = (shopList) => {
+    return {
+        type: 'FETCHED_SHOPPING_LIST',
+        shopList: shopList,
+        receivedAt: Date.now()
+    }
 }

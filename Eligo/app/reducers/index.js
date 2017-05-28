@@ -40,15 +40,6 @@ export function barcodeReducer(state={ barcodes: {}, product:{}, compare:{} }, a
     }
 };
 
-// can touch
-export function shoppingReducer(state={ count: {} }, action) {
-    const count = { ...state.count };
-    switch(action.type) {
-        default:
-            return state;
-    }
-};
-
 // don't touch
 const sceneReducer = (state = {}, {type, scene}) => {
     switch(type) {
@@ -63,8 +54,8 @@ const sceneReducer = (state = {}, {type, scene}) => {
 
 // const mainProfile = {"auth":"80833","users":[{"dr":["fish"],"first":"Mike","last":"Wleklinski"},{"dr":["wheat"],"first":"Nick","last":"Monfeli"},{"dr":["dairy","wheat"],"first":"Jordan","last":"Spina"}],"accountId":"tinyMikeHands"};
 const mainProfile = {};
-
-export const profileReducer = (state = {profile: mainProfile, accID: ""}, action) => {
+const testList = {"oatmeal": false, "cheerios": false};
+export const profileReducer = (state = {profile: mainProfile}, action) => {
     var profile = { ...state.profile };
 
     switch(action.type) {
@@ -102,7 +93,14 @@ export const profileReducer = (state = {profile: mainProfile, accID: ""}, action
             return {...state, profile: refreshed};
 
         case ACTION_TYPES.CLEAR_PROFILE:
-            return {...state, profile: mainProfile}
+            return {...state, profile: mainProfile};
+
+        case ACTION_TYPES.FETCHED_SHOPPING_LIST:
+            console.log(action);
+            var refreshed = Object.assign({}, profile);
+            refreshed.list = action.shopList;
+
+            return {...state, profile: refreshed};
 
         default:
             return state;
@@ -112,6 +110,5 @@ export const profileReducer = (state = {profile: mainProfile, accID: ""}, action
 export const appReducer = combineReducers({
     sceneReducer,
     barcodeReducer,
-    shoppingReducer,
     profileReducer,
 });
