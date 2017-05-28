@@ -30,10 +30,8 @@ export function barcodeReducer(state={ barcodes: {}, product:{}, compare:{} }, a
         case ACTION_TYPES.FETCHED_BARCODE:
             if (action.comp) {
                 var compare = action.product;
-                console.log(compare);
                 return { ...state, compare };
             } else {
-                console.log(action);
                 var product = action.product;
                 return { ...state, ...{product: product, compare: {}} };
             }

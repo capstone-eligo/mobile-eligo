@@ -50,7 +50,7 @@ class Login extends React.Component {
 
                         fetch('https://infinite-journey-83753.herokuapp.com/login',
                             {method:"POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(login)})
-                            .then(response => {console.log(response); return response.json()})
+                            .then(response => {return response.json()})
                             .then(json => {
                                 json.accountId = login.accountId;
                                 this.props.setAccount(json);

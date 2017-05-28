@@ -21,13 +21,6 @@ class ScanHistory extends React.Component {
     }
 
     render() {
-        // Object.keys(this.props.history).forEach((h, i) => {
-        //     let product = this.props.history[h];
-
-        //     let date = new Date(product.dateTime);
-        //     console.log(date);
-        // });
-
         const revHistory = Object.keys(this.props.history).reverse();
 
         return(

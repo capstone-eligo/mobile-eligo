@@ -88,9 +88,7 @@ class Scanner extends React.Component {
 
                 {!this.state.showCamera &&
                 <View style={styles.showCameraContainer}>
-                    <TouchableOpacity onPress={scanAgain}>
-                        <Text>Scan another</Text>
-                    </TouchableOpacity>
+                    <Button title="Scan another" backgroundColor="#44B8AE" onPress={scanAgain}/>
                 </View>
                 }
             </View>
