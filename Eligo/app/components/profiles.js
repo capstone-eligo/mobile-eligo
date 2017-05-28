@@ -35,7 +35,7 @@ class Profiles extends React.Component {
                     }}>
                         <ListItem
                             roundAvatar
-                            leftIcon={{name: 'person'}}
+                            avatar={profile.users[0].image && profile.users[0].image != 'no image' ? {uri: profile.users[0].image} : require('../img/profile.png')}
                             key={"my profile"}
                             title={profile.users[0].first + ' ' + profile.users[0].last}
                             onLongPress={() => {console.log('long press')}}
@@ -52,7 +52,8 @@ class Profiles extends React.Component {
                             {profile.users.map((m, i) => {
                                 if (i != 0 && profile.users[i]) {
                                     return (<ListItem
-                                        leftIcon={{name: 'person'}}
+                                        roundAvatar
+                                        avatar={m.image && m.image != 'no image' ? {uri: m.image} : require('../img/profile.png')}
                                         key={i}
                                         title={m.first + " " + m.last}
                                         onLongPress={() => {console.log('long press')}}
@@ -63,7 +64,7 @@ class Profiles extends React.Component {
                             <ListItem
                                 key={'addUserListItem'}
                                 leftIcon={{name: 'person-add'}}
-                                title="Add new member"
+                                title=" Add new member"
                                 onPress={() => {Actions.addUser()}}
                             />
                         </List>

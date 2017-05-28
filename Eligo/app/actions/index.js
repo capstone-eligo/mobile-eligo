@@ -22,22 +22,23 @@ export const addBarcode = (barcode) => {
     return { type: 'ADD_BARCODE', barcode };
 }
 
-export const fetchBarcode = (barcode, accountId) => {
+export const fetchBarcode = (barcode, accountId, comp=false) => {
     return dispatch => {
         dispatch(addBarcode(barcode))
         return fetch(baseURL + 'upc/' + barcode + "?" + "accountId=" + accountId)
             .then(response => response.json())
             .then(json => {
-                dispatch(receivedBarcode(barcode, json));
+                dispatch(receivedBarcode(barcode, json, comp));
                 dispatch(updateHistory(accountId));
             })
     }
 }
 
-export const receivedBarcode = (barcode, json) => {
+export const receivedBarcode = (barcode, json, comp) => {
     return {
         type: 'FETCHED_BARCODE',
         barcode,
+        comp: comp,
         product: json,
         receivedAt: Date.now()
     }

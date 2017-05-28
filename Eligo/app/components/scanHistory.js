@@ -21,13 +21,6 @@ class ScanHistory extends React.Component {
     }
 
     render() {
-        // Object.keys(this.props.history).forEach((h, i) => {
-        //     let product = this.props.history[h];
-
-        //     let date = new Date(product.dateTime);
-        //     console.log(date);
-        // });
-
         const revHistory = Object.keys(this.props.history).reverse();
 
         return(
@@ -50,8 +43,14 @@ class ScanHistory extends React.Component {
                                     title={product.name}
                                     subtitle={timeString}
                                     onPress={() => {
-                                        this.props.parseBarcode(product.upc, this.props.accountId);
-                                        Actions.results();
+                                        this.props.parseBarcode(product.upc, this.props.accountId, this.props.compare ? true : false);
+
+                                        if (this.props.compare) {
+                                            {/*Actions.results({moveToTab: 3});*/}
+                                            Actions.pop();
+                                        } else {
+                                            Actions.results();
+                                        }
                                     }}/>
                             )
                         })}

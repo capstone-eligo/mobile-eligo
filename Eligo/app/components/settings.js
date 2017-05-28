@@ -75,8 +75,8 @@ class Settings extends React.Component {
                         marginTop: 0
                     }}>
                         <ListItem
-                            key={'delete_user'}
-                            title="Delete user"
+                            key={'delete_account'}
+                            title="Delete account"
                             leftIcon={{name: 'cancel'}}
                             onPress={() => {AlertIOS.prompt(
                                 'Are you sure? :(',
@@ -101,7 +101,10 @@ class Settings extends React.Component {
                             key={'logout_item'}
                             title="Logout"
                             leftIcon={{name: 'exit-to-app'}}
-                            onPress={() => {LoginManager.logOut(); Actions.login()}}/>
+                            onPress={() => {
+                                LoginManager.logOut();
+                                setTimeout(() => {Actions.pop(); Actions.login({type: "reset"});}, 250);
+                                }}/>
                     </List>
                 </ScrollView>
             </View>

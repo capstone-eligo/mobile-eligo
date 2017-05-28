@@ -1,12 +1,61 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import {Card, Avatar, List, ListItem, Badge, Row, Col, Divider} from 'react-native-elements'
+import { Actions } from 'react-native-router-flux';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import {Card, Avatar, List, ListItem, Row, Col, Divider, Button} from 'react-native-elements';
+import CompareColumn from './compareColumn';
 
 import styles from '../styles'
+
 
 export default class ResultsContent extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {loading: false};
+    }
+
+    parseRestrictions(restrictions, profile) {
+        var restrictionsMapped = {};
+        restrictions = restrictions.split("***")
+
+        if (restrictions[0] == "") {
+        restrictions.shift()
+        }
+
+        restrictions.map(function(r, i) {
+            var item = r.split("$");
+            var user = {
+                idx: item[0],
+                firstName: item[1],
+                lastName: item[2],
+                dr: item[3],
+                drIng: item[4],
+                foodIng: item[5]
+            }
+
+            if (!restrictionsMapped[user.idx]) {
+                restrictionsMapped[user.idx] = {alerts:{}};
+                restrictionsMapped[user.idx].firstName = user.firstName;
+                restrictionsMapped[user.idx].lastName = user.lastName;
+            }
+
+            if (!restrictionsMapped[user.idx].alerts[user.foodIng]) {
+                restrictionsMapped[user.idx].alerts[user.foodIng] = new Set();
+            }
+
+            restrictionsMapped[user.idx].alerts[user.foodIng].add(user.dr);
+        });
+
+        profile.users.forEach((u, i) => {
+            if (u && !restrictionsMapped[i]) {
+                restrictionsMapped[i] = {
+                    firstName: u.first,
+                    lastName: u.last,
+                };
+            }
+        });
+
+        return restrictionsMapped;
     }
 
     renderResultsContent() {
@@ -16,50 +65,13 @@ export default class ResultsContent extends React.Component {
         var restrictionsMapped = {};
 
         if (restrictions) {
-            restrictions = restrictions.split("***")
-
-            if (restrictions[0] == "") {
-            restrictions.shift()
-            }
-
-            restrictions.map(function(r, i) {
-                var item = r.split("$");
-                var user = {
-                    idx: item[0],
-                    firstName: item[1],
-                    lastName: item[2],
-                    dr: item[3],
-                    drIng: item[4],
-                    foodIng: item[5]
-                }
-
-                if (!restrictionsMapped[user.idx]) {
-                    restrictionsMapped[user.idx] = {alerts:{}};
-                    restrictionsMapped[user.idx].firstName = user.firstName;
-                    restrictionsMapped[user.idx].lastName = user.lastName;
-                }
-
-                if (!restrictionsMapped[user.idx].alerts[user.foodIng]) {
-                    restrictionsMapped[user.idx].alerts[user.foodIng] = new Set();
-                }
-
-                restrictionsMapped[user.idx].alerts[user.foodIng].add(user.dr);
-            });
-
-            profile.users.forEach((u, i) => {
-                if (u && !restrictionsMapped[i]) {
-                    restrictionsMapped[i] = {
-                        firstName: u.first,
-                        lastName: u.last,
-                    };
-                }
-            });
-
+            restrictionsMapped = this.parseRestrictions(restrictions, profile)
         }
 
         const cardDividerStyle = {height: 0}
         const cardTitleStyle = {textAlign: 'left', marginBottom: 0}
-        const cardContainerStyle = {backgroundColor: '#F9F9F9'}
+        const cardContainerStyle = {backgroundColor: '#F9F9F9', borderWidth: 0, shadowRadius: 0, shadowColor: '#F9F9F9'}
+
 
         // ***[user#]:[user's dietary restriction]:[restriction's ingredient]:[ingredient in the scanned food]***
         return(
@@ -184,11 +196,59 @@ export default class ResultsContent extends React.Component {
         )
     }
 
+    showHistory() {
+        if (this.props.profile.history) {
+            Actions.history({
+                history: this.props.profile.history,
+                parseBarcode: this.props.parseBarcode,
+                accountId: this.props.profile.accountId,
+                compare: true
+                });
+        } else {
+            AlertIOS.alert(
+                'No history'
+            );
+        }
+    }
+
     renderCompareContent() {
+        var restrictions = this.props.product.Restrictions;
+        var profile = this.props.profile;
+
+        var restrictionsMapped = {};
+
+        if (restrictions) {
+            restrictionsMapped = this.parseRestrictions(restrictions, profile)
+        }
+
+        if (Object.keys(this.props.compare).length != 0) {
+            var restrictionsMapped2 = this.parseRestrictions(this.props.compare.Restrictions, this.props.profile);
+        }
+
         return(
-            <ScrollView>
-                <Card title="Work in progress"></Card>
-            </ScrollView>
+            <Row>
+                <Col size={50}>
+                    <CompareColumn product={this.props.product} restrictionsMapped={restrictionsMapped}></CompareColumn>
+                </Col>
+                <Col size={50}>
+                    {restrictionsMapped2 ?
+                        <View>
+                            <CompareColumn product={this.props.product} restrictionsMapped={restrictionsMapped}></CompareColumn>
+                            <Button title='Select other product'
+                            fontSize={14}
+                            buttonStyle={{height:30}}
+                            backgroundColor="#F39662"
+                            onPress={() => this.showHistory()}/>
+                        </View>
+
+                    : <Button title='Select product'
+                        fontSize={14}
+                        buttonStyle={{height:30}}
+                        backgroundColor="#F39662"
+                        onPress={() => this.showHistory()}/>
+                    }
+                </Col>
+            </Row>
         )
     }
 
