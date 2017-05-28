@@ -57,7 +57,7 @@
     </dict>
     <key>NSCameraUsageDescription</key>
     <string>Eligo needs access to your camera in order to scan barcodes.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
+    <key>NSPhotoLibraryUsageDescription</key>
     <string>Eligo needs access to your photos in order for profile images.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string/>

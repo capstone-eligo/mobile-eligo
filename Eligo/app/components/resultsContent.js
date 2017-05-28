@@ -1,12 +1,17 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import {Card, Avatar, List, ListItem, Row, Col, Divider} from 'react-native-elements'
+import { Actions } from 'react-native-router-flux';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import {Card, Avatar, List, ListItem, Row, Col, Divider, Button} from 'react-native-elements';
+import CompareColumn from './compareColumn';
 
 import styles from '../styles'
+
 
 export default class ResultsContent extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {loading: false};
     }
 
     parseRestrictions(restrictions, profile) {
@@ -65,7 +70,7 @@ export default class ResultsContent extends React.Component {
 
         const cardDividerStyle = {height: 0}
         const cardTitleStyle = {textAlign: 'left', marginBottom: 0}
-        const cardContainerStyle = {backgroundColor: '#F9F9F9', borderWidth: 0, shadowRadius: 0, shadowColor: '#44B8AE'}
+        const cardContainerStyle = {backgroundColor: '#F9F9F9', borderWidth: 0, shadowRadius: 0, shadowColor: '#F9F9F9'}
 
 
         // ***[user#]:[user's dietary restriction]:[restriction's ingredient]:[ingredient in the scanned food]***
@@ -191,6 +196,21 @@ export default class ResultsContent extends React.Component {
         )
     }
 
+    showHistory() {
+        if (this.props.profile.history) {
+            Actions.history({
+                history: this.props.profile.history,
+                parseBarcode: this.props.parseBarcode,
+                accountId: this.props.profile.accountId,
+                compare: true
+                });
+        } else {
+            AlertIOS.alert(
+                'No history'
+            );
+        }
+    }
+
     renderCompareContent() {
         var restrictions = this.props.product.Restrictions;
         var profile = this.props.profile;
@@ -201,37 +221,34 @@ export default class ResultsContent extends React.Component {
             restrictionsMapped = this.parseRestrictions(restrictions, profile)
         }
 
+        if (Object.keys(this.props.compare).length != 0) {
+            var restrictionsMapped2 = this.parseRestrictions(this.props.compare.Restrictions, this.props.profile);
+        }
+
         return(
-            <ScrollView style={{margin: 15}}>
-                <Row>
-                    <Col size={50}>
-                    <Text>{this.props.product.item_name}</Text>
-                    {
-                        Object.keys(restrictionsMapped).map((d,i) => (
-                            <View key={i}>
-                                <Text>{restrictionsMapped[d].firstName + " " + restrictionsMapped[d].lastName}</Text>
-                                { restrictionsMapped[d].alerts ?
-                                    <View>
-                                        <Text style={{color: '#EA4C2F', fontWeight: 'bold'}}>
-                                            {Object.keys(restrictionsMapped[d].alerts).length} potential ingredients
-                                        </Text>
+            <Row>
+                <Col size={50}>
+                    <CompareColumn product={this.props.product} restrictionsMapped={restrictionsMapped}></CompareColumn>
+                </Col>
+                <Col size={50}>
+                    {restrictionsMapped2 ?
+                        <View>
+                            <CompareColumn product={this.props.product} restrictionsMapped={restrictionsMapped}></CompareColumn>
+                            <Button title='Select other product'
+                            fontSize={14}
+                            buttonStyle={{height:30}}
+                            backgroundColor="#F39662"
+                            onPress={() => this.showHistory()}/>
+                        </View>
 
-                                        {Object.keys(restrictionsMapped[d].alerts).map((e, i) => (
-                                            <Text key={i}>{'- ' + e} ({Array.from(restrictionsMapped[d].alerts[e])})</Text>
-                                        ))}
-                                    </View>
-
-                                    : <Text style={{color: '#44B8AE', fontWeight: 'bold'}}>0</Text>
-                                }
-                            </View>
-                        ))
+                    : <Button title='Select product'
+                        fontSize={14}
+                        buttonStyle={{height:30}}
+                        backgroundColor="#F39662"
+                        onPress={() => this.showHistory()}/>
                     }
-                    </Col>
-                    <Col size={50}>
-                        <Text>Tap to select item from history</Text>
-                    </Col>
-                </Row>
-            </ScrollView>
+                </Col>
+            </Row>
         )
     }
 

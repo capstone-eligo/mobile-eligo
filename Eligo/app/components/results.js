@@ -4,28 +4,28 @@ import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-el
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import ResultsContent from './resultsContent';
+import { fetchBarcode } from '../actions';
 
 import styles from '../styles'
 
 mapStateToProps = (state) => ({
     barcodes: state.barcodeReducer.barcodes,
     product: state.barcodeReducer.product,
+    compare: state.barcodeReducer.compare,
     profile: state.profileReducer.profile,
 });
 
 mapDispatchToProps = (dispatch) => ({
-    // addGroceryItem: (groceryItem) => {
-    //     dispatch(addToGroceryList(groceryItem));
-    // },
-    // addTodoItem: (todoItem) => {
-    //     dispatch(addToTodoList(todoItem));
-    // },
+    fetchBarcode: (barcode, accountId, comp) => {
+        dispatch(fetchBarcode(barcode, accountId, comp));
+    },
 });
+
 
 class Results extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {selectedTab: 0}
+        this.state = {selectedTab: this.props.moveToTab ? this.props.moveToTab : 0}
     }
 
     overlay() {
@@ -42,7 +42,7 @@ class Results extends React.Component {
     productLoaded() {
         const headerSectionSize = 20;
 
-        const { barcodes, product, profile } = this.props;
+        const { barcodes, product, compare, profile } = this.props;
         const buttons = ['Results', 'Nutrition', 'Ingredients', 'Compare'];
         var selectedTab = 0;
 
@@ -74,7 +74,6 @@ class Results extends React.Component {
                             onPress={(id) => this.setState({selectedTab: id})}
                             selectedIndex={this.state.selectedTab}
                             buttons={buttons}
-                            buttonStyle={{color:"#000"}}
                             selectedBackgroundColor='#C6DC7E'
                             textStyle={{color:"#000", fontWeight:"normal"}}
                             containerStyle={{height:30, backgroundColor:"#B1D25E"}}/>
@@ -84,7 +83,11 @@ class Results extends React.Component {
                     <Row size={2}></Row>
 
                     <Row size={63}>
-                        <ResultsContent selectedTab={this.state.selectedTab} product={product} profile={profile}/>
+                        <ResultsContent selectedTab={this.state.selectedTab}
+                            product={product}
+                            profile={profile}
+                            compare={compare}
+                            parseBarcode={this.props.fetchBarcode}/>
                     </Row>
                 </Grid>
 

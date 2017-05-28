@@ -19,7 +19,7 @@ export function loginReducer(state={login:{}, auth:{}}, action) {
 }
 
 // don't touch
-export function barcodeReducer(state={ barcodes: {}, product:{} }, action) {
+export function barcodeReducer(state={ barcodes: {}, product:{}, compare:{} }, action) {
     const barcodes = { ...state.barcodes };
     var product = { ...state.product };
 
@@ -28,9 +28,15 @@ export function barcodeReducer(state={ barcodes: {}, product:{} }, action) {
             barcodes.lastBarcode = action.barcode;
             return { ...state, barcodes };
         case ACTION_TYPES.FETCHED_BARCODE:
-            console.log(action);
-            var product = action.product;
-            return { ...state, product };
+            if (action.comp) {
+                var compare = action.product;
+                console.log(compare);
+                return { ...state, compare };
+            } else {
+                console.log(action);
+                var product = action.product;
+                return { ...state, ...{product: product, compare: {}} };
+            }
         default:
             return state;
     }

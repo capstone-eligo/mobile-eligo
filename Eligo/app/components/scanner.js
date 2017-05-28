@@ -40,7 +40,6 @@ class Scanner extends React.Component {
                 'Scan a product to create a history!'
             );
         }
-
     }
 
     renderRightButton = () => {
