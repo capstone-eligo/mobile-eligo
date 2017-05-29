@@ -64,9 +64,7 @@ export default class ResultsContent extends React.Component {
 
         var restrictionsMapped = {};
 
-        if (restrictions) {
-            restrictionsMapped = this.parseRestrictions(restrictions, profile)
-        }
+        restrictionsMapped = this.parseRestrictions(restrictions, profile)
 
         const cardDividerStyle = {height: 0}
         const cardTitleStyle = {textAlign: 'left', marginBottom: 0}
@@ -216,10 +214,7 @@ export default class ResultsContent extends React.Component {
         var profile = this.props.profile;
 
         var restrictionsMapped = {};
-
-        if (restrictions) {
-            restrictionsMapped = this.parseRestrictions(restrictions, profile)
-        }
+        restrictionsMapped = this.parseRestrictions(restrictions, profile)
 
         if (Object.keys(this.props.compare).length != 0) {
             var restrictionsMapped2 = this.parseRestrictions(this.props.compare.Restrictions, this.props.profile);
@@ -233,7 +228,8 @@ export default class ResultsContent extends React.Component {
                 <Col size={50}>
                     {restrictionsMapped2 ?
                         <View>
-                            <CompareColumn product={this.props.product} restrictionsMapped={restrictionsMapped}></CompareColumn>
+                            <CompareColumn product={this.props.product}
+                                restrictionsMapped={restrictionsMapped}></CompareColumn>
                             <Button title='Select other product'
                             fontSize={14}
                             buttonStyle={{height:30}}
