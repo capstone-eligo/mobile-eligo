@@ -96,8 +96,8 @@ export default StyleSheet.create({
         paddingLeft: 15,
         height: 40,
         borderRadius: 4,
-        borderColor: '#E6E5ED',
-        backgroundColor: '#DDD'
+        borderColor: '#F9F9F9',
+        backgroundColor: '#F9F9F9'
     },
     loginInput: {
         paddingLeft: 15,
