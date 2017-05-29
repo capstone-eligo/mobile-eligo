@@ -32,7 +32,7 @@ export default class PetitionModal extends React.Component {
 
         return(
             <Modal
-                animationType={"slide"}
+                animationType={"fade"}
                 transparent={false}
                 visible={this.props.showModal}
                 onRequestClose={() => {alert("Modal has been closed.")}}>
