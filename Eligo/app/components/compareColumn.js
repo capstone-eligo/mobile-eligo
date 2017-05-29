@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, AlertIOS } from 'react-native';
 import {Card, Avatar, List, ListItem, Row, Col, Divider} from 'react-native-elements';
 
 import styles from '../styles'
@@ -9,6 +9,24 @@ export default class CompareColumn extends React.Component {
         super(props);
 
         this.state = {};
+    }
+
+    showDetails(d) {
+        const {restrictionsMapped } = this.props;
+
+        var content = "";
+        if (restrictionsMapped[d].alerts) {
+            Object.keys(restrictionsMapped[d].alerts).map((e, i) => {
+                content = content + '- ' + e + ' ' + Array.from(restrictionsMapped[d].alerts[e]) + '\n';
+            });
+        } else {
+            content = "No alerts detected."
+        }
+
+        AlertIOS.alert(
+            restrictionsMapped[d].firstName + ' ' + restrictionsMapped[d].lastName,
+            content
+        );
     }
 
     render() {
@@ -42,7 +60,7 @@ export default class CompareColumn extends React.Component {
                 <Text style={prodNameStyle}>{product.item_name}</Text>
                 {
                     Object.keys(restrictionsMapped).map((d,i) => (
-                        <TouchableOpacity key={i} style={userDRStyle}>
+                        <TouchableOpacity key={i} style={userDRStyle} onPress={() => this.showDetails(d)}>
                             <Text style={nameTextStyle}>{restrictionsMapped[d].firstName + " " + restrictionsMapped[d].lastName}</Text>
                             { restrictionsMapped[d].alerts ?
                                 <View>
