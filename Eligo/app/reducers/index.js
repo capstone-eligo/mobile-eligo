@@ -60,7 +60,14 @@ export const profileReducer = (state = {profile: mainProfile}, action) => {
 
     switch(action.type) {
         case ACTION_TYPES.SET_ACCOUNT:
-            return {...state, profile: action.acc };
+            if (!action.acc.list) {
+                var acc = action.acc;
+                acc.list = {};
+                return {...state, profile: acc };
+
+            } else {
+                return {...state, profile: action.acc };
+            }
 
         case ACTION_TYPES.GET_PROFILE:
             return state;
