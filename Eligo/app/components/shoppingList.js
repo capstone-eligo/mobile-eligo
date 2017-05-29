@@ -30,7 +30,7 @@ class ShoppingListItem extends React.Component {
     toggleItem = () => {
         this.setState({checked: !this.state.checked});
         this.props.removeShopItem(this.props.name);
-    }    
+    }
 
     render() {
         const textStyling = {fontWeight: 'normal'};
@@ -47,7 +47,7 @@ class ShoppingListItem extends React.Component {
                 onPress={() => {this.toggleItem()}}
                 onIconPress={() => {this.toggleItem()}}
             />
-        )        
+        )
 
     }
 }
@@ -77,9 +77,10 @@ class ShoppingList extends React.Component {
     render() {
         const { list } = this.props.profile;
         const inputStyle = {
-            marginTop: 20,
-            marginBottom: 20,
+            marginTop: 10,
+            marginBottom: 5,
             marginLeft: 10,
+            marginRight:10,
             backgroundColor: '#F9F9F9',
             padding: 5,
             height: 40
@@ -93,13 +94,13 @@ class ShoppingList extends React.Component {
                     onSubmitEditing={() => {this.addShopItem()}}
                     onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
-                    placeholder="Add new item"    
+                    placeholder="Add new item"
                 />
 
                 <ScrollView>
-                    {list ? Object.keys(list).map((d, i) => (
+                    {list && Object.keys(list).length > 0 ? Object.keys(list).map((d, i) => (
                         <ShoppingListItem key={d} name={d} removeShopItem={this.removeShopItem}></ShoppingListItem>
-                    )) : <Text></Text>} 
+                    )) : <Text style={{marginLeft: 10}}></Text>}
 
                 </ScrollView>
             </View>

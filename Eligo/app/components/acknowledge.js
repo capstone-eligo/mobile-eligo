@@ -10,7 +10,7 @@ export default class Acknowledge extends React.Component {
     render() {
         const cardDividerStyle = {height: 0}
         const cardTitleStyle = {textAlign: 'left', marginBottom: 0}
-        const cardContainerStyle = {backgroundColor: '#F9F9F9'}
+        const cardContainerStyle = {backgroundColor: '#F9F9F9', borderWidth: 0, shadowRadius: 0, shadowColor: '#F9F9F9'}
 
         return(
             <ScrollView style={styles.container}>

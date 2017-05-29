@@ -140,3 +140,11 @@ export const receivedShoppingList = (shopList) => {
         receivedAt: Date.now()
     }
 }
+
+export const makeSuggestion = (suggestion) => {
+    return dispatch => {
+        return fetch(baseURL + 'suggest',
+            {method: "POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(suggestion)})
+            .then(response => console.log(response));
+    }
+}

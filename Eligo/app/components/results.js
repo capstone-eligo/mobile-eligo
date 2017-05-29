@@ -4,7 +4,7 @@ import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-el
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import ResultsContent from './resultsContent';
-import { fetchBarcode } from '../actions';
+import { fetchBarcode, makeSuggestion } from '../actions';
 
 import styles from '../styles'
 
@@ -19,6 +19,9 @@ mapDispatchToProps = (dispatch) => ({
     fetchBarcode: (barcode, accountId, comp) => {
         dispatch(fetchBarcode(barcode, accountId, comp));
     },
+    makeSuggestion: (suggestion) => {
+        dispatch(makeSuggestion(suggestion));
+    }
 });
 
 
@@ -87,7 +90,8 @@ class Results extends React.Component {
                             product={product}
                             profile={profile}
                             compare={compare}
-                            parseBarcode={this.props.fetchBarcode}/>
+                            parseBarcode={this.props.fetchBarcode}
+                            makeSuggestion={this.props.makeSuggestion}/>
                     </Row>
                 </Grid>
 
