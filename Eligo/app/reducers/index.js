@@ -52,14 +52,13 @@ const sceneReducer = (state = {}, {type, scene}) => {
     }
 }
 
-// const mainProfile = {"auth":"80833","users":[{"dr":["fish"],"first":"Mike","last":"Wleklinski"},{"dr":["wheat"],"first":"Nick","last":"Monfeli"},{"dr":["dairy","wheat"],"first":"Jordan","last":"Spina"}],"accountId":"tinyMikeHands"};
 const mainProfile = {};
-const testList = {"oatmeal": false, "cheerios": false};
 export const profileReducer = (state = {profile: mainProfile}, action) => {
     var profile = { ...state.profile };
 
     switch(action.type) {
         case ACTION_TYPES.SET_ACCOUNT:
+            console.log(action);
             if (!action.acc.list) {
                 var acc = action.acc;
                 acc.list = {};
@@ -99,8 +98,8 @@ export const profileReducer = (state = {profile: mainProfile}, action) => {
 
             return {...state, profile: refreshed};
 
-        case ACTION_TYPES.CLEAR_PROFILE:
-            return {...state, profile: mainProfile};
+        // case ACTION_TYPES.CLEAR_PROFILE:
+        //     return {...state, profile: {}};
 
         case ACTION_TYPES.FETCHED_SHOPPING_LIST:
             console.log(action);
