@@ -53,7 +53,7 @@ class Profiles extends React.Component {
                                 if (i != 0 && profile.users[i]) {
                                     return (<ListItem
                                         roundAvatar
-                                        avatar={m.image && m.image != 'no image' ? {uri: m.image} : require('../img/profile.png')}
+                                        avatar={m.image && m.image != 'no image' ? {uri: m.image} : {title: 'hi'}}
                                         key={i}
                                         title={m.first + " " + m.last}
                                         onLongPress={() => {console.log('long press')}}

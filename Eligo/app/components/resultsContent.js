@@ -1,8 +1,9 @@
 import React from 'react';
 import { Actions } from 'react-native-router-flux';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Modal } from 'react-native';
 import {Card, Avatar, List, ListItem, Row, Col, Divider, Button} from 'react-native-elements';
 import CompareColumn from './compareColumn';
+import PetitionModal from './petitionModal';
 
 import styles from '../styles'
 
@@ -11,7 +12,7 @@ export default class ResultsContent extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {loading: false};
+        this.state = {loading: false, showModal: false, modalIngredient: ''};
     }
 
     parseRestrictions(restrictions, profile) {
@@ -174,11 +175,22 @@ export default class ResultsContent extends React.Component {
         )
     }
 
+    petitionIngredient() {
+
+    }
+
     renderIngredientsContent() {
         const ingredients = this.props.product.nf_ingredient_statement.split(',');
 
         return(
             <ScrollView>
+                <PetitionModal
+                    showModal={this.state.showModal}
+                    hideModal={() => this.setState({showModal: false})}
+                    ingredient={this.state.modalIngredient}
+                    accountId={this.props.profile.accountId}
+                    makeSuggestion={this.props.makeSuggestion}></PetitionModal>
+
                 <List containerStyle={{marginBottom: 20}}>
                 {
                     ingredients.map((l, i) => (
@@ -186,9 +198,9 @@ export default class ResultsContent extends React.Component {
                         key={i}
                         title={l.trim()}
                         hideChevron={true}
-                    />
+                        onPress={() => this.setState({showModal: true, modalIngredient: l.trim()})}/>
                     ))
-                    }
+                }
                 </List>
             </ScrollView>
         )
@@ -239,7 +251,7 @@ export default class ResultsContent extends React.Component {
 
                     : <Button title='Select product'
                         fontSize={14}
-                        buttonStyle={{height:30}}
+                        buttonStyle={{height:30, marginTop: 5}}
                         backgroundColor="#F39662"
                         onPress={() => this.showHistory()}/>
                     }
