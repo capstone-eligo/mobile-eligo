@@ -40,7 +40,7 @@ class Settings extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, {marginTop: 58}]}>
                 <ScrollView>
                     <List
                         containerStyle={{

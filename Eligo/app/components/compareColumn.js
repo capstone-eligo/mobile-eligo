@@ -17,7 +17,7 @@ export default class CompareColumn extends React.Component {
         var content = "";
         if (restrictionsMapped[d].alerts) {
             Object.keys(restrictionsMapped[d].alerts).map((e, i) => {
-                content = content + '- ' + e + ' ' + Array.from(restrictionsMapped[d].alerts[e]) + '\n';
+                content = content + '- ' + e + ' (' + Array.from(restrictionsMapped[d].alerts[e]) + ')\n';
             });
         } else {
             content = "No alerts detected."
@@ -39,7 +39,7 @@ export default class CompareColumn extends React.Component {
         }
 
         const prodNameStyle = {
-            marginBottom: 0,
+            marginBottom: 10,
             padding: 5,
         }
 
@@ -69,7 +69,7 @@ export default class CompareColumn extends React.Component {
                                     </Text>
                                 </View>
 
-                                : <Text style={{color: '#44B8AE'}}>No alert detected</Text>
+                                : <Text>No alert detected</Text>
                             }
                         </TouchableOpacity>
                     ))
