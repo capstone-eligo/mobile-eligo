@@ -31,9 +31,11 @@ class EditProfile extends React.Component {
 
         const selectedUser = this.props.profile.users[this.props.userIndex];
         let drs = {};
-        selectedUser.dr.forEach((d) => {
-            drs[d] = true;
-        });
+        if (selectedUser.dr) {
+            selectedUser.dr.forEach((d) => {
+                drs[d] = true;
+            });
+        }
         this.state = {
             first: selectedUser.first,
             last: selectedUser.last,
