@@ -98,11 +98,7 @@ export const profileReducer = (state = {profile: mainProfile}, action) => {
 
             return {...state, profile: refreshed};
 
-        // case ACTION_TYPES.CLEAR_PROFILE:
-        //     return {...state, profile: {}};
-
         case ACTION_TYPES.FETCHED_SHOPPING_LIST:
-            console.log(action);
             var refreshed = Object.assign({}, profile);
             refreshed.list = action.shopList;
 
