@@ -245,14 +245,16 @@ export default class ResultsContent extends React.Component {
                             <Button title='Select other product'
                             fontSize={14}
                             buttonStyle={{height:30}}
-                            backgroundColor="#F39662"
+                            color="#000"
+                            backgroundColor="#A9DBD7"
                             onPress={() => this.showHistory()}/>
                         </View>
 
                     : <Button title='Select product'
                         fontSize={14}
                         buttonStyle={{height:30, marginTop: 5}}
-                        backgroundColor="#F39662"
+                        color="#000"
+                        backgroundColor="#A9DBD7"
                         onPress={() => this.showHistory()}/>
                     }
                 </Col>

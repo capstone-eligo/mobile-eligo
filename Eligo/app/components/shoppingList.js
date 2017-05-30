@@ -66,7 +66,7 @@ class ShoppingList extends React.Component {
     }
 
     addShopItem = () => {
-        var updatedList = this.props.profile.list;
+        var updatedList = this.props.profile.list ? this.props.profile.list : {};
         updatedList[this.state.text] = {};
         updatedList[this.state.text]["checked"] = false;
 
