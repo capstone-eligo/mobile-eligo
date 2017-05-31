@@ -2,6 +2,7 @@ export const ACTION_TYPES = {
     ADD_BARCODE: 'ADD_BARCODE',
     FETCHED_BARCODE: 'FETCHED_BARCODE',
     FETCHED_HISTORY: 'FETCHED_HISTORY',
+    ERROR_BARCODE: 'ERROR_BARCODE',
 
     SET_ACCOUNT: 'SET_ACCOUNT',
     GET_PROFILE: "GET_PROFILE",
@@ -33,6 +34,18 @@ export const fetchBarcode = (barcode, accountId, comp=false) => {
                 dispatch(receivedBarcode(barcode, json, comp));
                 dispatch(updateHistory(accountId));
             })
+            .catch((error) => {
+                dispatch(errorBarcode(barcode, comp));
+            });
+    }
+}
+
+export const errorBarcode = (barcode, comp) => {
+    return {
+        type: 'ERROR_BARCODE',
+        barcode,
+        comp: comp,
+        receivedAt: Date.now()
     }
 }
 

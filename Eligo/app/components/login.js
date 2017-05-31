@@ -8,6 +8,7 @@ import {
     Button,
     StatusBar,
     ActivityIndicator,
+    AlertIOS
 } from 'react-native';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
@@ -50,7 +51,7 @@ class Login extends React.Component {
 
                         fetch('https://infinite-journey-83753.herokuapp.com/login',
                             {method:"POST", headers:{'Content-Type': 'application/json'}, body: JSON.stringify(login)})
-                            .then(response => {return response.json()})
+                            .then(response => {console.log(response); return response.json()})
                             .then(json => {
                                 json.accountId = login.accountId;
                                 this.props.setAccount(json);
@@ -62,7 +63,15 @@ class Login extends React.Component {
                                     // Onboarding here
                                     Actions.onboardOne();
                                 }
-                        });
+                            })
+                            .catch(error => {
+                                this.setState({spinnerActive: false});
+
+                                AlertIOS.alert(
+                                    'Server offline :(',
+                                    'Please try again later! :)'
+                                );
+                            });
                     });
                 }
             }, function (error) {

@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator, AlertIOS } from 'react-native';
 import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import ResultsContent from './resultsContent';
 import { fetchBarcode, makeSuggestion } from '../actions';
 
-import styles from '../styles'
+import styles from '../styles';
 
 mapStateToProps = (state) => ({
     barcodes: state.barcodeReducer.barcodes,
@@ -49,16 +49,18 @@ class Results extends React.Component {
         const buttons = ['Results', 'Nutrition', 'Ingredients', 'Compare'];
         var selectedTab = 0;
 
+        const resultsInfoStyle = {paddingLeft: 10, paddingRight: 10};
+
         return(
             <View style={styles.resultsContainer}>
                 <Grid>
-                    <Row containerStyle={styles.resultsInfo} size={headerSectionSize}>
+                    <Row containerStyle={[styles.resultsInfo, resultsInfoStyle]} size={headerSectionSize}>
                         <Col size={40}>
                             <Avatar
                                 xlarge
                                 rounded
-                                overlayContainerStyle={{backgroundColor: 'white'}}
-                                source={require('../img/picture-placeholder.png')}
+                                overlayContainerStyle={{backgroundColor: '#F9F9F9'}}
+                                source={require('../img/picture_placeholder.png')}
                                 activeOpacity={0.7}
                             />
                         </Col>
@@ -104,6 +106,15 @@ class Results extends React.Component {
     render() {
         if (Object.keys(this.props.product).length === 0) {
             return this.overlay();
+        }
+        else if (this.props.product.error) {
+            return (
+                <View>
+                {AlertIOS.alert(
+                    'Server offline :(',
+                    'Please try again later! :)')}
+                </View>
+            )
         } else {
             return this.productLoaded();
         }

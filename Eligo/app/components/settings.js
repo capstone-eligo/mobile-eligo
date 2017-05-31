@@ -35,6 +35,12 @@ class Settings extends React.Component {
                     LoginManager.logOut();
                     setTimeout(() => {Actions.pop(); Actions.login();}, 250);
                 }
+            })
+            .catch(error => {
+                AlertIOS.alert(
+                    'Server offline :(',
+                    'Please try again later! :)'
+                );
             });
     }
 
