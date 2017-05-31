@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator, AlertIOS } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator, AlertIOS, Image } from 'react-native';
 import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -55,16 +55,20 @@ class Results extends React.Component {
             <View style={styles.resultsContainer}>
                 <Grid>
                     <Row containerStyle={[styles.resultsInfo, resultsInfoStyle]} size={headerSectionSize}>
-                        <Col size={40}>
-                            <Avatar
+                        <Col size={45} containerStyle={{alignItems: 'center'}}>
+                            {/*<Avatar
                                 xlarge
                                 rounded
                                 overlayContainerStyle={{backgroundColor: '#F9F9F9'}}
-                                source={require('../img/picture_placeholder.png')}
+                                source={require('../img/picture-placeholder.png')}
                                 activeOpacity={0.7}
+                            />*/}
+                            <Image
+                                style={{flex: 1, width: 376 / 2.75, height: 276 / 2.75, resizeMode: 'contain'}}
+                                source={require('../img/picture-placeholder.png')}
                             />
+
                         </Col>
-                        <Col size={5}></Col>
                         <Col size={55} containerStyle={styles.resultsItemContainer}>
                             <Text style={styles.resultsItemName}>{product.item_name ? product.item_name : "N/A" }</Text>
                             <Text style={styles.resultsItemName}>{product.brand_name ? "(" + product.brand_name + ")": "N/A"}</Text>
