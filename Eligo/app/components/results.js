@@ -115,8 +115,12 @@ class Results extends React.Component {
             return (
                 <View>
                 {AlertIOS.alert(
-                    'Server offline :(',
-                    'Please try again later! :)')}
+                    'Invalid UPC',
+                    'Tap to return to scanner!',
+                    [
+                    {text: 'Ok', onPress: () => Actions.pop()},
+                    ],
+                    )}
                 </View>
             )
         } else {
