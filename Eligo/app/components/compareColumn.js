@@ -17,7 +17,7 @@ export default class CompareColumn extends React.Component {
         var content = "";
         if (restrictionsMapped[d].alerts) {
             Object.keys(restrictionsMapped[d].alerts).map((e, i) => {
-                content = content + '- ' + e + ' (' + Array.from(restrictionsMapped[d].alerts[e]) + ')\n';
+                content = content + '- ' + e + ' (' + Array.from(restrictionsMapped[d].alerts[e]).join(', ') + ')\n';
             });
         } else {
             content = "No alerts detected."

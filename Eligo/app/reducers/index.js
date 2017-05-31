@@ -35,6 +35,9 @@ export function barcodeReducer(state={ barcodes: {}, product:{}, compare:{} }, a
                 var product = action.product;
                 return { ...state, ...{product: product, compare: {}} };
             }
+        case ACTION_TYPES.ERROR_BARCODE:
+            return { ...state, ...{product: {error: true}}}
+
         default:
             return state;
     }

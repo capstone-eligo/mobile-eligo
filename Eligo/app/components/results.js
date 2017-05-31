@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator, AlertIOS, Image } from 'react-native';
 import {Card, Button, Avatar, Grid, Row, Col, ButtonGroup} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import ResultsContent from './resultsContent';
 import { fetchBarcode, makeSuggestion } from '../actions';
 
-import styles from '../styles'
+import styles from '../styles';
 
 mapStateToProps = (state) => ({
     barcodes: state.barcodeReducer.barcodes,
@@ -49,20 +49,26 @@ class Results extends React.Component {
         const buttons = ['Results', 'Nutrition', 'Ingredients', 'Compare'];
         var selectedTab = 0;
 
+        const resultsInfoStyle = {paddingLeft: 10, paddingRight: 10};
+
         return(
             <View style={styles.resultsContainer}>
                 <Grid>
-                    <Row containerStyle={styles.resultsInfo} size={headerSectionSize}>
-                        <Col size={40}>
-                            <Avatar
+                    <Row containerStyle={[styles.resultsInfo, resultsInfoStyle]} size={headerSectionSize}>
+                        <Col size={45} containerStyle={{alignItems: 'center'}}>
+                            {/*<Avatar
                                 xlarge
                                 rounded
-                                overlayContainerStyle={{backgroundColor: 'white'}}
+                                overlayContainerStyle={{backgroundColor: '#F9F9F9'}}
                                 source={require('../img/picture-placeholder.png')}
                                 activeOpacity={0.7}
+                            />*/}
+                            <Image
+                                style={{flex: 1, width: 376 / 2.75, height: 276 / 2.75, resizeMode: 'contain'}}
+                                source={require('../img/picture-placeholder.png')}
                             />
+
                         </Col>
-                        <Col size={5}></Col>
                         <Col size={55} containerStyle={styles.resultsItemContainer}>
                             <Text style={styles.resultsItemName}>{product.item_name ? product.item_name : "N/A" }</Text>
                             <Text style={styles.resultsItemName}>{product.brand_name ? "(" + product.brand_name + ")": "N/A"}</Text>
@@ -104,6 +110,19 @@ class Results extends React.Component {
     render() {
         if (Object.keys(this.props.product).length === 0) {
             return this.overlay();
+        }
+        else if (this.props.product.error) {
+            return (
+                <View>
+                {AlertIOS.alert(
+                    'Invalid UPC',
+                    'Tap to return to scanner!',
+                    [
+                    {text: 'Ok', onPress: () => Actions.pop()},
+                    ],
+                    )}
+                </View>
+            )
         } else {
             return this.productLoaded();
         }

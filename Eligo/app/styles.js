@@ -139,7 +139,7 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     resultsInfo: {
-        padding: 25
+        padding: 25,
     },
     resultsContentScroll: {
         marginBottom: 20

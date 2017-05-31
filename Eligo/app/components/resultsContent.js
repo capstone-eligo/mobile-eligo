@@ -91,7 +91,7 @@ export default class ResultsContent extends React.Component {
                                         <Col size={3}></Col>
                                         <Col size={97}>
                                             {Object.keys(restrictionsMapped[d].alerts).map((e, i) => (
-                                                <Text key={i}>{'- ' + e} ({Array.from(restrictionsMapped[d].alerts[e])})</Text>
+                                                <Text key={i}>{'- ' + e} ({Array.from(restrictionsMapped[d].alerts[e]).join(', ')})</Text>
                                             ))}
                                         </Col>
                                     </Row>
@@ -175,12 +175,15 @@ export default class ResultsContent extends React.Component {
         )
     }
 
-    petitionIngredient() {
-
-    }
-
     renderIngredientsContent() {
         const ingredients = this.props.product.nf_ingredient_statement.split(',');
+        const helperTextStyle = {
+            marginLeft: 12,
+            marginRight: 12,
+            padding: 10,
+            textAlign: 'center',
+            backgroundColor: '#F9F9F9',
+        };
 
         return(
             <ScrollView>
@@ -191,7 +194,9 @@ export default class ResultsContent extends React.Component {
                     accountId={this.props.profile.accountId}
                     makeSuggestion={this.props.makeSuggestion}></PetitionModal>
 
-                <List containerStyle={{marginBottom: 20}}>
+                <Text style={helperTextStyle}>Help improve Eligo by tapping any ingredient that violates a dietary restriction!</Text>
+
+                <List containerStyle={{marginBottom: 20, marginTop: 10}}>
                 {
                     ingredients.map((l, i) => (
                     <ListItem
@@ -202,6 +207,7 @@ export default class ResultsContent extends React.Component {
                     ))
                 }
                 </List>
+
             </ScrollView>
         )
     }

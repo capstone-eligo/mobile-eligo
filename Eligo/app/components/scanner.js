@@ -20,7 +20,7 @@ mapDispatchToProps = (dispatch) => ({
 class Scanner extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showCamera: true}
+        this.state = {showCamera: true, textUPC: ''}
     }
 
     componentDidMount() {
@@ -62,7 +62,8 @@ class Scanner extends React.Component {
         }
 
         const scanBarcodeTest = () => {
-            fetchBarcode('038000356216', accountId);
+            fetchBarcode(this.state.textUPC, accountId);
+            this.setState({textUPC: ''});
             Actions.results();
         }
 
@@ -72,6 +73,8 @@ class Scanner extends React.Component {
             <View style={ styles.cameraContainer }>
                 <TextInput
                     style={styles.cameraInput}
+                    value={this.state.textUPC}
+                    onChangeText={(text) => this.setState({textUPC: text})}
                     onSubmitEditing={scanBarcodeTest}
                     returnKeyType="done"
                     placeholder="Search by barcode number"
