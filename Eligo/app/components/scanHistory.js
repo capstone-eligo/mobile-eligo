@@ -43,6 +43,7 @@ class ScanHistory extends React.Component {
                                     title={product.name}
                                     subtitle={timeString}
                                     onPress={() => {
+                                        console.log(product.upc);
                                         this.props.parseBarcode(product.upc, this.props.accountId, this.props.compare ? true : false);
 
                                         if (this.props.compare) {
