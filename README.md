@@ -49,15 +49,13 @@ The four major parts of Eligo are detailed below:
   4. **Settings** - Allows users to view more information about Eligo such as Terms of Service, Privacy Policy, and the ingredients that are currently connected to each dietary restriction.
 
 ## Eligo in action
-Pictures...
+### Video - [link on YouTube](https://youtu.be/ZAPgmRydZ8c)
+
+### Pictures
 ![panel 1](./screenshots/panel1.png)
 
 ![panel 2](./screenshots/panel2.png)
 
-Video...
 
 ## Acknowledgements
 - [Nutritionix API](https://www.nutritionix.com/business/api) for their wonderful API in connecting UPC to nutritional information
-
-## References
-- TBA
