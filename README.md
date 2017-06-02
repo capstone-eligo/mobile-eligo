@@ -49,7 +49,7 @@ The four major parts of Eligo are detailed below:
   4. **Settings** - Allows users to view more information about Eligo such as Terms of Service, Privacy Policy, and the ingredients that are currently connected to each dietary restriction.
 
 ## Eligo in action
-### Video - [link on YouTube](https://youtu.be/ZAPgmRydZ8c)
+### Video - [link on YouTube](https://youtu.be/7X0zwjGJ5Eg)
 
 ### Pictures
 ![panel 1](./screenshots/panel1.png)
