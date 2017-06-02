@@ -235,6 +235,7 @@ export default class ResultsContent extends React.Component {
         restrictionsMapped = this.parseRestrictions(restrictions, profile)
 
         if (Object.keys(this.props.compare).length != 0) {
+            console.log(this.props.compare.Restrictions);
             var restrictionsMapped2 = this.parseRestrictions(this.props.compare.Restrictions, this.props.profile);
         }
 
@@ -246,8 +247,8 @@ export default class ResultsContent extends React.Component {
                 <Col size={50}>
                     {restrictionsMapped2 ?
                         <View>
-                            <CompareColumn product={this.props.product}
-                                restrictionsMapped={restrictionsMapped}></CompareColumn>
+                            <CompareColumn product={this.props.compare}
+                                restrictionsMapped={restrictionsMapped2}></CompareColumn>
                             <Button title='Select other product'
                             fontSize={14}
                             buttonStyle={{height:30}}
